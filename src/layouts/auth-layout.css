@@ -1,0 +1,36 @@
+.auth-layout-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, var(--color-primary), var(--color-primary-light));;
+  padding: var(--spacing-md);
+}
+
+.auth-main {
+  width: 100%;
+  max-width: 1400px !important;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-layout-container {
+    min-height: 100vh;
+    padding: var(--spacing-md);
+  }
+
+  .auth-main {
+    max-width: 100%;
+  }
+}

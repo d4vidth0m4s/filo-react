@@ -1,0 +1,184 @@
+.contenido {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.populares {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
+}
+
+.populares h2 {
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  color: var(--color-text-primary);
+}
+
+.icon-populares {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md);
+  width: 100%;
+  overflow-x: auto;
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+  scroll-behavior: smooth;
+}
+
+.icon-populares::-webkit-scrollbar {
+  height: 6px;
+}
+
+.icon-populares::-webkit-scrollbar-track {
+  background: var(--color-bg-light);
+}
+
+.icon-populares::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 3px;
+}
+
+.icon-populares::-webkit-scrollbar-thumb:hover {
+  background: #009c3c;
+}
+
+.redirect {
+  min-width: 300px;
+  width: 280px;
+  height: auto;
+  background: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  overflow: hidden;
+  transition: opacity var(--transition-medium) ease, box-shadow var(--transition-medium) ease;
+  
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.redirect:hover {
+  transform: opacity(0.9);
+  box-shadow: 0 8px 16px var(--color-shadow);
+}
+
+.card-image-section {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  background: var(--color-bg-light);
+}
+
+.card-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-info-section {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md);
+  gap: var(--spacing-sm);
+  flex: 1;
+}
+
+.card-header {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: flex-start;
+}
+
+.card-logo-img {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--border-radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.card-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.card-title-line {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-text h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-rating-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.card-rating-badge i {
+  font-size: 11px;
+}
+
+.card-details-line {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  flex-wrap: wrap;
+}
+
+.card-text p {
+  margin: 0;
+  font-size: 11px;
+  color: #666;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-time-badge,
+.card-envio-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: var(--color-text-primary);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.card-time-badge i {
+  font-size: 11px;
+  color: var(--color-primary);
+}
+
+.card-envio-badge {
+  font-weight: 600;
+  color: var(--color-primary);
+}
