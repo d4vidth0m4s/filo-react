@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './AuthCard.css'
+import { UsuariosApi } from '../../api/UsuariosApi'
 
 type AuthCardProps = {
   modo?: 'login' | 'registro'
@@ -12,12 +13,26 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
   const navigate = useNavigate()
 
   const [isLogin, setIsLogin] = useState(modo === 'login')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (isLogin) {
-      console.log('Iniciando sesión')
+      setLoading(true)
+      try {
+        const response = await UsuariosApi.pots({ username, password })
+        console.log('Login exitoso:', response)
+        localStorage.setItem('userDatos', JSON.stringify(response))
+        localStorage.setItem('token', response.token)
+        navigate('/')
+      } catch (error) {
+        console.error('Error al iniciar sesión:', error)
+      } finally {
+        setLoading(false)
+      }
     } else {
       console.log('Registrando usuario')
     }
@@ -53,12 +68,24 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
 
           <div className="input-group">
             <i className="fa-solid fa-envelope"></i>
-            <input type="email" placeholder="Correo electrónico" required />
+            <input 
+              type="email" 
+              placeholder="Nombre de usuario" 
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required 
+            />
           </div>
 
           <div className="input-group">
             <i className="fa-solid fa-lock"></i>
-            <input type="password" placeholder="Contraseña" required />
+            <input 
+              type="password" 
+              placeholder="Contraseña" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required 
+            />
           </div>
 
           {!isLogin && (
@@ -68,8 +95,8 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
             </div>
           )}
 
-          <button type="submit">
-            {isLogin ? 'Iniciar sesión' : 'Registrarse'}
+          <button type="submit" disabled={loading}>
+            {loading ? 'Cargando...' : isLogin ? 'Iniciar sesión' : 'Registrarse'}
           </button>
         </form>
 

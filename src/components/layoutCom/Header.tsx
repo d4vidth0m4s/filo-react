@@ -6,6 +6,15 @@ import { FaUser, FaShoppingCart  } from "react-icons/fa";
 const Header: React.FC = () => {
   const navigate = useNavigate()
 
+  const handleUserClick = () => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      navigate('/users/1') // Ruta al perfil del usuario
+    } else {
+      navigate('/users/login')
+    }
+  }
+
   return (
     <header className="header">
       {/* MOBILE HEADER */}
@@ -15,7 +24,7 @@ const Header: React.FC = () => {
             <i className="fa-solid fa-bars"><FaShoppingCart/></i>
           </button>
           <h1 className="logo">Filo</h1>
-          <button className="icon-btn" onClick={() => navigate('/users/login')}>
+          <button className="icon-btn" onClick={handleUserClick}>
             <i className="fa-solid fa-user"> <FaUser/></i>
 
           </button>
@@ -46,7 +55,7 @@ const Header: React.FC = () => {
         <button className="icon-btn" >
           <i className="fa-solid fa-cart-shopping"><FaShoppingCart/></i>
         </button>
-        <button className="icon-btn" onClick={() => navigate('/users/register')}>
+        <button className="icon-btn" onClick={handleUserClick}>
           <i className="fa-solid fa-user"><FaUser/> </i>
         </button>
       </div>

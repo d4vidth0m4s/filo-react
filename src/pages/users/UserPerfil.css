@@ -1,0 +1,105 @@
+/* Estilos del perfil de usuario */
+body {
+  background: #f4f4f4;
+  min-height: 100vh;
+}
+
+.perfil-header {
+  width: 100%;
+  margin: -10px;
+  background: linear-gradient(135deg, #00c853 30%, #7cff6b 60%, #b2ff59 100%);
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-radius: 0 0 10px 10px;
+}
+
+.perfil-header .back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.perfil-card {
+  background: linear-gradient(to bottom, #00c853, #b2ff59);
+  margin: 20px;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  background: #1fd15f;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  font-size: 30px;
+}
+
+.Foto-perfil {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.correo {
+  color: #777;
+  font-size: 14px;
+}
+
+.perfil-opciones {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  margin: 20px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.opcion {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.opcion i {
+  color: #1fd15f;
+}
+
+.opcion:hover {
+  background: #f9f9f9;
+}
+
+.logout {
+  color: red;
+}
+
+.logout i {
+  color: red;
+}
+
+.swal2-popup {
+  font-family: "Poppins", sans-serif !important;
+}
+
+.user-perfil-container {
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding: 0;
+}

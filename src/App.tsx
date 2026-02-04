@@ -1,5 +1,5 @@
 // src/App.tsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Layout from "./layouts/Layout";
 import AuthLayout from "./layouts/AuthLayout";
 import Home from "./pages/Home";
@@ -14,11 +14,11 @@ const App = () => {
         {/* Layout principal con Header y Footer */}
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/users/:id" element={<UserPerfil />} />
         </Route>
 
         {/* Layout de autenticación sin Header ni Footer */}
         <Route element={<AuthLayout />}>
+          <Route path="/users/:id" element={<UserPerfil />} />
           <Route path="/users/login" element={<UserLog />} />
           <Route path="/users/register" element={<Register />} />
         </Route>
