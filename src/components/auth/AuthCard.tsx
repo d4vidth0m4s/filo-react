@@ -68,23 +68,23 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
 
           <div className="input-group">
             <i className="fa-solid fa-envelope"></i>
-            <input 
-              type="email" 
-              placeholder="Nombre de usuario" 
+            <input
+              type="email"
+              placeholder="Correo electrónico"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              required 
+              required
             />
           </div>
 
           <div className="input-group">
             <i className="fa-solid fa-lock"></i>
-            <input 
-              type="password" 
-              placeholder="Contraseña" 
+            <input
+              type="password"
+              placeholder="Contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required 
+              required
             />
           </div>
 
