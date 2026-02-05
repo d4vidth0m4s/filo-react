@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import './header.css'
 import { useState } from 'react';
+import CartDrawer from "../cartBuy/carrito-compra";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 
 
@@ -54,9 +55,16 @@ const Header: React.FC = () => {
         </div>
         <div className="nav-links">
 
-          <button className="icon-btn" onClick={() => setAbierto(false)}>
-            <i className="fa-solid fa-cart-shopping"><FaShoppingCart /></i>
-          </button>
+          <div className="cart-wrapper">
+            <button
+              className="icon-btn"
+              onClick={() => setAbierto(!abierto)}
+            >
+              <i className="fa-solid fa-cart-shopping"><FaShoppingCart /></i>
+            </button>
+
+            <CartDrawer abierto={abierto} setAbierto={setAbierto} />
+          </div>
           <button className="icon-btn" onClick={handleUserClick}>
             <i className="fa-solid fa-user"><FaUser /> </i>
           </button>
