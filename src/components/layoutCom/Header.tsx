@@ -1,11 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import './header.css'
-import { FaUser, FaShoppingCart  } from "react-icons/fa";
+import { useState } from 'react';
+import { FaUser, FaShoppingCart } from "react-icons/fa";
+
 
 const Header: React.FC = () => {
   const navigate = useNavigate()
-
+  const [abierto, setAbierto] = useState(false);
   const handleUserClick = () => {
     const token = localStorage.getItem('token')
     if (token) {
@@ -21,11 +23,11 @@ const Header: React.FC = () => {
       <div className="header-mobile">
         <div className="mobile-top">
           <button className="menu-btn">
-            <i className="fa-solid fa-bars"><FaShoppingCart/></i>
+            <i className="fa-solid fa-bars"><FaShoppingCart /></i>
           </button>
           <h1 className="logo">Filo</h1>
           <button className="icon-btn" onClick={handleUserClick}>
-            <i className="fa-solid fa-user"> <FaUser/></i>
+            <i className="fa-solid fa-user"> <FaUser /></i>
 
           </button>
         </div>
@@ -50,15 +52,15 @@ const Header: React.FC = () => {
           </span>
           <input type="text" placeholder="¿Qué se te antoja hoy?" />
         </div>
-      <div className="nav-links">
+        <div className="nav-links">
 
-        <button className="icon-btn" >
-          <i className="fa-solid fa-cart-shopping"><FaShoppingCart/></i>
-        </button>
-        <button className="icon-btn" onClick={handleUserClick}>
-          <i className="fa-solid fa-user"><FaUser/> </i>
-        </button>
-      </div>
+          <button className="icon-btn" onClick={() => setAbierto(false)}>
+            <i className="fa-solid fa-cart-shopping"><FaShoppingCart /></i>
+          </button>
+          <button className="icon-btn" onClick={handleUserClick}>
+            <i className="fa-solid fa-user"><FaUser /> </i>
+          </button>
+        </div>
       </div>
 
     </header>
