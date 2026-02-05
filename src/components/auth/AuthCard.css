@@ -63,7 +63,7 @@
   background: #f2f2f2;
   padding: 10px;
   border-radius: 10px;
-  
+
 }
 
 
@@ -90,8 +90,36 @@ button[type="submit"] {
   cursor: pointer;
 }
 
+
+.google-btn {
+  background: white;
+  cursor: pointer;
+  border-radius: 30%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.google-btn:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
 button[type="submit"]:hover {
   background: #17b653;
+}
+
+.link-btn {
+  background: none;
+  color: #1fd15f;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.link-btn:hover {
+  color: #17b653;
 }
 
 @media (max-width: 800px) {

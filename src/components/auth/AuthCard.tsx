@@ -9,7 +9,7 @@ type AuthCardProps = {
 
 const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
 
-  const bannerURL = 'https://lzcqnygnduehntdbijzw.supabase.co/storage/v1/object/public/filo/filobaner.webp'
+  const bannerURL = '../../public/images/posterUserlanding.png'
   const navigate = useNavigate()
 
   const [isLogin, setIsLogin] = useState(modo === 'login')
@@ -104,7 +104,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
 
         <div className="Google">
           <button className="google-btn" type="button" onClick={loginGoogle}>
-            <img src="/imgs/SVG/google.SVG" alt="Google" />
+            <img src="../../public/images/SVG/google-icon.svg" alt="Google" />
           </button>
         </div>
 
