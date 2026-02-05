@@ -53,8 +53,6 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
     padding: 15px;
     z-index: 1000;
-
-    /* estado cerrado */
     opacity: 0;
     transform: translateY(-12px) scale(0.98);
     visibility: hidden;
