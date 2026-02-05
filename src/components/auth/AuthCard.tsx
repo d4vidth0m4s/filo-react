@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './AuthCard.css'
 import { UsuariosApi } from '../../api/UsuariosApi'
-
+import { IoMdHome } from "react-icons/io";
 type AuthCardProps = {
   modo?: 'login' | 'registro'
 }
@@ -52,7 +52,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
 
       <section className="login-container">
         <button id="back" className="back-btn" onClick={() => navigate(-1)}>
-          <i className="fa-solid fa-arrow-left"></i> Volver
+          <IoMdHome />
         </button>
 
         <h1>Filo</h1>

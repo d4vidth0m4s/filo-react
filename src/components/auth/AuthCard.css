@@ -5,6 +5,23 @@
   text-align: center;
 }
 
+#back {
+  display: flex;
+  justify-content: flex-start;
+  background: none;
+  color: #1fd15f;
+  border: none;
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+#back:hover {
+  color: #17b653;
+}
+
 .auth-wrapper {
   display: flex;
   align-items: stretch;
