@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   const handleUserClick = () => {
     const token = localStorage.getItem('token')
     if (token) {
-      navigate('/users/1') // Ruta al perfil del usuario
+      navigate('/users/') // Ruta al perfil del usuario
     } else {
       navigate('/users/login')
     }

@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './AuthCard.css'
 import { UsuariosApi } from '../../api/UsuariosApi'
-import { IoMdHome } from "react-icons/io";
+
+import BackBotton from '../backBotton/BackBotton';
 type AuthCardProps = {
   modo?: 'login' | 'registro'
 }
 
 const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
 
-  const bannerURL = '../../public/images/posterUserlanding.png'
+  const bannerURL = 'https://lzcqnygnduehntdbijzw.supabase.co/storage/v1/object/public/filo/BannerFilo.webp'
   const navigate = useNavigate()
 
   const [isLogin, setIsLogin] = useState(modo === 'login')
@@ -51,10 +52,8 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
       </aside>
 
       <section className="login-container">
-        <button id="back" className="back-btn" onClick={() => navigate(-1)}>
-          <IoMdHome />
-        </button>
-
+       <BackBotton modo="home" />
+       
         <h1>Filo</h1>
         <p>{isLogin ? 'Inicia sesión para continuar' : 'Regístrate para continuar'}</p>
 

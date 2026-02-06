@@ -1,75 +1,95 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './UserPerfil.css'
+import BackBotton from '../../components/backBotton/BackBotton'
+import {getUserData} from '../../Auth/auth'
 
 type Usuario = {
-  id: number;
-  email: string;
-  username: string;
-
-  nombre: string;
-  familyName: string;
-
-  pictureUrl: string;
-  token: string;
-};
+  id: number
+  email: string
+  username: string
+  nombre: string
+  familyName: string
+  pictureUrl: string
+  token: string
+}
 
 const UserPerfil: React.FC = () => {
   const [usuario] = useState<Usuario | null>(() => {
-    const userData = localStorage.getItem('userDatos')
-    if (userData) {
-      try {
-        return JSON.parse(userData)
-      } catch (error) {
-        console.error('Error al parsear userData:', error)
-        return null
-      }
-    }
-    return null
+    const userData = getUserData();
+    
+    return userData  ? userData as Usuario : null;
   })
+
+  const filoAscii = `
+ ________      ___          ___               ________     
+|\\  _____\\    |\\  \\        |\\  \\             |\\   __  \\    
+\\ \\  \\__/     \\ \\  \\       \\ \\  \\            \\ \\  \\|\\  \\   
+ \\ \\   __\\     \\ \\  \\       \\ \\  \\            \\ \\  \\\\\\  \\  
+  \\ \\  \\_|      \\ \\  \\       \\ \\  \\____        \\ \\  \\\\\\  \\ 
+   \\ \\__\\        \\ \\__\\       \\ \\_______\\       \\ \\_______\\
+    \\|__|         \\|__|        \\|_______|        \\|_______|
+`
 
   return (
     <div className="user-perfil-container">
-    <header className="perfil-header">
-  <button data-back type="button" className="back-btn">
-  <i className="fa-solid fa-arrow-left"></i>
-  </button>
-  <h2>Mi perfil</h2>
-</header>
+      <header className="perfil-header">
+        <BackBotton modo="home" />
+        <h2>Mi perfil</h2>
+      </header>
 
-<section className="perfil-card">
-  <div className="avatar">
-    <img
-      className="Foto-perfil"
-      src={usuario?.pictureUrl || "/imgs/userPhoto.jpg"}
-      alt="Foto de perfil"
-    />
-  </div>
-  <h3>{usuario?.nombre} {usuario?.familyName || 'Usuario'}</h3>
-  <p className="correo">{usuario?.email || 'usuario@email.com'}</p>
-</section>
+      <div className="perfil-layout">
+        {/* MENU TICKET - Ahora primero */}
+        <aside className="ticket">
+          <div className="ticket-inner">
+            <div className="center">
+              <div className="logo">MENU<br />INTEGRATE</div>
+            </div>
 
-<section className="perfil-opciones">
-  <button className="opcion">
-    <i className="fa-solid fa-clipboard-list"></i>
-    <span>Mis pedidos</span>
-  </button>
+            
 
-  <button className="opcion">
-    <i className="fa-solid fa-heart"></i>
-    <span>Favoritos</span>
-  </button>
+            <hr />
+            <div className="info center">
+              <p>Nombre: {usuario?.nombre}</p>
+              
+            </div>
+            <hr />
 
-  <button className="opcion">
-    <i className="fa-solid fa-gear"></i>
-    <span>Configuración</span>
-  </button>
+            <div className="grid perfil-opciones">
+              <button className="opcion">
+                <span>Mis pedidos</span>
+              </button>
+              <button className="opcion">
+                <span>Favoritos</span>
+              </button>
+              <button className="opcion">
+                <span>Tu comercio</span>
+              </button>
+              <button className="opcion logout">
+                <span>Cerrar sesión</span>
+              </button>
+            </div>
 
-  <button className="opcion logout" id="logoutBtn">
-    <i className="fa-solid fa-right-from-bracket"></i>
-    <span>Cerrar sesión</span>
-  </button>
-</section>
-</div>
+            <hr />
+            <div className="center">
+                <pre className="ascii-logo">
+              {filoAscii}
+            </pre>
+            </div>
+          </div>
+        </aside>
+
+        {/* CARD USUARIO - Ahora segundo */}
+        <section className="perfil-card">
+          <img
+            className="foto-perfil"
+            src={  `https://placehold.co/500/00c853/ffffff?text=${usuario?.nombre.charAt(0).toUpperCase()|| "U"}`}
+            alt="Foto de perfil"
+          />
+          <h3 className="nombre-usuario">{usuario?.nombre} {usuario?.familyName}</h3>
+          <p className="correo">{usuario?.email}</p>
+        </section>
+      </div>
+    </div>
   )
 }
 
