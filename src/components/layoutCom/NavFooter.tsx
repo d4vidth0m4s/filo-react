@@ -6,7 +6,7 @@ import { FaHome,FaTags, FaUser, FaShoppingCart } from "react-icons/fa";
 
 
 const NavFooter: React.FC = () => {
-  const navigate = useNavigate()
+  
 
   return (
     <footer className="navFooter">
