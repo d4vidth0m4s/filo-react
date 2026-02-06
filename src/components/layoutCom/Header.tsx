@@ -25,9 +25,16 @@ const Header: React.FC = () => {
       {/* MOBILE HEADER */}
       <div className="header-mobile">
         <div className="mobile-top">
-          <button className="menu-btn">
-            <i className="fa-solid fa-bars"><FaShoppingCart /></i>
-          </button>
+          <div className="cart-wrapper">
+            <button
+              className="icon-btn"
+              onClick={() => setAbierto(!abierto)}
+            >
+              <i className="fa-solid fa-cart-shopping"><FaShoppingCart /></i>
+            </button>
+
+            <CartDrawer abierto={abierto} setAbierto={setAbierto} />
+          </div>
           <h1 className="logo">Filo</h1>
           <div className="ubicacion">
             <i className="fa-solid fa-location-dot"></i>

@@ -1,5 +1,10 @@
 import type React from "react";
 import "./populares.css";
+import { Link } from "react-router-dom";
+
+
+
+
 const categorias = [
     {
       titulo: "Comida Rápida",
@@ -58,6 +63,7 @@ const categorias = [
   ];
   const Populares: React.FC = () => {
   return (
+    <Link to="/tiendas/1" className="card-tienda"> 
     <div className="contenido">
       <div className="populares">
         <h2>Populares cerca de ti</h2>
@@ -100,6 +106,7 @@ const categorias = [
         ))}
       </div>
     </div>
+    </Link>
   );
 }
 

@@ -7,6 +7,7 @@ import Register from "./pages/users/Register";
 import UserLog from "./pages/users/UserLog";
 import UserPerfil from "./pages/users/UserPerfil";
 import PrivateLayout from "./layouts/Private Layout/PrivateLayout";
+import TiendasPerfil from "./pages/Tiendas/TiendasPerfil";
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
       {/* Layout principal con Header y Footer */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        
+        <Route path="/tiendas/:id" element={<TiendasPerfil />} />
       </Route>
       
       
