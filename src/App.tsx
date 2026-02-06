@@ -7,7 +7,6 @@ import Register from "./pages/users/Register";
 import UserLog from "./pages/users/UserLog";
 import UserPerfil from "./pages/users/UserPerfil";
 
-
 const App = () => {
   return (
 
@@ -15,7 +14,11 @@ const App = () => {
       {/* Layout principal con Header y Footer */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+        
       </Route>
+      
+      
+     
 
       {/* Layout de autenticación sin Header ni Footer */}
       <Route element={<AuthLayout />}>
