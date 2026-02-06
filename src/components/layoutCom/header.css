@@ -66,6 +66,7 @@
 .search-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: var(--border-radius-md);
@@ -137,6 +138,7 @@
 
 .header-mobile .menu-btn:hover {
   background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.03);
 }
 
 .header-mobile .search-container {
@@ -256,8 +258,8 @@
     background: rgba(0, 0, 0, 0.2);
   }
 
-  .nav-links{
-    
+  .nav-links {
+
     display: flex;
     align-items: center;
     gap: var(--spacing-lg);

@@ -4,6 +4,8 @@ import './header.css'
 import { useState } from 'react';
 import CartDrawer from "../cartBuy/carrito-compra";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { IoSearch } from "react-icons/io5";
 
 
 const Header: React.FC = () => {
@@ -27,14 +29,17 @@ const Header: React.FC = () => {
             <i className="fa-solid fa-bars"><FaShoppingCart /></i>
           </button>
           <h1 className="logo">Filo</h1>
+          <div className="ubicacion">
+            <i className="fa-solid fa-location-dot"></i>
+            <span><i><FaLocationDot /></i> Ciénaga Magdalena</span>
+          </div>
           <button className="icon-btn" onClick={handleUserClick}>
             <i className="fa-solid fa-user"> <FaUser /></i>
-
           </button>
         </div>
         <div className="search-container">
           <span className="search-icon">
-            <i className="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"><IoSearch/></i>
           </span>
           <input type="text" placeholder="¿Qué se te antoja hoy?" />
         </div>
@@ -45,11 +50,11 @@ const Header: React.FC = () => {
         <h1 className="logo">Filo</h1>
         <div className="ubicacion">
           <i className="fa-solid fa-location-dot"></i>
-          <span>Ciénaga Magdalena</span>
+          <span><i><FaLocationDot /></i> Ciénaga Magdalena</span>
         </div>
         <div className="search-container">
           <span className="search-icon">
-            <i className="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"><IoSearch /></i>
           </span>
           <input type="text" placeholder="¿Qué se te antoja hoy?" />
         </div>

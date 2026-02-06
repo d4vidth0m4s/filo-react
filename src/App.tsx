@@ -8,7 +8,6 @@ import UserLog from "./pages/users/UserLog";
 import UserPerfil from "./pages/users/UserPerfil";
 import PrivateLayout from "./layouts/Private Layout/PrivateLayout";
 
-
 const App = () => {
   return (
 
@@ -16,7 +15,11 @@ const App = () => {
       {/* Layout principal con Header y Footer */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+        
       </Route>
+      
+      
+     
 
       {/* Layout de autenticación lgin y registro */}
       <Route element={<AuthLayout />}>
