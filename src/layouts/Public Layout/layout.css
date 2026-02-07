@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-.home-main {
+.main {
   flex: 1;
   width: 100%;
   box-sizing: border-box;
@@ -17,13 +17,13 @@
   align-items: center;
 }
 
-.home-main > * {
+.main > * {
   width: 100%;
   max-width: 1400px;
 }
 
 @media (max-width: 1258px) {
-  .home-main > * {
+  .main > * {
     width: 100%;
   }
 

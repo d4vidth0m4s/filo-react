@@ -1,12 +1,11 @@
 import type React from "react";
 import "./populares.css";
 import { Link } from "react-router-dom";
-
-
-
+ 
 
 const categorias = [
     {
+      slug: "comida-rapida",
       titulo: "Comida Rápida",
       descripcion: "Comidas rápidas",
       imagen: "https://placehold.co/50/00c853/ffffff?text=CF",
@@ -16,6 +15,7 @@ const categorias = [
       envio: "Gratis"
     },
     {
+      slug: "restaurantes",
       titulo: "Restaurantes",
       descripcion: "Restaurantes variados",
       imagen: "https://placehold.co/50/00c853/ffffff?text=R",
@@ -25,6 +25,7 @@ const categorias = [
       envio: "Gratis"
     },
     {
+      slug: "supermercados",
       titulo: "Supermercados",
       descripcion: "Todo en un lugar",
       imagen: "https://placehold.co/50/00c853/ffffff?text=S",
@@ -33,7 +34,8 @@ const categorias = [
       tiempo: "15-25 min",
       envio: "$2.000"
     },
-    {
+    { 
+      slug: "cebolleros",
       titulo: "Cebolleros",
       descripcion: "Perros calientes",
       imagen: "https://placehold.co/50/00c853/ffffff?text=C",
@@ -43,7 +45,8 @@ const categorias = [
       envio: "Gratis"
     },
     {
-      titulo: "Demoradas Dinámicas",
+      slug: "demoradas-dinas",
+      titulo: "Demoradas Dinas",
       descripcion: "Comidas demoradas",
       imagen: "https://placehold.co/50/00c853/ffffff?text=DD",
       logo: "https://placehold.co/60/00c853/white?text=DD",
@@ -52,6 +55,7 @@ const categorias = [
       envio: "$3.000"
     },
     {
+      slug: "gordo-burguez",
       titulo: "Gordo Burguez",
       descripcion: "Salchipapas",
       imagen: "https://placehold.co/50/00c853/ffffff?text=GB",
@@ -63,14 +67,14 @@ const categorias = [
   ];
   const Populares: React.FC = () => {
   return (
-    <Link to="/tiendas/1" className="card-tienda"> 
     <div className="contenido">
       <div className="populares">
         <h2>Populares cerca de ti</h2>
+        <a href="#" className="ver-todo">Ver todo</a>
       </div>
       <div className="icon-populares">
-        {categorias.map((categoria, index) => (
-          <button key={index} className="redirect">
+        {categorias.map((categoria) => (
+          <Link to={`/tiendas/${categoria.slug}`} key={categoria.slug} className="redirect">
             <div className="card-image-section">
               <img 
                 src={categoria.imagen} 
@@ -102,11 +106,10 @@ const categorias = [
                 </div>
               </div>
             </div>
-          </button>
+          </Link>
         ))}
       </div>
     </div>
-    </Link>
   );
 }
 

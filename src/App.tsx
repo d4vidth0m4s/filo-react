@@ -16,7 +16,7 @@ const App = () => {
       {/* Layout principal con Header y Footer */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/tiendas/:id" element={<TiendasPerfil />} />
+        <Route path="/tiendas/:slug" element={<TiendasPerfil />} />
       </Route>
       
       

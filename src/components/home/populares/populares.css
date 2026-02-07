@@ -7,9 +7,19 @@
 
 .populares {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   gap: var(--spacing-sm);
   padding: var(--spacing-lg);
+}
+.ver-todo{
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+.ver-todo:hover{
+  color: #009c3c;
 }
 
 .populares h2 {
