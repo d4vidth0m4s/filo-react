@@ -3,8 +3,8 @@ export const tiendas = [
     slug: "gordo-burguez",
     nombre: "Gordo Burguez",
     descripcion: "Las mejores salchipapas",
-    banner: "/img/banner-gordo.jpg",
-    logo: "/img/logo-gordo.png",
+    banner: "https://placehold.co/600x200/ffcc80/1b1b1b?text=Gordo+Burguez",
+    logo: "https://placehold.co/100x100/ffb74d/1b1b1b?text=Gordo+Burguez",
     rating: 4.9,
     tiempo: "15-20 min",
     envio: "Gratis",
@@ -15,14 +15,15 @@ export const tiendas = [
         nombre: "Salchipapa Mega",
         descripcion: "Papa + salchicha + queso",
         precio: 12000,
-        imagen: "/img/salchipapa.jpg"
+        imagen: "https://placehold.co/300x200/ffe0b2/1b1b1b?text=Salchipapa+Mega"
+        
       },
       {
         id: 2,
         nombre: "Hamburguesa Doble",
         descripcion: "Doble carne, queso y papas",
         precio: 18000,
-        imagen: "/img/hamburguesa.jpg"
+        imagen: "https://placehold.co/300x200/ffccbc/1b1b1b?text=Hamburguesa+Doble"
       }
     ]
   },
@@ -31,8 +32,8 @@ export const tiendas = [
     slug: "comida-rapida",
     nombre: "Fast Food Express",
     descripcion: "Hamburguesas, papas y más",
-    banner: "/img/banner-fastfood.jpg",
-    logo: "/img/logo-fastfood.png",
+    banner: "https://placehold.co/600x200/ff7043/ffffff?text=Fast+Food+Express",
+    logo: "https://placehold.co/100x100/ff8a65/ffffff?text=Fast+Food+Express",
     rating: 4.5,
     tiempo: "20-30 min",
     envio: "Gratis",
@@ -43,7 +44,7 @@ export const tiendas = [
         nombre: "Combo Hamburguesa",
         descripcion: "Hamburguesa + papas + bebida",
         precio: 15000,
-        imagen: "/img/combo.jpg"
+        imagen: "https://placehold.co/300x200/ffab91/1b1b1b?text=Combo+Hamburguesa"
       }
     ]
   },
@@ -52,8 +53,8 @@ export const tiendas = [
     slug: "restaurantes",
     nombre: "Restaurante El Buen Sabor",
     descripcion: "Comida tradicional y gourmet",
-    banner: "/img/banner-restaurante.jpg",
-    logo: "/img/logo-restaurante.png",
+    banner: "https://placehold.co/600x200/9ccc65/1b1b1b?text=Restaurante+El+Buen+Sabor",
+    logo: "https://placehold.co/100x100/aed581/1b1b1b?text=El+Buen+Sabor",
     rating: 4.8,
     tiempo: "30-40 min",
     envio: "Gratis",
@@ -64,7 +65,7 @@ export const tiendas = [
         nombre: "Bandeja Especial",
         descripcion: "Carne, arroz, ensalada y bebida",
         precio: 22000,
-        imagen: "/img/bandeja.jpg"
+        imagen: "https://placehold.co/300x200/c5e1a5/1b1b1b?text=Bandeja+Especial"
       }
     ]
   },
@@ -73,8 +74,8 @@ export const tiendas = [
     slug: "supermercados",
     nombre: "Super Mercado Express",
     descripcion: "Todo lo que necesitas",
-    banner: "/img/banner-super.jpg",
-    logo: "/img/logo-super.png",
+    banner: "https://placehold.co/600x200/4db6ac/ffffff?text=Super+Mercado+Express",
+    logo: "https://placehold.co/100x100/80cbc4/1b1b1b?text=Super+Mercado",
     rating: 4.6,
     tiempo: "15-25 min",
     envio: "$2.000",
@@ -85,7 +86,7 @@ export const tiendas = [
         nombre: "Pack Snacks",
         descripcion: "Papas, galletas y bebida",
         precio: 10000,
-        imagen: "/img/snacks.jpg"
+        imagen: "https://placehold.co/300x200/b2dfdb/1b1b1b?text=Pack+Snacks"
       }
     ]
   },
@@ -94,8 +95,8 @@ export const tiendas = [
     slug: "cebolleros",
     nombre: "Los Cebolleros",
     descripcion: "Perros calientes legendarios",
-    banner: "/img/banner-cebolleros.jpg",
-    logo: "/img/logo-cebolleros.png",
+    banner: "https://placehold.co/600x200/9575cd/ffffff?text=Los+Cebolleros",
+    logo: "https://placehold.co/100x100/b39ddb/1b1b1b?text=Cebolleros",
     rating: 4.7,
     tiempo: "10-15 min",
     envio: "Gratis",
@@ -106,7 +107,7 @@ export const tiendas = [
         nombre: "Perro Especial",
         descripcion: "Salchicha, cebolla, papas y salsas",
         precio: 8000,
-        imagen: "/img/perro.jpg"
+        imagen: "https://placehold.co/300x200/d1c4e9/1b1b1b?text=Perro+Especial"
       }
     ]
   },
@@ -115,8 +116,8 @@ export const tiendas = [
     slug: "demoradas-dinas",
     nombre: "Demoradas Dinámicas",
     descripcion: "Platos que valen la espera",
-    banner: "/img/banner-demoradas.jpg",
-    logo: "/img/logo-demoradas.png",
+    banner: "https://placehold.co/600x200/90caf9/1b1b1b?text=Demoradas+Dinamicas",
+    logo: "https://placehold.co/100x100/bbdefb/1b1b1b?text=Demoradas",
     rating: 4.4,
     tiempo: "45-60 min",
     envio: "$3.000",
@@ -127,7 +128,7 @@ export const tiendas = [
         nombre: "Pasta Especial",
         descripcion: "Pasta en salsa cremosa",
         precio: 20000,
-        imagen: "/img/pasta.jpg"
+        imagen: "https://placehold.co/300x200/e3f2fd/1b1b1b?text=Pasta+Especial"
       }
     ]
   }

@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { tiendas } from "../../data/tiendas";
 import "./tiendaPerfil.css";
+import BackBotton from "../../components/backBotton/BackBotton";
 
 const TiendaPerfil = () => {
   const { slug } = useParams();
@@ -13,7 +14,7 @@ const TiendaPerfil = () => {
 
   return (
     <div className="tienda-page">
-     
+     <BackBotton modo="back" />
       <div
         className="tienda-banner"
         style={{ backgroundImage: `url(${tienda.banner})` }}
