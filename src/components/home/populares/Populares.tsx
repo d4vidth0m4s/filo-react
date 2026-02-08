@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 import { tiendas } from "../../../data/tiendas";
  
 
-//filtro api simulado para mostrar solo las tiendas con rating mayor a 4.0
-const categorias = tiendas.filter((tienda) => tienda.rating > 4.0);
+//filtro llamada api simulado para mostrar solo las tiendas con rating mayor a 4.0
+const categorias = tiendas.filter((tienda) => tienda.rating > 4.5);
+
+
   const Populares: React.FC = () => {
   return (
     <div className="contenido">

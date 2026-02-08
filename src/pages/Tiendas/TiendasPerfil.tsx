@@ -9,14 +9,16 @@ const TiendaPerfil = () => {
   const tienda = tiendas.find(t => t.slug === slug);
 
   if (!tienda) {
+    // Regirigi a Nofound ()
     return <h2 className="tienda-error">Tienda no encontrada</h2>;
   }
 
   return (
     <div className="tienda-page">
      <BackBotton modo="back" />
-      <div
-        className="tienda-banner"
+      <div className="tienda-header">
+      </div>
+      <div className="tienda-banner"
         style={{ backgroundImage: `url(${tienda.banner})` }}
       >
         <div className="tienda-overlay">
@@ -34,7 +36,9 @@ const TiendaPerfil = () => {
 
       <div className="tienda-categorias">
         {tienda.categorias.map((cat, i) => (
-          <button key={i}>{cat}</button>
+          <button key={i}>
+            {cat}
+            </button>
         ))}
       </div>
 

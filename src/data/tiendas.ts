@@ -1,10 +1,11 @@
 export const tiendas = [
   {
-    slug: "gordo-burguez",
-    nombre: "Gordo Burguez",
+    //el slug lo haremos desde el backend
+    slug: "gordo-burguer",
+    nombre: "Gordo Burguer",
     descripcion: "Las mejores salchipapas",
-    banner: "https://placehold.co/600x200/ffcc80/1b1b1b?text=Gordo+Burguez",
-    logo: "https://placehold.co/100x100/ffb74d/1b1b1b?text=Gordo+Burguez",
+    banner: "https://placehold.co/600x200/ffcc80/1b1b1b?text=Gordo+Burguer",
+    logo: "https://placehold.co/100x100/ffb74d/1b1b1b?text=Gordo+Burguer",
     rating: 4.9,
     tiempo: "15-20 min",
     envio: "Gratis",
