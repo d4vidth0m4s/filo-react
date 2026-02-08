@@ -8,7 +8,7 @@ const TiendaPerfil = () => {
   const { slug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
 const categoria = searchParams.get("cat") || "all";
-const cambiarCategoria = (cat) => {
+const cambiarCategoria = (cat:string ) => {
   setSearchParams({ cat });
 };
 
