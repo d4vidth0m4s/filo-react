@@ -46,7 +46,7 @@ const Header: React.FC = () => {
         </div>
         <div className="search-container">
           <span className="search-icon">
-            <i className="fa-solid fa-magnifying-glass"><IoSearch/></i>
+            <i className="fa-solid fa-magnifying-glass"><IoSearch /></i>
           </span>
           <input type="text" placeholder="¿Qué se te antoja hoy?" />
         </div>
