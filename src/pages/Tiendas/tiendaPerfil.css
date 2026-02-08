@@ -51,9 +51,6 @@
   color: white;
   background-color: #00c853;
   overflow-x: auto;
-<<<<<<< HEAD
-  background-color: #00c853;
-=======
   scrollbar-width: none;
 }
 
@@ -61,7 +58,6 @@
 .tienda-categorias button:focus {
   border: 2px solid #00c853;
   outline: none;
->>>>>>> b6112d959da84e4a042916c2fff1977318168c9c
 }
 
 .tienda-categorias button {
@@ -69,7 +65,7 @@
   padding: 8px 14px;
   border-radius: 20px;
   border: none;
-  background: #623838;
+  background: rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
 
