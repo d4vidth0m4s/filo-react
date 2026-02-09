@@ -1,5 +1,4 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import './NavFooter.css'
 import { FaHome,FaTags, FaUser, FaShoppingCart } from "react-icons/fa";
 //import '../scripts/login'

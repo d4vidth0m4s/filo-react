@@ -83,6 +83,9 @@
 }
 
 .producto-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: white;
   border-radius: 12px;
   overflow: hidden;
@@ -96,7 +99,10 @@
 }
 
 .producto-info {
+  display: flex;
+  flex-direction: column ;
   padding: 10px;
+  flex: 1;
 }
 
 .producto-info h3 {
@@ -114,7 +120,7 @@
 }
 
 .producto-info button {
-  margin-top: 8px;
+  margin-top: auto;
   width: 100%;
   background: #00c853;
   color: white;
