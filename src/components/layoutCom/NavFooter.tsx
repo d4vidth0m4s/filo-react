@@ -11,7 +11,7 @@ const NavFooter: React.FC = () => {
   return (
     <footer className="navFooter">
       <div className="nav-Footer-content">
-        <a href="#">
+        <a href="/Filo-Home">
           <i className="fa-solid fa-house"><FaHome/></i>
           <span>Inicio</span>
         </a>
@@ -23,7 +23,7 @@ const NavFooter: React.FC = () => {
           <i className="fa-solid fa-cart-shopping"><FaShoppingCart/></i>
           <span>Pedidos</span>
         </a>
-        <a href="" id="userBtn">
+        <a href="/users/login" id="userBtn">
           <i className="fa-solid fa-user"><FaUser/></i>
           <span>Perfil</span>
         </a>

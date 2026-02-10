@@ -8,6 +8,8 @@ import UserLog from "./pages/users/UserLog";
 import UserPerfil from "./pages/users/UserPerfil";
 import PrivateLayout from "./layouts/Private Layout/PrivateLayout";
 import TiendasPerfil from "./pages/Tiendas/TiendasPerfil";
+import TiendaDetalle from "./pages/Tiendas/tiendaDetalle";
+
 
 const App = () => {
   navigator.geolocation.getCurrentPosition(
@@ -27,6 +29,7 @@ const App = () => {
     
 
     <Routes>
+      
      
 
       {/* Layout principal con Header y Footer */}
@@ -34,6 +37,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="/Filo-home" element={<Home />} />
         <Route path="/tiendas/:slug" element={<TiendasPerfil />} />
+        <Route path="/tiendas/:slug" element={<TiendaDetalle />} />
       </Route>
       
       

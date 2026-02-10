@@ -6,6 +6,7 @@ import App from './App';
 //import { AuthProvider } from './contexts/AuthContext';
 //import { DataProvider } from './contexts/DataContext';
 import './index.css';
+import { CartProvider } from "./context/cartContext";
 
 // Crear la instancia del cliente de queries
 //const queryClient = new QueryClient();
@@ -13,9 +14,10 @@ import './index.css';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-   
+   <CartProvider>
   
             <App />
+   </CartProvider>
   
   
    

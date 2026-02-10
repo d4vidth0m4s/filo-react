@@ -3,16 +3,17 @@ import { tiendas } from "../../data/tiendas";
 import "./tiendaPerfil.css";
 import BackBotton from "../../components/backBotton/BackBotton";
 import { useSearchParams } from "react-router-dom";
-
+import { useCart } from "../../context/cartContext";
 const TiendaPerfil = () => {
   const { slug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
+  const { agregarProducto, restarProducto, carrito } = useCart();
 const categoria = searchParams.get("cat") || "all";
 const cambiarCategoria = (cat:string ) => {
   setSearchParams({ cat });
 };
 
-
+  
   
   const productosFiltrados_t = tiendas;
 
@@ -76,10 +77,50 @@ const cambiarCategoria = (cat:string ) => {
               <h3>{prod.nombre}</h3>
               <p>{prod.descripcion}</p>
               <span>${prod.precio}</span>
-              <button>Agregar</button>
+
+              {(() => {
+                const item = carrito.find(p => p.id === prod.id);
+
+                if (!item) {
+                  return (
+                    <button
+                      onClick={() =>
+                        agregarProducto({
+                          id: prod.id,
+                          nombre: prod.nombre,
+                          precio: prod.precio,
+                          imagen: prod.imagen
+                        })
+                      }
+                    >
+                        Agregar
+                    </button>
+                  );
+                }
+
+                return (
+                  <div className="cantidad-control">
+                    <button onClick={() => restarProducto(prod.id)}>-</button>
+                    <span>{item.cantidad}</span>
+                    <button
+                      onClick={() =>
+                        agregarProducto({
+                          id: prod.id,
+                          nombre: prod.nombre,
+                          precio: prod.precio,
+                          imagen: prod.imagen
+                        })
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         ))}
+        
       </div>
     </div>
   );

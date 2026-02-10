@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./header.css";
-import CartDrawer from "../cartBuy/carrito-compra";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import LocationSelector from "../Localizacion/localizaciongeo";
 
-
+interface HeaderProps {
+  onCartClick: () => void;
+}
 interface LocationData {
   name: string;
   lat: number | null;
   lng: number | null;
 }
 
-const Header: React.FC = () => {
+const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
   const navigate = useNavigate();
 
-  const [abierto, setAbierto] = useState<boolean>(false);
 
   const [location, setLocation] = useState<LocationData>(() => {
     try {
@@ -53,10 +53,9 @@ const Header: React.FC = () => {
           <div className="cart-wrapper">
             <button
               className="icon-btn"
-              onClick={() => setAbierto(!abierto)}
+              onClick={onCartClick}
             > <i><FaShoppingCart /></i>
             </button>
-            <CartDrawer abierto={abierto} setAbierto={setAbierto} />
           </div>
 
           <Link to="/Filo-Home" className="logo-link">
@@ -101,13 +100,12 @@ const Header: React.FC = () => {
           <div className="cart-wrapper">
             <button
               className="icon-btn"
-              onClick={() => setAbierto(!abierto)}
+              onClick={onCartClick}
             >
               <i><FaShoppingCart /></i>
             </button>
-            <CartDrawer abierto={abierto} setAbierto={setAbierto} />
           </div>
-          
+
           <button className="icon-btn" onClick={handleUserClick}>
             <i><FaUser /></i>
           </button>

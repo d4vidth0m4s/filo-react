@@ -129,3 +129,12 @@
   border-radius: 8px;
   cursor: pointer;
 }
+.cantidad-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cantidad-control button {
+  padding: 4px 10px;
+}
