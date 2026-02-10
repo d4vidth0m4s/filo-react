@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { FaLocationDot } from "react-icons/fa6";
+import "./localizaciongeo.css";
 
 interface LocationData {
   name: string;
@@ -92,7 +93,6 @@ useEffect(() => {
   });
 };
 
-
   const searchPlace = async (q: string) => {
     if (!q.trim()) return;
 
@@ -113,102 +113,46 @@ useEffect(() => {
           }
         }
 );
-
       const data = await res.json();
-
       setResults(data.slice(0, 5));
     } catch (err) {
       console.error("Error buscando ubicación", err);
     }
-
     setLoading(false);
      };
 
   return (
-    <div style={{ position: "relative" }}>
-      <div
-        onClick={() => setOpen(!open)}
-        style={{
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          gap: "6px",
-          fontWeight: "500",
-        }}
-      >
+    <div className="location-wrapper">
+      <div className="location-trigger" onClick={() => setOpen(!open)}>
         <FaLocationDot /> Cambiar ubicación
       </div>
 
-     
       {open && (
-        <div
-          ref={panelRef}
-          style={{
-            position: "absolute",
-            top: "35px",
-            left: 0,
-            width: "280px",
-            background: "#fff",
-            border: "1px solid #ddd",
-            borderRadius: "8px",
-            padding: "10px",
-            boxShadow: "0 4px 10px rgba(0,0,0,.1)",
-            zIndex: 9999,
-          }}
-        >
-          <button
-            onClick={getMyLocation}
-            style={{ width: "100%", marginBottom: "8px",
-                backgroundColor:"#09ab17ff",
-                color: "#fff",
-                border: "none",
-                padding: "10px 20px",
-                borderRadius: "5px",
-                cursor: "pointer",
-             }}
-          >
+        <div ref={panelRef} className="location-panel">
+          <button className="use-location-btn" onClick={getMyLocation}>
             Usar mi ubicación
           </button>
 
-          <hr />
-
-          <input
-            type="text"
-            placeholder="Buscar ciudad..."
-            value={search}
+          <input type="text" placeholder="Buscar ciudad..." value={search}
             onChange={(e) => {
                     const value = e.target.value;
                     setSearch(value);
-
                     clearTimeout((window as any).searchTimer);
-
                     (window as any).searchTimer = setTimeout(() => {
                     searchPlace(value);
                     }, 500);
                 }}
-            style={{
-                width: "100%",
-                padding: "8px",
-                marginBottom: "8px",
-                border: "1px solid #ddd",
-                borderRadius: "6px",
-                display: "block",
-                marginLeft: "auto",
-                marginRight: "auto",
-                textAlign: "center",
-                boxSizing: "border-box",
-            }}
+            className="location-input"
           />
 
-          {loading && <p>Cargando...</p>}
+          {loading && <p className="location-text">Cargando...</p>}
 
           {!loading && results.length === 0 && search && (
-            <p>No hay resultados</p>
+            <p className="location-text">No hay resultados</p>
           )}
 
           {results.map((r) => (
-            <div
-              key={r.place_id}
+            <div key={r.place_id} className="location-result"
               onClick={() => {
                 const city = getCityName(r.address, r.display_name);
                 onSelect({
@@ -217,12 +161,6 @@ useEffect(() => {
                     name: city,
                 });
                 setOpen(false);
-              }}
-              style={{
-                padding: "6px",
-                cursor: "pointer",
-                borderBottom: "1px solid #eee",
-                fontSize: "13px",
               }}
             >
               {r.address?.city ||

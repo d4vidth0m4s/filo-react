@@ -197,11 +197,18 @@
     display: none;
   }
 
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+
+  }
+
   .header-desktop {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--spacing-lg);
     padding: var(--spacing-lg);
   }
 
@@ -218,9 +225,13 @@
   }
 
   .header-desktop .search-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-self: center;
     flex: 1;
-    min-width: 250px;
-    max-width: 400px;
+    width: 100%;
+    max-width: 480px;
     height: 42px;
     background: rgba(0, 0, 0, 0.08);
     border: 1px solid rgba(0, 0, 0, 0.1);

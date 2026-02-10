@@ -54,7 +54,7 @@ const Header: React.FC = () => {
             <button
               className="icon-btn"
               onClick={() => setAbierto(!abierto)}
-            > <FaShoppingCart />
+            > <i><FaShoppingCart /></i>
             </button>
 
             <CartDrawer abierto={abierto} setAbierto={setAbierto} />
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
           </div>
 
           <button className="icon-btn" onClick={handleUserClick}>
-            <FaUser />
+            <i><FaUser /></i>
           </button>
         </div>
 
@@ -82,20 +82,24 @@ const Header: React.FC = () => {
 
       {/* DESKTOP */}
       <div className="header-desktop">
-        <h1 className="logo">Filo</h1>
 
-        <div className="ubicacion">
+        
+        <div className="header-left">
+          <h1 className="logo">Filo</h1>
 
-          <span>{location.name}</span>
-
-          <LocationSelector onSelect={handleLocationSelect} />
+          <div className="ubicacion">
+            <span>{location.name}</span>
+            <LocationSelector onSelect={handleLocationSelect} />
+          </div>
         </div>
 
+        
         <div className="search-container">
           <IoSearch className="search-icon" />
           <input placeholder="¿Qué se te antoja hoy?" />
         </div>
 
+        
         <div className="nav-links">
           <div className="cart-wrapper">
             <button
@@ -104,7 +108,6 @@ const Header: React.FC = () => {
             >
               <i><FaShoppingCart /></i>
             </button>
-
             <CartDrawer abierto={abierto} setAbierto={setAbierto} />
           </div>
 
