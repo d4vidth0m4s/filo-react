@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./header.css";
 import CartDrawer from "../cartBuy/carrito-compra";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
@@ -56,16 +56,15 @@ const Header: React.FC = () => {
               onClick={() => setAbierto(!abierto)}
             > <i><FaShoppingCart /></i>
             </button>
-
             <CartDrawer abierto={abierto} setAbierto={setAbierto} />
           </div>
 
-          <h1 className="logo">Filo</h1>
+          <Link to="/Filo-Home" className="logo-link">
+            <h1 className="logo">Filo</h1>
+          </Link>
 
           <div className="ubicacion">
-
             <span>{location.name}</span>
-
             <LocationSelector onSelect={handleLocationSelect} />
           </div>
 
@@ -82,10 +81,10 @@ const Header: React.FC = () => {
 
       {/* DESKTOP */}
       <div className="header-desktop">
-
-        
         <div className="header-left">
-          <h1 className="logo">Filo</h1>
+          <Link to="/Filo-Home" className="logo-link">
+            <h1 className="logo">Filo</h1>
+          </Link>
 
           <div className="ubicacion">
             <span>{location.name}</span>
@@ -93,13 +92,11 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        
         <div className="search-container">
           <IoSearch className="search-icon" />
           <input placeholder="¿Qué se te antoja hoy?" />
         </div>
 
-        
         <div className="nav-links">
           <div className="cart-wrapper">
             <button
@@ -110,7 +107,7 @@ const Header: React.FC = () => {
             </button>
             <CartDrawer abierto={abierto} setAbierto={setAbierto} />
           </div>
-
+          
           <button className="icon-btn" onClick={handleUserClick}>
             <i><FaUser /></i>
           </button>
