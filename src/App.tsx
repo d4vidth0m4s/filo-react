@@ -10,12 +10,29 @@ import PrivateLayout from "./layouts/Private Layout/PrivateLayout";
 import TiendasPerfil from "./pages/Tiendas/TiendasPerfil";
 
 const App = () => {
+  navigator.geolocation.getCurrentPosition(
+  (position) => {
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+
+    console.log("Lat:", lat);
+    console.log("Lng:", lng);
+  },
+  (error) => {
+    console.log("Error:", error);
+  }
+);
+
   return (
+    
 
     <Routes>
+     
+
       {/* Layout principal con Header y Footer */}
       <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
+        <Route index element={<Home />} />
+        <Route path="/Filo-home" element={<Home />} />
         <Route path="/tiendas/:slug" element={<TiendasPerfil />} />
       </Route>
       

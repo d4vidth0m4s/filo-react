@@ -8,7 +8,8 @@
   background-size: cover;
   background-position: center;
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  padding-bottom: 70px;
 }
 
 .tienda-overlay {
@@ -16,9 +17,12 @@
   color: white;
   height: 100%;
   padding: 20px;
+  padding-top: -40%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  z-index: 1;
+  position: relative;
 }
 
 .tienda-logo {
@@ -38,7 +42,7 @@
 
 .tienda-categorias {
 
-  z-index: 10;
+  z-index: 2;
   display: flex;
   gap: 10px;
   padding: 15px;
@@ -52,6 +56,7 @@
   background-color: #00c853;
   overflow-x: auto;
   scrollbar-width: none;
+  z-index: 2;
 }
 
 .tienda-categorias button:active,
@@ -67,6 +72,7 @@
   border: none;
   background: rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  z-index: 2;
 }
 
 .tienda-productos {
@@ -77,6 +83,9 @@
 }
 
 .producto-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: white;
   border-radius: 12px;
   overflow: hidden;
@@ -90,7 +99,10 @@
 }
 
 .producto-info {
+  display: flex;
+  flex-direction: column ;
   padding: 10px;
+  flex: 1;
 }
 
 .producto-info h3 {
@@ -108,7 +120,7 @@
 }
 
 .producto-info button {
-  margin-top: 8px;
+  margin-top: auto;
   width: 100%;
   background: #00c853;
   color: white;

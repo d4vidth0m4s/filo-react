@@ -12,7 +12,8 @@ export const tiendas = [
     categorias: ["Hamburguesas", "Salchipapas", "Combos"],
     productos: [
       {
-        id: 1,
+        id: 1, 
+        categoria: "Salchipapas",
         nombre: "Salchipapa Mega",
         descripcion: "Papa + salchicha + queso",
         precio: 12000,
@@ -21,6 +22,7 @@ export const tiendas = [
       },
       {
         id: 2,
+        categoria: "Hamburguesas",
         nombre: "Hamburguesa Doble",
         descripcion: "Doble carne, queso y papas",
         precio: 18000,
@@ -41,6 +43,7 @@ export const tiendas = [
     categorias: ["Hamburguesas", "Papas", "Perros"],
     productos: [
       {
+        categoria: "Hamburguesas",
         id: 1,
         nombre: "Combo Hamburguesa",
         descripcion: "Hamburguesa + papas + bebida",
@@ -52,6 +55,7 @@ export const tiendas = [
 
   {
     slug: "restaurantes",
+    
     nombre: "Restaurante El Buen Sabor",
     descripcion: "Comida tradicional y gourmet",
     banner: "https://placehold.co/600x200/9ccc65/1b1b1b?text=Restaurante+El+Buen+Sabor",
@@ -62,6 +66,7 @@ export const tiendas = [
     categorias: ["Almuerzos", "Especiales"],
     productos: [
       {
+        categoria: "Almuerzos",
         id: 1,
         nombre: "Bandeja Especial",
         descripcion: "Carne, arroz, ensalada y bebida",
@@ -84,6 +89,7 @@ export const tiendas = [
     productos: [
       {
         id: 1,
+        categoria: "Snacks",
         nombre: "Pack Snacks",
         descripcion: "Papas, galletas y bebida",
         precio: 10000,
@@ -105,6 +111,7 @@ export const tiendas = [
     productos: [
       {
         id: 1,
+        categoria: "Perros",
         nombre: "Perro Especial",
         descripcion: "Salchicha, cebolla, papas y salsas",
         precio: 8000,
@@ -126,6 +133,7 @@ export const tiendas = [
     productos: [
       {
         id: 1,
+        categoria: "Pastas",
         nombre: "Pasta Especial",
         descripcion: "Pasta en salsa cremosa",
         precio: 20000,

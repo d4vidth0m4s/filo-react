@@ -15,7 +15,7 @@ const BackBotton :React.FC<BackBottonProps> = ({ modo = 'home' }) => {
   return (
     <>
     
-            <button id="back" className="back-btn" onClick={() => navigate(-1)}>
+            <button id="back" className="back-btn" onClick={() => navigate("/Filo-Home")}>
               {modoState ? <IoMdHome /> : <IoMdArrowBack />}
             </button>
     
