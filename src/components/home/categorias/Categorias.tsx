@@ -4,10 +4,10 @@ import './categorias.css'
 const Categorias = () => {
 
 const categorias = [
-  { nombre: 'Restaurantes', icono: '../public/images/restaurantes.png' },
-  { nombre: 'Tiendas', icono: '../public/images/tiendas.webp' },
-  { nombre: 'Supermercados', icono: '../public/images/supermercados.png' },
-  { nombre: 'Comidas Rápidas', icono: '../public/images/comidas-rapidas.png' },
+  { nombre: 'Restaurantes', icono: '../src/images/restaurantes.png' },
+  { nombre: 'Tiendas', icono: '../src/images/tiendas.webp' },
+  { nombre: 'Supermercados', icono: '../src/images/supermercados.png' },
+  { nombre: 'Comidas Rápidas', icono: '../src/images/comidas-rapidas.png' },
   
 ]
 
