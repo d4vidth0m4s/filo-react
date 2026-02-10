@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 //import { useNavigate } from 'react-router-dom'
 //import '../scripts/back'
 
@@ -7,7 +8,6 @@ const UserCall: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Aquí iría la lógica de login
     console.log('Formulario de login enviado')
   }
 
@@ -20,7 +20,9 @@ const UserCall: React.FC = () => {
       <button id="back" className="back-btn">
         <i className="fa-solid fa-arrow-left"></i> Volver
       </button>
-      <h1>Filo</h1>
+      <Link to="/Filo-Home" className="logo-link">
+        <h1>Filo</h1>
+      </Link>
       <p>Inicia sesión para continuar</p>
       <form id="loginForm" onSubmit={handleSubmit}>
         <div className="input-group">

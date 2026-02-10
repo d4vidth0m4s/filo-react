@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import './AuthCard.css'
 import { UsuariosApi } from '../../api/UsuariosApi'
 
@@ -52,9 +52,11 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
       </aside>
 
       <section className="login-container">
-       <BackBotton modo="home" />
-       
-        <h1>Filo</h1>
+        <BackBotton modo="home" />
+
+        <Link to="/Filo-Home" className="logo-link">
+          <h1>Filo</h1>
+        </Link>
         <p>{isLogin ? 'Inicia sesión para continuar' : 'Regístrate para continuar'}</p>
 
         <form onSubmit={handleSubmit}>
