@@ -29,6 +29,7 @@ const cambiarCategoria = (cat:string ) => {
     : productos.filter(
         (p) => p.categoria === categoria
       );
+      
 
   return (
     <div className="tienda-page">

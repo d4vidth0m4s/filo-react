@@ -1,90 +1,120 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import './header.css'
-import { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./header.css";
 import CartDrawer from "../cartBuy/carrito-compra";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
 import { IoSearch } from "react-icons/io5";
+import LocationSelector from "../Localizacion/localizaciongeo";
 
+
+interface LocationData {
+  name: string;
+  lat: number | null;
+  lng: number | null;
+}
 
 const Header: React.FC = () => {
-  const navigate = useNavigate()
-  const [abierto, setAbierto] = useState(false);
-  const handleUserClick = () => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      navigate('/users/') // Ruta al perfil del usuario
-    } else {
-      navigate('/users/login')
+  const navigate = useNavigate();
+
+  const [abierto, setAbierto] = useState<boolean>(false);
+
+  const [location, setLocation] = useState<LocationData>(() => {
+    try {
+      const saved = localStorage.getItem("userLocation");
+
+      return saved
+        ? JSON.parse(saved)
+        : { name: "Ciénaga Magdalena", lat: null, lng: null };
+    } catch {
+      return { name: "Ciénaga Magdalena", lat: null, lng: null };
     }
-  }
+  });
+
+  const handleUserClick = () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("/users/");
+    } else {
+      navigate("/users/login");
+    }
+  };
+
+  const handleLocationSelect = (loc: LocationData) => {
+    setLocation(loc);
+    localStorage.setItem("userLocation", JSON.stringify(loc));
+  };
 
   return (
     <header className="header">
-      {/* MOBILE HEADER */}
+      {/* MOBILE */}
       <div className="header-mobile">
         <div className="mobile-top">
           <div className="cart-wrapper">
             <button
               className="icon-btn"
               onClick={() => setAbierto(!abierto)}
-            >
-              <i className="fa-solid fa-cart-shopping"><FaShoppingCart /></i>
+            > <FaShoppingCart />
             </button>
 
             <CartDrawer abierto={abierto} setAbierto={setAbierto} />
           </div>
+
           <h1 className="logo">Filo</h1>
+
           <div className="ubicacion">
-            <i className="fa-solid fa-location-dot"></i>
-            <span><i><FaLocationDot /></i> Ciénaga Magdalena</span>
+
+            <span>{location.name}</span>
+
+            <LocationSelector onSelect={handleLocationSelect} />
           </div>
+
           <button className="icon-btn" onClick={handleUserClick}>
-            <i className="fa-solid fa-user"> <FaUser /></i>
+            <FaUser />
           </button>
         </div>
+
         <div className="search-container">
-          <span className="search-icon">
-            <i className="fa-solid fa-magnifying-glass"><IoSearch /></i>
-          </span>
-          <input type="text" placeholder="¿Qué se te antoja hoy?" />
+          <IoSearch className="search-icon" />
+          <input placeholder="¿Qué se te antoja hoy?" />
         </div>
       </div>
 
-      {/* DESKTOP HEADER */}
+      {/* DESKTOP */}
       <div className="header-desktop">
         <h1 className="logo">Filo</h1>
-        <div className="ubicacion">
-          <i className="fa-solid fa-location-dot"></i>
-          <span><i><FaLocationDot /></i> Ciénaga Magdalena</span>
-        </div>
-        <div className="search-container">
-          <span className="search-icon">
-            <i className="fa-solid fa-magnifying-glass"><IoSearch /></i>
-          </span>
-          <input type="text" placeholder="¿Qué se te antoja hoy?" />
-        </div>
-        <div className="nav-links">
 
+        <div className="ubicacion">
+
+          <span>{location.name}</span>
+
+          <LocationSelector onSelect={handleLocationSelect} />
+        </div>
+
+        <div className="search-container">
+          <IoSearch className="search-icon" />
+          <input placeholder="¿Qué se te antoja hoy?" />
+        </div>
+
+        <div className="nav-links">
           <div className="cart-wrapper">
             <button
               className="icon-btn"
               onClick={() => setAbierto(!abierto)}
             >
-              <i className="fa-solid fa-cart-shopping"><FaShoppingCart /></i>
+              <i><FaShoppingCart /></i>
             </button>
 
             <CartDrawer abierto={abierto} setAbierto={setAbierto} />
           </div>
+
           <button className="icon-btn" onClick={handleUserClick}>
-            <i className="fa-solid fa-user"><FaUser /> </i>
+            <i><FaUser /></i>
           </button>
         </div>
       </div>
-
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
