@@ -4,6 +4,7 @@ import "./header.css";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import LocationSelector from "../Localizacion/localizaciongeo";
+import { useCart } from "../../context/cartContext";
 
 interface HeaderProps {
   onCartClick: () => void;
@@ -14,9 +15,11 @@ interface LocationData {
   lng: number | null;
 }
 
+
 const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
   const navigate = useNavigate();
-
+  const { carrito } = useCart();
+  const totalTipos = carrito.length;
 
   const [location, setLocation] = useState<LocationData>(() => {
     try {
@@ -51,10 +54,11 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
       <div className="header-mobile">
         <div className="mobile-top">
           <div className="cart-wrapper">
-            <button
-              className="icon-btn"
-              onClick={onCartClick}
-            > <i><FaShoppingCart /></i>
+            <button className="icon-btn" onClick={onCartClick}>
+              <i><FaShoppingCart /></i>
+              {totalTipos > 0 && (
+                <span className="carrito-badge">{totalTipos}</span>
+              )}
             </button>
           </div>
 
@@ -67,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
             <LocationSelector onSelect={handleLocationSelect} />
           </div>
 
-          <button className="icon-btn" onClick={handleUserClick}>
+          <button className="icon-btn user-btn" onClick={handleUserClick}>
             <i><FaUser /></i>
           </button>
         </div>
@@ -98,11 +102,11 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
 
         <div className="nav-links">
           <div className="cart-wrapper">
-            <button
-              className="icon-btn"
-              onClick={onCartClick}
-            >
+            <button className="icon-btn" onClick={onCartClick}>
               <i><FaShoppingCart /></i>
+              {totalTipos > 0 && (
+                <span className="carrito-badge">{totalTipos}</span>
+              )}
             </button>
           </div>
 
