@@ -8,7 +8,7 @@ import UserLog from "./pages/users/UserLog";
 import UserPerfil from "./pages/users/UserPerfil";
 import PrivateLayout from "./layouts/Private Layout/PrivateLayout";
 import TiendasPerfil from "./pages/Tiendas/TiendasPerfil";
-import TiendaDetalle from "./pages/Tiendas/tiendaDetalle";
+//import TiendaDetalle from "./pages/Tiendas/tiendaDetalle";
 
 
 const App = () => {
@@ -37,7 +37,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="/Filo-home" element={<Home />} />
         <Route path="/tiendas/:slug" element={<TiendasPerfil />} />
-        <Route path="/tiendas/:slug" element={<TiendaDetalle />} />
+      {/*  <Route path="/tiendas/:slug" element={<TiendaDetalle />} /> */}  
       </Route>
       
       

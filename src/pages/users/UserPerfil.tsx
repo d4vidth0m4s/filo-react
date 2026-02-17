@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './UserPerfil.css'
 import BackBotton from '../../components/backBotton/BackBotton'
 import {getUserData} from '../../Auth/auth'
+import { api } from '../../api/Api'
 
 type Usuario = {
   id: number
@@ -13,12 +14,45 @@ type Usuario = {
   token: string
 }
 
+ type CodeRequest = {
+  audience: string,
+  expirationSeconds: number
+}
+
+type CodeResponse = {
+  accessCode: string
+  audience: string
+  expiresIn: number
+}
+
 const UserPerfil: React.FC = () => {
   const [usuario] = useState<Usuario | null>(() => {
     const userData = getUserData();
     
     return userData  ? userData as Usuario : null;
   })
+
+ 
+
+  const codeAccess = async (data: CodeRequest): Promise<CodeResponse> => {
+    const response = await api.post<CodeResponse>('/api/auth/bridge/code', data);
+    return response.data;
+  }
+
+async function codeAccessHandler () {
+  const data = await codeAccess({ audience: "ControlGastosClients", expirationSeconds: 100 })
+
+const win = window.open("http://localhost:3001/auth/bridge", "_blank");
+
+setTimeout(() => {
+  win?.postMessage(
+    { code: data.accessCode },
+    "http://localhost:3001"
+  );
+}, 500);
+
+  console.log(data)
+}
 
   const filoAscii = `
  ________      ___          ___               ________     
@@ -61,7 +95,7 @@ const UserPerfil: React.FC = () => {
               <button className="opcion">
                 <span>Favoritos</span>
               </button>
-              <button className="opcion">
+              <button className="opcion" onClick={codeAccessHandler}>
                 <span>Tu comercio</span>
               </button>
               <button className="opcion logout">
