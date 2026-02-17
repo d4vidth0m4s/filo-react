@@ -29,9 +29,6 @@ const App = () => {
     
 
     <Routes>
-      
-     
-
       {/* Layout principal con Header y Footer */}
       <Route element={<Layout />}>
         <Route index element={<Home />} />
