@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './UserPerfil.css'
 import BackBotton from '../../components/backBotton/BackBotton'
 import {getUserData} from '../../Auth/auth'
+import {useNavigate } from "react-router-dom";
+import { logout } from "../../Auth/auth";
 
 type Usuario = {
   id: number
@@ -12,13 +14,33 @@ type Usuario = {
   pictureUrl: string
   token: string
 }
-
 const UserPerfil: React.FC = () => {
+  const navigate = useNavigate();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   const [usuario] = useState<Usuario | null>(() => {
     const userData = getUserData();
     
     return userData  ? userData as Usuario : null;
   })
+
+
+const handleLogout = () => {
+  // Limpiar sesión
+  localStorage.removeItem("token");
+  logout();
+  localStorage.clear();
+
+  // Mostrar modal
+  setShowLogoutModal(true);
+
+  // Redirigir luego
+  setTimeout(() => {
+    navigate("/users/login", { replace: true });}, 2000);
+};
+
+
+
 
   const filoAscii = `
  ________      ___          ___               ________     
@@ -64,7 +86,7 @@ const UserPerfil: React.FC = () => {
               <button className="opcion">
                 <span>Tu comercio</span>
               </button>
-              <button className="opcion logout">
+              <button className="opcion logout" onClick={handleLogout}>
                 <span>Cerrar sesión</span>
               </button>
             </div>
@@ -89,6 +111,18 @@ const UserPerfil: React.FC = () => {
           <p className="correo">{usuario?.email}</p>
         </section>
       </div>
+      {/* MODAL LOGOUT */}
+        {showLogoutModal && (
+          <div className="logout-overlay">
+            <div className="logout-box">
+              <div className="logout-icon">✓</div>
+              <h3>Sesión cerrada</h3>
+              <p>Has salido correctamente</p>
+              <span>Redirigiendo...</span>
+              <button className="logout-btn" onClick={() => navigate("/users/login")}>Ir al login</button>
+            </div>
+          </div>
+        )}
     </div>
   )
 }

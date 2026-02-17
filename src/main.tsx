@@ -18,9 +18,11 @@ createRoot(document.getElementById('root')!).render(
   
             <App />
    </CartProvider>
-  
+   
   
    
     </BrowserRouter>
+    
   </StrictMode>
+  
 );

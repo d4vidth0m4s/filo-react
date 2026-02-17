@@ -105,11 +105,11 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
 
         <div className="Google">
           <button className="google-btn" type="button" onClick={loginGoogle}>
-            <img src="../../public/images/SVG/google-icon.svg" alt="Google" />
+            <img src="/src/images/SVG/google-icon.svg" alt="Google" />
           </button>
         </div>
 
-        <p className="toggle-mode">
+        <p className="toggle-mode"> 
           {isLogin ? (
             <>
               ¿No tienes cuenta?{' '}

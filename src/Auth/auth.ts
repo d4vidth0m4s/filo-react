@@ -11,6 +11,7 @@ export const removeToken = () => {
 }
 
 export const isAuthenticated = (): boolean => {
+  
   return !!getToken();
 }
 
@@ -25,3 +26,7 @@ export const getUserData = () => {
     }
   return  null;
 }
+export const logout = () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("token");
+};
