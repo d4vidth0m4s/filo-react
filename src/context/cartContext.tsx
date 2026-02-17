@@ -12,12 +12,17 @@ type CartContextType = {
   carrito: ProductoCarrito[];
   agregarProducto: (producto: Omit<ProductoCarrito, "cantidad">) => void;
   restarProducto: (id: number) => void;
+  vaciarCarrito: () => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
 
+
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [carrito, setCarrito] = useState<ProductoCarrito[]>([]);
+  const vaciarCarrito = () => {
+  setCarrito([]);
+};
 
   const agregarProducto = (producto: Omit<ProductoCarrito, "cantidad">) => {
     setCarrito((prev) => {
@@ -46,7 +51,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <CartContext.Provider value={{ carrito, agregarProducto, restarProducto }}>
+    <CartContext.Provider value={{ carrito, agregarProducto, restarProducto, vaciarCarrito }}>
       {children}
     </CartContext.Provider>
   );

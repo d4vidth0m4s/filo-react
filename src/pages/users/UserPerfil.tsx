@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './UserPerfil.css'
 import BackBotton from '../../components/backBotton/BackBotton'
 import {getUserData} from '../../Auth/auth'
@@ -24,23 +24,17 @@ const UserPerfil: React.FC = () => {
     return userData  ? userData as Usuario : null;
   })
 
-
 const handleLogout = () => {
   // Limpiar sesión
   localStorage.removeItem("token");
   logout();
   localStorage.clear();
-
   // Mostrar modal
   setShowLogoutModal(true);
-
   // Redirigir luego
   setTimeout(() => {
     navigate("/users/login", { replace: true });}, 2000);
 };
-
-
-
 
   const filoAscii = `
  ________      ___          ___               ________     
