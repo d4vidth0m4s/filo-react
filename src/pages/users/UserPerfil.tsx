@@ -2,12 +2,9 @@ import React, { useState } from 'react'
 import './UserPerfil.css'
 import BackBotton from '../../components/backBotton/BackBotton'
 import {getUserData} from '../../Auth/auth'
-<<<<<<< HEAD
 import { api } from '../../api/Api'
-=======
 import {useNavigate } from "react-router-dom";
 import { logout } from "../../Auth/auth";
->>>>>>> c644f1d6c144c3178e8e285001ecf4234569cf95
 
 type Usuario = {
   id: number
@@ -18,7 +15,6 @@ type Usuario = {
   pictureUrl: string
   token: string
 }
-<<<<<<< HEAD
 
  type CodeRequest = {
   audience: string,
@@ -31,8 +27,6 @@ type CodeResponse = {
   expiresIn: number
 }
 
-=======
->>>>>>> c644f1d6c144c3178e8e285001ecf4234569cf95
 const UserPerfil: React.FC = () => {
   const navigate = useNavigate();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -43,7 +37,6 @@ const UserPerfil: React.FC = () => {
     return userData  ? userData as Usuario : null;
   })
 
-<<<<<<< HEAD
  
 
   const codeAccess = async (data: CodeRequest): Promise<CodeResponse> => {
@@ -65,7 +58,7 @@ setTimeout(() => {
 
   console.log(data)
 }
-=======
+
 const handleLogout = () => {
   // Limpiar sesión
   localStorage.removeItem("token");
@@ -77,7 +70,6 @@ const handleLogout = () => {
   setTimeout(() => {
     navigate("/users/login", { replace: true });}, 2000);
 };
->>>>>>> c644f1d6c144c3178e8e285001ecf4234569cf95
 
   const filoAscii = `
  ________      ___          ___               ________     

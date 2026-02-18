@@ -75,7 +75,7 @@ export default function CartDrawer({ abierto, setAbierto }: { abierto: boolean; 
                                     <span>${item.precio}</span>
 
                                     <div className="cantidad-control">
-                                        <button onClick={() => restarProducto(item.id)}>-</button>
+                                        <button onClick={() => restarProducto(item.id, item.storeId)}>-</button>
                                         <span>{item.cantidad}</span>
                                         <button
                                             onClick={() =>
@@ -84,6 +84,8 @@ export default function CartDrawer({ abierto, setAbierto }: { abierto: boolean; 
                                                     nombre: item.nombre,
                                                     precio: item.precio,
                                                     imagen: item.imagen,
+                                                    storeId: item.storeId,
+                                                    storeName: item.storeName,
                                                 })}>+</button>
                                     </div>
                                 </div>

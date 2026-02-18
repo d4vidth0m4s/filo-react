@@ -89,7 +89,9 @@ const cambiarCategoria = (cat:string ) => {
                           id: prod.id,
                           nombre: prod.nombre,
                           precio: prod.precio,
-                          imagen: prod.imagen
+                          imagen: prod.imagen,
+                          storeId: tienda.slug,
+                          storeName: tienda.nombre,
                         })
                       }
                     >
@@ -100,7 +102,7 @@ const cambiarCategoria = (cat:string ) => {
 
                 return (
                   <div className="cantidad-control">
-                    <button onClick={() => restarProducto(prod.id)}>-</button>
+                    <button onClick={() => restarProducto(prod.id, tienda.slug)}>-</button>
                     <span>{item.cantidad}</span>
                     <button
                       onClick={() =>
@@ -108,7 +110,9 @@ const cambiarCategoria = (cat:string ) => {
                           id: prod.id,
                           nombre: prod.nombre,
                           precio: prod.precio,
-                          imagen: prod.imagen
+                          imagen: prod.imagen,
+                          storeId: tienda.slug,
+                          storeName: tienda.nombre,
                         })
                       }
                     >
