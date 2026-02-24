@@ -79,7 +79,7 @@ const cambiarCategoria = (cat:string ) => {
               <span>${prod.precio}</span>
 
               {(() => {
-                const item = carrito.find(p => p.id === prod.id);
+                const item = carrito.find(p => p.id === prod.id && p.storeId === tienda.slug);
 
                 if (!item) {
                   return (

@@ -23,7 +23,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
   const [familyName, setFamilyName] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -70,6 +70,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
   const loginGoogle = () => {
     console.log('Login con Google')
   }
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="auth-wrapper">
@@ -144,15 +145,23 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
             />
           </div>
 
-          <div className="input-group">
+          <div className="input-group password-group">
             <i className="fa-solid fa-lock"></i>
             <input
+<<<<<<< HEAD
               type="password"
               placeholder="Contrasena"
+=======
+              type={showPassword ? "text" : "password"}
+              placeholder="Contraseña"
+>>>>>>> 44a718478f6c012754667ac48aabda62327bd867
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <button type="button" className="toggle-password-btn" onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
+            </button>
           </div>
 
           {!isLogin && (
