@@ -16,9 +16,10 @@ type LoginData = {
   username: string;
   password: string;
 };
-export const UsuariosApi = {
+export const AuthApi = {
   pots: async (data: LoginData): Promise<Usuario> => {
     const response = await api.post<Usuario>('/api/Autenticacion/login', data);
     return response.data;
   },
+
 };
