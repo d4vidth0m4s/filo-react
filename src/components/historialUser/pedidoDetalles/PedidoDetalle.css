@@ -29,7 +29,6 @@
 }
 
 .detalle-volver {
-  background: transparent;
   border: 1px dashed #333;
   cursor: pointer;
   padding: 6px 12px;
@@ -42,12 +41,10 @@
 }
 
 .detalle-volver:hover {
-  background: rgba(0, 0, 0, 0.05);
   border-style: solid;
 }
 
 .detalle-soporte-btn {
-  background: transparent;
   border: 1px dashed #333;
   cursor: pointer;
   padding: 6px 14px;
@@ -60,7 +57,7 @@
 }
 
 .detalle-soporte-btn:hover {
-  background: rgba(0, 0, 0, 0.05);
+  border-style: solid;
 }
 
 .detalle-body {

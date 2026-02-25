@@ -23,7 +23,6 @@
 }
 
 .historial-volver {
-  background: transparent;
   border: 1px dashed #333;
   cursor: pointer;
   padding: 6px 12px;
@@ -36,7 +35,6 @@
 }
 
 .historial-volver:hover {
-  background: rgba(0, 0, 0, 0.05);
   border-style: solid;
 }
 
@@ -67,6 +65,14 @@
 .pedido-card:hover {
   border-style: solid;
   box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.08);
+}
+.perfil-card {
+  height: auto;
+  overflow: visible;
+}
+
+.user-perfil-container {
+  overflow-y: auto;
 }
 
 .pedido-card-header {

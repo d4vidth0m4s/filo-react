@@ -44,7 +44,7 @@ type PedidoDetalleProps = {
   onLlamarRepartidor: () => void;
 };
 
-const PedidoDetalle = ({
+const PedidoDetalleData = ({
   pedido,
   onVolver,
   onContactarSoporte,
@@ -75,10 +75,8 @@ const PedidoDetalle = ({
       </div>
 
       <div className="detalle-body">
-        {/* COLUMNA IZQUIERDA */}
         <div className="detalle-izquierda">
-
-          {/* PASOS DE PROGRESO */}
+/
           <div className="detalle-pasos">
             {pedido.pasos.map((paso, index) => (
               <div className="detalle-paso-item" key={paso.id}>
@@ -95,8 +93,7 @@ const PedidoDetalle = ({
             ))}
           </div>
 
-          {/* MENSAJE DE ESTADO */}
-          <div className="detalle-mensaje-estado">
+            <div className="detalle-mensaje-estado">
             <span className="detalle-mensaje-icono">ℹ</span>
             <p>{pedido.mensajeEstado}</p>
           </div>
@@ -108,7 +105,6 @@ const PedidoDetalle = ({
           </div>
         </div>
 
-        {/* COLUMNA DERECHA */}
         <div className="detalle-derecha">
 
           {/* TIEMPO ESTIMADO */}
@@ -121,7 +117,7 @@ const PedidoDetalle = ({
             </div>
           </div>
 
-          {/* REPARTIDOR */}
+         
           <div className="detalle-repartidor-card">
             <span className="detalle-seccion-titulo">Tu repartidor</span>
             <div className="detalle-repartidor-info">
@@ -147,7 +143,7 @@ const PedidoDetalle = ({
             </div>
           </div>
 
-          {/* RESUMEN DE ORDEN */}
+       
           <div className="detalle-resumen-card">
             <span className="detalle-seccion-titulo">Resumen del pedido</span>
             <div className="detalle-items-lista">
@@ -196,4 +192,4 @@ const PedidoDetalle = ({
   );
 };
 
-export default PedidoDetalle;
+export default PedidoDetalleData;
