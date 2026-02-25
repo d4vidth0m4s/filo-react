@@ -5,7 +5,8 @@ import {getUserData} from '../../Auth/auth'
 import { api } from '../../api/Api'
 import {useNavigate } from "react-router-dom";
 import { logout } from "../../Auth/auth";
-
+import HistorialUser from '../../components/historialUser/historialUser'
+import DetallePedido from '../../components/historialUser/pedidoDetalles/PedidoDetalle'
 type Usuario = {
   id: number
   email: string
@@ -36,7 +37,8 @@ const UserPerfil: React.FC = () => {
     
     return userData  ? userData as Usuario : null;
   })
-
+  const [vistaActiva, setVistaActiva] = useState<"perfil" | "pedidos"|"detalle">("perfil");
+  const [pedidoSeleccionadoId, setPedidoSeleccionadoId] = useState<number | null>(null);
  
 
   const codeAccess = async (data: CodeRequest): Promise<CodeResponse> => {
@@ -106,7 +108,7 @@ const handleLogout = () => {
             <hr />
 
             <div className="grid perfil-opciones">
-              <button className="opcion">
+              <button className="opcion" onClick={() => setVistaActiva("pedidos")}>
                 <span>Mis pedidos</span>
               </button>
               <button className="opcion">
@@ -130,7 +132,10 @@ const handleLogout = () => {
         </aside>
 
         {/* CARD USUARIO - Ahora segundo */}
-        <section className="perfil-card">
+    
+      <section className="perfil-card">
+        {vistaActiva === "perfil" && (
+          <>
           <img
             className="foto-perfil"
             src={  `https://placehold.co/500/00c853/ffffff?text=${usuario?.nombre.charAt(0).toUpperCase()|| "U"}`}
@@ -138,6 +143,27 @@ const handleLogout = () => {
           />
           <h3 className="nombre-usuario">{usuario?.nombre} {usuario?.familyName}</h3>
           <p className="correo">{usuario?.email}</p>
+          </>
+           ) }
+          {vistaActiva === "pedidos" && (
+              <HistorialUser
+              pedidos={[]}
+              onVolver={() => setVistaActiva("perfil")}
+              onVerDetalle={(id) =>{
+                setPedidoSeleccionadoId(id);
+                setVistaActiva("detalle");
+              }} />
+            )}
+            {vistaActiva === "detalle" && (
+              <DetallePedido
+              idPedido={pedidoSeleccionadoId}
+              pedido={null}
+              onVolver={() => setVistaActiva("pedidos")}
+              onContactarSoporte={() => {}}
+              onMensajearRepartidor={() => {}}
+              onLlamarRepartidor={() => {}}
+              />
+            )}  
         </section>
       </div>
       {/* MODAL LOGOUT */}

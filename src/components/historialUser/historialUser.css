@@ -1,0 +1,173 @@
+/* HistorialPedidos.css */
+
+.historial-container {
+  width: 100%;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.historial-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #333;
+}
+
+.historial-titulo {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.historial-volver {
+  background: transparent;
+  border: 1px dashed #333;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.historial-volver:hover {
+  background: rgba(0, 0, 0, 0.05);
+  border-style: solid;
+}
+
+/* LISTA */
+.historial-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.historial-vacio {
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+  padding: 40px 0;
+  border: 1px dashed #ccc;
+}
+
+/* TARJETA */
+.pedido-card {
+  border: 1px dashed #333;
+  padding: 16px;
+  background: #fff;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.pedido-card:hover {
+  border-style: solid;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.08);
+}
+
+.pedido-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.pedido-numero {
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.pedido-fecha {
+  font-size: 11px;
+  color: #666;
+  margin-top: 3px;
+}
+
+/* BADGE DE ESTADO */
+.pedido-estado {
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border: 1px solid currentColor;
+}
+
+.pedido-estado.entregado {
+  color: #00a844;
+  border-color: #00a844;
+  background: rgba(0, 168, 68, 0.06);
+}
+
+.pedido-estado.pendiente {
+  color: #e67e00;
+  border-color: #e67e00;
+  background: rgba(230, 126, 0, 0.06);
+}
+
+.pedido-estado.cancelado {
+  color: #c00;
+  border-color: #c00;
+  background: rgba(204, 0, 0, 0.06);
+}
+
+.pedido-estado.preparando {
+  color: #0066cc;
+  border-color: #0066cc;
+  background: rgba(0, 102, 204, 0.06);
+}
+
+/* SEPARADOR INTERNO */
+.pedido-divider {
+  border: none;
+  border-top: 1px dashed #ddd;
+  margin: 12px 0;
+}
+
+/* PRODUCTOS */
+.pedido-productos {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.pedido-producto-item {
+  font-size: 12px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pedido-producto-item::before {
+  content: "·";
+  color: #999;
+}
+
+/* FOOTER DE LA TARJETA */
+.pedido-card-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px dashed #ddd;
+}
+
+.pedido-total-label {
+  font-size: 11px;
+  color: #888;
+  margin-right: 6px;
+  text-transform: uppercase;
+}
+
+.pedido-total-monto {
+  font-size: 15px;
+  font-weight: bold;
+  color: #111;
+}
