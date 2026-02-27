@@ -10,88 +10,89 @@ interface LocationData {
 
 interface Props {
   onSelect: (loc: LocationData) => void;
+  locationName?: string;
 }
 
-export default function LocationSelector({ onSelect }: Props) {
+export default function LocationSelector({ onSelect, locationName }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [search, setSearch] = useState<string>("");
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const getCityName = (address: any, display: string) => {
-  return (
-    address?.city ||
-    address?.town ||
-    address?.municipality ||
-    address?.village ||
-    address?.state ||
-    display.split(",")[0]
-  );
-};
-useEffect(() => {
-  function handleClickOutside(e: MouseEvent) {
-    if (
-      panelRef.current &&
-      !panelRef.current.contains(e.target as Node)
-    ) {
-      setOpen(false);
-    }
-  }
-
-  if (open) {
-    document.addEventListener("mousedown", handleClickOutside);
-  }
-
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
+    return (
+      address?.city ||
+      address?.town ||
+      address?.municipality ||
+      address?.village ||
+      address?.state ||
+      display.split(",")[0]
+    );
   };
-}, [open]);
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        panelRef.current &&
+        !panelRef.current.contains(e.target as Node)
+      ) {
+        setOpen(false);
+      }
+    }
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
 
 
   const getMyLocation = () => {
-  if (!navigator.geolocation) return;
+    if (!navigator.geolocation) return;
 
-  navigator.geolocation.getCurrentPosition(async (pos) => {
-    const lat = Number(pos.coords.latitude);
-    const lng = Number(pos.coords.longitude);
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      const lat = Number(pos.coords.latitude);
+      const lng = Number(pos.coords.longitude);
 
-    try {
-      const res = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&addressdetails=1`,
-        {
-          headers: {
-            "Accept": "application/json",
-            "User-Agent": "FiloApp/1.0"
+      try {
+        const res = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&addressdetails=1`,
+          {
+            headers: {
+              "Accept": "application/json",
+              "User-Agent": "FiloApp/1.0"
+            }
           }
-        }
-      );
+        );
 
-      const data = await res.json();
+        const data = await res.json();
 
-      const city =
-        getCityName(data.address, data.display_name);
+        const city =
+          getCityName(data.address, data.display_name);
 
-      onSelect({
-        lat,
-        lng,
-        name: city,
-      });
+        onSelect({
+          lat,
+          lng,
+          name: city,
+        });
 
-      setOpen(false);
+        setOpen(false);
 
-    } catch (err) {
-      console.error(err);
+      } catch (err) {
+        console.error(err);
 
-      onSelect({
-        lat,
-        lng,
-        name: "Mi ubicación",
-      });
+        onSelect({
+          lat,
+          lng,
+          name: "Mi ubicación",
+        });
 
-      setOpen(false);
-    }
-  });
-};
+        setOpen(false);
+      }
+    });
+  };
 
   const searchPlace = async (q: string) => {
     if (!q.trim()) return;
@@ -112,19 +113,19 @@ useEffect(() => {
             "User-Agent": "FiloApp/1.0 (contacto@filo.com)"
           }
         }
-);
+      );
       const data = await res.json();
       setResults(data.slice(0, 5));
     } catch (err) {
       console.error("Error buscando ubicación", err);
     }
     setLoading(false);
-     };
+  };
 
   return (
     <div className="location-wrapper">
       <div className="location-trigger" onClick={() => setOpen(!open)}>
-        <FaLocationDot /> Cambiar ubicación
+        <FaLocationDot /> <span> {locationName ? locationName : "Cambiar ubicación"}</span>
       </div>
 
       {open && (
@@ -135,13 +136,13 @@ useEffect(() => {
 
           <input type="text" placeholder="Buscar ciudad..." value={search}
             onChange={(e) => {
-                    const value = e.target.value;
-                    setSearch(value);
-                    clearTimeout((window as any).searchTimer);
-                    (window as any).searchTimer = setTimeout(() => {
-                    searchPlace(value);
-                    }, 500);
-                }}
+              const value = e.target.value;
+              setSearch(value);
+              clearTimeout((window as any).searchTimer);
+              (window as any).searchTimer = setTimeout(() => {
+                searchPlace(value);
+              }, 500);
+            }}
             className="location-input"
           />
 
@@ -156,9 +157,9 @@ useEffect(() => {
               onClick={() => {
                 const city = getCityName(r.address, r.display_name);
                 onSelect({
-                    lat: Number(r.lat),
-                    lng: Number(r.lon),
-                    name: city,
+                  lat: Number(r.lat),
+                  lng: Number(r.lon),
+                  name: city,
                 });
                 setOpen(false);
               }}

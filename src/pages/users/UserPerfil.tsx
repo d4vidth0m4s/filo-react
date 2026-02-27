@@ -5,6 +5,10 @@ import {getUserData} from '../../Auth/auth'
 import { api } from '../../api/Api'
 import {useNavigate } from "react-router-dom";
 import { logout } from "../../Auth/auth";
+import HistorialUser from '../../components/historialUser/historialUser'
+import  type {DetallePedido} from '../../components/historialUser/pedidoDetalles/PedidoDetalle'
+import type { PedidoHistorial } from '../../components/historialUser/historialUser'
+import DetallePedidoData  from '../../components/historialUser/pedidoDetalles/PedidoDetalle'
 
 type Usuario = {
   id: number
@@ -26,6 +30,57 @@ type CodeResponse = {
   audience: string
   expiresIn: number
 }
+const PEDIDOS_FAKE: PedidoHistorial[] = [
+  {
+    id: 1,
+    codigo: "#1240",
+    fecha: "24 Feb 2026 · 12:45 PM",
+    estado: "entregado",
+    monto: "$31.20",
+    items: [
+      { id: 1, nombre: "1x Hamburguesa Clásica" },
+      { id: 2, nombre: "1x Papas Medianas" },
+    ],
+  },
+  {
+    id: 2,
+    codigo: "#1241",
+    fecha: "23 Feb 2026 · 08:10 PM",
+    estado: "preparando",
+    monto: "$56.90",
+    items: [
+      { id: 1, nombre: "2x Pizza Hawaiana" },
+      { id: 2, nombre: "1x Limonada 1L" },
+    ],
+  },
+];
+const DETALLE_FAKE: DetallePedido = {
+  codigo: "#1240",
+  fechaColocado: "12:45 PM",
+  tiempoEstimado: "12-18 mins",
+  horaEstimada: "1:25 PM",
+  enHorario: true,
+  repartidorNombre: "Carlos R.",
+  repartidorFoto: "https://placehold.co/100/00c853/ffffff?text=C",
+  repartidorCalificacion: 4.9,
+  repartidorEntregas: 2400,
+  mensajeEstado: "Carlos tiene tu pedido y está a 1.2 km. Llegada estimada: 1:15 PM.",
+  pasos: [
+    { id: 1, etiqueta: "Colocado",       estado: "completado" },
+    { id: 2, etiqueta: "Preparando",     estado: "completado" },
+    { id: 3, etiqueta: "En camino",      estado: "activo"     },
+    { id: 4, etiqueta: "Entregado",      estado: "pendiente"  },
+  ],
+  items: [
+    { id: 1, nombre: "Hamburguesa Clásica", cantidad: 1, precio: "$14.50" },
+    { id: 2, nombre: "Papas Medianas",      cantidad: 1, precio: "$6.75"  },
+    { id: 3, nombre: "Cola",                cantidad: 1, precio: "$3.25"  },
+  ],
+  subtotal:      "$24.50",
+  costoEnvio:    "GRATIS",
+  costoServicio: "$1.99",
+  total:         "$26.49",
+};
 
 const UserPerfil: React.FC = () => {
   const navigate = useNavigate();
@@ -36,7 +91,8 @@ const UserPerfil: React.FC = () => {
     
     return userData  ? userData as Usuario : null;
   })
-
+  const [vistaActiva, setVistaActiva] = useState<"perfil" | "pedidos"|"detalle">("perfil");
+  const [pedidoSeleccionadoId, setPedidoSeleccionadoId] = useState<number | null>(null);
  
 
   const codeAccess = async (data: CodeRequest): Promise<CodeResponse> => {
@@ -95,9 +151,6 @@ const handleLogout = () => {
             <div className="center">
               <div className="logo">MENU<br />INTEGRATE</div>
             </div>
-
-            
-
             <hr />
             <div className="info center">
               <p>Nombre: {usuario?.nombre}</p>
@@ -106,7 +159,7 @@ const handleLogout = () => {
             <hr />
 
             <div className="grid perfil-opciones">
-              <button className="opcion">
+              <button className="opcion" onClick={() => setVistaActiva("pedidos")}>
                 <span>Mis pedidos</span>
               </button>
               <button className="opcion">
@@ -130,7 +183,10 @@ const handleLogout = () => {
         </aside>
 
         {/* CARD USUARIO - Ahora segundo */}
-        <section className="perfil-card">
+    
+      <section className="perfil-card">
+        {vistaActiva === "perfil" && (
+          <>
           <img
             className="foto-perfil"
             src={  `https://placehold.co/500/00c853/ffffff?text=${usuario?.nombre.charAt(0).toUpperCase()|| "U"}`}
@@ -138,6 +194,27 @@ const handleLogout = () => {
           />
           <h3 className="nombre-usuario">{usuario?.nombre} {usuario?.familyName}</h3>
           <p className="correo">{usuario?.email}</p>
+          </>
+           ) }
+          {vistaActiva === "pedidos" && (
+              <HistorialUser
+              pedidos={PEDIDOS_FAKE}
+              onVolver={() => setVistaActiva("perfil")}
+              onVerDetalle={(id) =>{
+                setPedidoSeleccionadoId(id);
+                setVistaActiva("detalle");
+              }} />
+            )}
+            {vistaActiva === "detalle" && (
+              <DetallePedidoData
+              idPedido={pedidoSeleccionadoId}
+              pedido={DETALLE_FAKE}
+              onVolver={() => setVistaActiva("pedidos")}
+              onContactarSoporte={() => {}}
+              onMensajearRepartidor={() => {}}
+              onLlamarRepartidor={() => {}}
+              />
+            )}  
         </section>
       </div>
       {/* MODAL LOGOUT */}

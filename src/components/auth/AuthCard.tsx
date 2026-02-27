@@ -73,6 +73,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
+    <div className="auth-layout-container">
     <div className="auth-wrapper">
       <aside className="auth-banner">
         <div className="banner-content">
@@ -205,6 +206,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
           )}
         </p>
       </section>
+    </div>
     </div>
   )
 }

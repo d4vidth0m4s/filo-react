@@ -1,53 +1,54 @@
-.login-container {
-  background: white;
-  padding: 30px;
-  flex: 1 1 50% !important;
-  text-align: center;
+/* ── Variables ─────────────────────────────────────────── */
+:root {
+  --green:       #1fd15f;
+  --green-hover: #17b653;
+  --green-dark:  #00c853;
+  --bg:          #f8f8f8;
+  --input-bg:    #f2f2f2;
+  --shadow-sm:   0 4px 10px rgba(0,0,0,0.12);
+  --shadow-md:   0 8px 30px rgba(0,0,0,0.08);
 }
 
-#back {
+/* ── Reset base ────────────────────────────────────────── */
+body, #root {
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* ── Layout raíz ───────────────────────────────────────── */
+.auth-layout-container {
   display: flex;
-  justify-content: flex-start;
-  background: none;
-  color: #1fd15f;
-  border: none;
-  padding: 0;
-  text-decoration: none;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg);
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-#back:hover {
-  color: #17b653;
-}
-
+/* ── Card contenedor ───────────────────────────────────── */
 .auth-wrapper {
   display: flex;
   align-items: stretch;
-  justify-content: center;
   width: 100%;
-  max-width: 1000px !important;
-  margin: 0 auto !important;
-  padding: 0;
+  max-width: 1000px;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
+/* ── Banner lateral ────────────────────────────────────── */
 .auth-banner {
   flex: 1 1 50%;
-  background: linear-gradient(135deg, #1fd15f 0%, #00c853 100%);
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  padding: 0;
   overflow: hidden;
 }
 
 .banner-content {
-  text-align: center;
   width: 100%;
   height: 100%;
   display: flex;
@@ -59,54 +60,47 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  margin: 0;
-  border-radius: 0;
+}
+
+/* ── Formulario ────────────────────────────────────────── */
+.login-container {
+  flex: 1 1 50%;
+  background: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 0 20px 20px 0;
 }
 
 .login-container h1 {
-  color: #1fd15f;
+  color: var(--green);
   margin-bottom: 5px;
 }
 
-.login-container {
-  background: white;
-  padding: 30px;
-  flex: 1 1 50%;
-  text-align: center;
+/* ── Botón volver ──────────────────────────────────────── */
+#back {
+  display: flex;
+  justify-content: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--green);
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
 }
 
+#back:hover { color: var(--green-hover); }
+
+/* ── Inputs ────────────────────────────────────────────── */
 .input-group {
-  margin-bottom: 15px;
-  background: #f2f2f2;
-  padding: 10px;
-  border-radius: 10px;
   position: relative;
   display: flex;
   align-items: center;
-}
-
-.toggle-password-btn {
-  position: absolute;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #666;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.toggle-password-btn:hover {
-  background: none;
-  color: #1fd15f ;
-  transform: scale(1.1);
-  transition: transform 0.2s ease;
-}
-
-.input-group input {
-  padding-right: 40px; 
+  background: var(--input-bg);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
 .input-group i {
@@ -119,70 +113,86 @@
   background: none;
   outline: none;
   width: 100%;
+  padding-right: 40px;
 }
 
+.toggle-password-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password-btn:hover {
+  color: var(--green);
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+/* ── Botones ───────────────────────────────────────────── */
 button[type="submit"] {
   width: 100%;
   padding: 12px;
   border: none;
   border-radius: 10px;
-  background: #1fd15f;
+  background: var(--green);
   color: white;
   font-size: 16px;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
+button[type="submit"]:hover { background: var(--green-hover); }
 
 .google-btn {
   background: white;
+  border: none;
   cursor: pointer;
   border-radius: 30%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-sm);
   transition: box-shadow 0.3s ease, transform 0.2s ease;
-
 }
 
 .google-btn:hover {
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
   transform: translateY(-1px);
-  border-color: #1fd15f;
-}
-
-button[type="submit"]:hover {
-  background: #17b653;
 }
 
 .link-btn {
   background: none;
-  color: #1fd15f;
   border: none;
   padding: 0;
-  text-decoration: none;
-  cursor: pointer;
+  color: var(--green);
   font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.link-btn:hover {
-  color: #17b653;
-}
+.link-btn:hover { color: var(--green-hover); }
 
+/* ── Responsive ────────────────────────────────────────── */
 @media (max-width: 800px) {
   .auth-wrapper {
     flex-direction: column;
-    padding: 12px;
-    border-radius: 16px;
+    border-radius: 20px;
   }
 
   .auth-banner {
-    order: -1;
-    width: 100%;
-    padding: 18px;
-    border-radius: 16px 16px 0 0;
+    display: none;
   }
 
   .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
     max-width: 100%;
     flex: none;
-    border-radius: 0 0 16px 16px;
   }
-}
+} 
