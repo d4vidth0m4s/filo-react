@@ -13,6 +13,9 @@
   color: #333;
   font-size: 24px;
 }
+.logo-link{
+  margin-right: -150px;
+}
 
 .ubicacion {
   display: flex;
