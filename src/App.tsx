@@ -8,6 +8,7 @@ import UserLog from "./pages/users/UserLog";
 import UserPerfil from "./pages/users/UserPerfil";
 import PrivateLayout from "./layouts/Private Layout/PrivateLayout";
 import TiendasPerfil from "./pages/Tiendas/TiendasPerfil";
+import ConfirmacionPedido from "./pages/checkout/ConfirmacionPedido";
 //import TiendaDetalle from "./pages/Tiendas/tiendaDetalle";
 
 
@@ -34,6 +35,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="/Filo-home" element={<Home />} />
         <Route path="/tiendas/:slug" element={<TiendasPerfil />} />
+        <Route path="/confirmar-pedido" element={<ConfirmacionPedido />} />
       {/*  <Route path="/tiendas/:slug" element={<TiendaDetalle />} /> */}  
       </Route>
       

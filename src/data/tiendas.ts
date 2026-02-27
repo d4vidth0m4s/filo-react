@@ -16,7 +16,7 @@ export const tiendas = [
         categoria: "Salchipapas",
         nombre: "Salchipapa Mega",
         descripcion: "Papa + salchicha + queso",
-        precio: 12000,
+        precio: 2000,
         imagen: "https://placehold.co/300x200/ffe0b2/1b1b1b?text=Salchipapa+Mega"
         
       },
@@ -25,7 +25,7 @@ export const tiendas = [
         categoria: "Hamburguesas",
         nombre: "Hamburguesa Doble",
         descripcion: "Doble carne, queso y papas",
-        precio: 18000,
+        precio: 1900,
         imagen: "https://placehold.co/300x200/ffccbc/1b1b1b?text=Hamburguesa+Doble"
       }
     ]

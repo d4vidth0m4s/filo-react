@@ -1,48 +1,22 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./carrito.css";
 import { useCart } from "../../context/cartContext";
 
 export default function CartDrawer({ abierto, setAbierto }: { abierto: boolean; setAbierto: (value: boolean) => void }) {
-    const { carrito, agregarProducto, restarProducto, vaciarCarrito } = useCart();
+    const { carrito, agregarProducto, restarProducto } = useCart();
+    const navigate = useNavigate();
     const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
     const envio = total >= 50000 ? 0 : 5000;
     const totalFinal = total + envio;
-    const [cargando, setCargando] = useState(false);
-    const [pedidoExitoso, setPedidoExitoso] = useState(false);
-    const procesarCompra = () => {
-  setCargando(true);
+    
+    const irAConfirmacion = () => {
+        if (carrito.length === 0) {
+            return;
+        }
 
-  // Simula llamada a backend
-  setTimeout(() => {
-
-    // Guardar pedido
-    const pedido = {
-      id: Date.now(),
-      productos: carrito,
-      total: totalFinal,
-      fecha: new Date().toISOString(),
+        setAbierto(false);
+        navigate("/confirmar-pedido");
     };
-
-    // Guardar en localStorage (simula BD)
-    const pedidosGuardados =
-      JSON.parse(localStorage.getItem("pedidos") || "[]");
-
-    pedidosGuardados.push(pedido);
-
-    localStorage.setItem(
-      "pedidos",
-      JSON.stringify(pedidosGuardados)
-    );
-
-    // Vaciar carrito
-    vaciarCarrito();
-
-    // Mostrar mensaje
-    setCargando(false);
-    setPedidoExitoso(true);
-
-  }, 2000);
-};
 
 
     return (
@@ -50,21 +24,13 @@ export default function CartDrawer({ abierto, setAbierto }: { abierto: boolean; 
           <div className={`overlay ${abierto ? "activo" : ""}`} onClick={() => setAbierto(false)} />
             <aside className={`carrito ${abierto ? "activo" : ""}`}>
                 <h3>Tu carrito</h3>
-                {/* MENSAJE ÉXITO */}
-                {pedidoExitoso && (
-                    <div className="pedido-exito">
-                        <h3>Pedido realizado con éxito</h3>
-                        <p>Gracias por tu compra 💚</p>
-                    </div>
-                )}
-
                 {/* CARRITO VACÍO */}
-                {!pedidoExitoso && carrito.length === 0 && (
+                {carrito.length === 0 && (
                     <p>Tu carrito está vacío</p>
                 )}
 
                 {/* LISTA DE PRODUCTOS */}
-                {!pedidoExitoso && carrito.length > 0 && (
+                {carrito.length > 0 && (
                 <div className="carrito-lista">
                         {carrito.map((item) => (
                             <div key={item.id} className="carrito-item">
@@ -113,13 +79,22 @@ export default function CartDrawer({ abierto, setAbierto }: { abierto: boolean; 
                         </div>  
 )}
 
-                {!pedidoExitoso && carrito.length > 0 && (
+                {carrito.length > 0 && (
                     <button
                         className="btn-comprar"
-                        disabled={cargando}
-                        onClick={procesarCompra}>{cargando ? <div className="loader" /> : "Comprar ahora"}</button>
+                        onClick={irAConfirmacion}
+                    >
+                        Comprar ahora
+                    </button>
 )}
-                <button disabled={cargando} className="cerrar" onClick={() => {setAbierto(false); setPedidoExitoso(false);}}>Cerrar</button>
+                <button
+                    className="cerrar"
+                    onClick={() => {
+                        setAbierto(false);
+                    }}
+                >
+                    Cerrar
+                </button>
             </aside>
         </>
     );

@@ -148,13 +148,10 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
           <div className="input-group password-group">
             <i className="fa-solid fa-lock"></i>
             <input
-<<<<<<< HEAD
-              type="password"
-              placeholder="Contrasena"
-=======
+
               type={showPassword ? "text" : "password"}
               placeholder="Contraseña"
->>>>>>> 44a718478f6c012754667ac48aabda62327bd867
+
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
