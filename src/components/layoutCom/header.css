@@ -144,6 +144,7 @@
   color: white;
 }
 
+
 .header-mobile .logo {
   color: white;
 }
@@ -245,6 +246,7 @@
 
   .header-desktop .logo {
     color: #333;
+    margin-right: 200px;
     font-size: 32px;
     flex-shrink: 0;
   }

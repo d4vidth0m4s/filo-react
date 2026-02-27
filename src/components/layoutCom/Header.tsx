@@ -24,7 +24,6 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
   const [location, setLocation] = useState<LocationData>(() => {
     try {
       const saved = localStorage.getItem("userLocation");
-
       return saved
         ? JSON.parse(saved)
         : { name: "Ciénaga Magdalena", lat: null, lng: null };
@@ -67,8 +66,7 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
           </Link>
 
           <div className="ubicacion">
-            <span>{location.name}</span>
-            <LocationSelector onSelect={handleLocationSelect} />
+            <LocationSelector onSelect={handleLocationSelect} locationName={location.name} />
           </div>
 
           <button className="icon-btn user-btn" onClick={handleUserClick}>
@@ -90,8 +88,7 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
           </Link>
 
           <div className="ubicacion">
-            <span>{location.name}</span>
-            <LocationSelector onSelect={handleLocationSelect} />
+            <LocationSelector onSelect={handleLocationSelect} locationName={location.name} />
           </div>
         </div>
 

@@ -1,3 +1,4 @@
+import { FaStar, FaPhoneAlt, FaCloud, FaMapMarkedAlt, FaCheck } from "react-icons/fa";
 import "./PedidoDetalle.css";
 
 type ItemPedido = {
@@ -49,7 +50,7 @@ const PedidoDetalleData = ({
   onVolver,
   onContactarSoporte,
   onMensajearRepartidor,
-  onLlamarRepartidor, 
+  onLlamarRepartidor,
 }: PedidoDetalleProps) => {
   if (!pedido) {
     return (
@@ -76,12 +77,12 @@ const PedidoDetalleData = ({
 
       <div className="detalle-body">
         <div className="detalle-izquierda">
-/
+
           <div className="detalle-pasos">
             {pedido.pasos.map((paso, index) => (
               <div className="detalle-paso-item" key={paso.id}>
                 <div className={`detalle-paso-circulo paso-${paso.estado}`}>
-                  {paso.estado === "completado" ? "✓" : index + 1}
+                  {paso.estado === "completado" ? <FaCheck /> : index + 1}
                 </div>
                 {index < pedido.pasos.length - 1 && (
                   <div className={`detalle-paso-linea linea-${pedido.pasos[index + 1].estado}`} />
@@ -93,7 +94,7 @@ const PedidoDetalleData = ({
             ))}
           </div>
 
-            <div className="detalle-mensaje-estado">
+          <div className="detalle-mensaje-estado">
             <span className="detalle-mensaje-icono">ℹ</span>
             <p>{pedido.mensajeEstado}</p>
           </div>
@@ -101,7 +102,7 @@ const PedidoDetalleData = ({
           {/* MAPA - TODO: integrar con tu API de mapa */}
           <div className="detalle-mapa-placeholder">
             {/* Aquí va el componente de mapa con tu API */}
-            <span>🗺 Mapa en tiempo real</span>
+            <span><FaMapMarkedAlt /> Mapa en tiempo real</span>
           </div>
         </div>
 
@@ -117,7 +118,7 @@ const PedidoDetalleData = ({
             </div>
           </div>
 
-         
+
           <div className="detalle-repartidor-card">
             <span className="detalle-seccion-titulo">Tu repartidor</span>
             <div className="detalle-repartidor-info">
@@ -129,21 +130,21 @@ const PedidoDetalleData = ({
               <div>
                 <div className="detalle-repartidor-nombre">{pedido.repartidorNombre}</div>
                 <div className="detalle-repartidor-rating">
-                  ⭐ {pedido.repartidorCalificacion} · {pedido.repartidorEntregas.toLocaleString()} entregas
+                  <i className="Star-rating"><FaStar /></i> {pedido.repartidorCalificacion} · {pedido.repartidorEntregas.toLocaleString()} entregas
                 </div>
               </div>
             </div>
             <div className="detalle-repartidor-acciones">
               <button className="detalle-btn-secundario" onClick={onMensajearRepartidor}>
-                💬 Mensaje
+                <FaCloud /> Mensaje
               </button>
               <button className="detalle-btn-primario" onClick={onLlamarRepartidor}>
-                📞 Llamar
+                <FaPhoneAlt /> Llamar
               </button>
             </div>
           </div>
 
-       
+
           <div className="detalle-resumen-card">
             <span className="detalle-seccion-titulo">Resumen del pedido</span>
             <div className="detalle-items-lista">
