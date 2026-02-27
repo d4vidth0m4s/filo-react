@@ -1,3 +1,7 @@
+csshtml, body {
+  overflow-x: hidden;
+  width: 100%;
+}
 .contenido {
   padding: 0;
   margin: 0;
@@ -12,13 +16,15 @@
   gap: var(--spacing-sm);
   padding: var(--spacing-lg);
 }
-.ver-todo{
+
+.ver-todo {
   color: var(--color-primary);
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
 }
-.ver-todo:hover{
+
+.ver-todo:hover {
   color: #009c3c;
 }
 
@@ -57,7 +63,7 @@
 }
 
 .redirect {
-  min-width: 300px;
+  min-width: 280px;
   width: 280px;
   height: auto;
   background: white;
@@ -68,9 +74,8 @@
   cursor: pointer;
   overflow: hidden;
   transition: opacity var(--transition-medium) ease, box-shadow var(--transition-medium) ease;
-  
-  flex-shrink: 0;
   padding: 0;
+  /* 👇 elimina flex-shrink: 0 */
 }
 
 .redirect:hover {
@@ -191,4 +196,76 @@
 .card-envio-badge {
   font-weight: 600;
   color: var(--color-primary);
+}
+
+.ver-todo {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #09ab17;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.contenido-expandido {
+  animation: subirContenido 0.4s ease;
+
+  .icon-populares.expandido {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+}
+
+
+.icon-populares.expandido {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  overflow-x: unset;
+  flex-direction: unset;
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+}
+
+.icon-populares.expandido .redirect {
+  width: 100%;
+  min-width: unset;
+  flex-shrink: unset;
+}
+
+@keyframes subirContenido {
+  from {
+    opacity: 0.5;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .contenido {
+    overflow: hidden;
+  }
+
+  .icon-populares.expandido {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow-x: unset;
+    gap: 16px;
+    padding: 0 16px 16px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .icon-populares.expandido .redirect,
+  .cat-grid .redirect {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex-shrink: 1 !important;
+    box-sizing: border-box;
+  }
 }

@@ -1,0 +1,48 @@
+.cat-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box; 
+  width: 100%;
+}
+
+.cat-titulo {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.cat-vacio {
+  text-align: center;
+  color: #888;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .cat-container {
+    padding: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .cat-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .cat-grid .redirect {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex-shrink: 1 !important;
+    box-sizing: border-box;
+  }
+}

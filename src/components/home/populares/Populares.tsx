@@ -2,36 +2,35 @@ import type React from "react";
 import "./populares.css";
 import { Link } from "react-router-dom";
 import { tiendas } from "../../../data/tiendas";
- 
 
-//filtro llamada api simulado para mostrar solo las tiendas con rating mayor a 4.0
-const categorias = tiendas.filter((tienda) => tienda.rating > 4.5);
+const populares = tiendas.filter((tienda) => tienda.rating > 4.5);
 
+interface PopularesProps {
+  expandido: boolean;
+  onToggle: () => void;
+}
 
-  const Populares: React.FC = () => {
+const Populares: React.FC<PopularesProps> = ({ expandido, onToggle }) => {
+  const mostrar = expandido ? tiendas : populares;
+
   return (
-    <div className="contenido">
+    <div className={`contenido ${expandido ? "contenido-expandido" : ""}`}>
       <div className="populares">
         <h2>Populares cerca de ti</h2>
-        <a href="#" className="ver-todo">Ver todo</a>
+        <button className="ver-todo" onClick={onToggle}>
+          {expandido ? "Ver menos" : "Ver todo"}
+        </button>
       </div>
-      <div className="icon-populares">
-        {categorias.map((categoria) => (
+
+      <div className={`icon-populares ${expandido ? "expandido" : ""}`}>
+        {mostrar.map((categoria) => (
           <Link to={`/tiendas/${categoria.slug}`} key={categoria.slug} className="redirect">
             <div className="card-image-section">
-              <img 
-                src={categoria.banner} 
-                alt={categoria.nombre}
-                className="card-main-image"
-              />
+              <img src={categoria.banner} alt={categoria.nombre} className="card-main-image" />
             </div>
             <div className="card-info-section">
               <div className="card-header">
-                <img 
-                  src={categoria.logo} 
-                  alt={`${categoria.nombre} logo`}
-                  className="card-logo-img"
-                />
+                <img src={categoria.logo} alt={`${categoria.nombre} logo`} className="card-logo-img" />
                 <div className="card-text">
                   <div className="card-title-line">
                     <h3>{categoria.nombre}</h3>
@@ -54,6 +53,6 @@ const categorias = tiendas.filter((tienda) => tienda.rating > 4.5);
       </div>
     </div>
   );
-}
+};
 
 export default Populares;
