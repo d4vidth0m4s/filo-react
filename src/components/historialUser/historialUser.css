@@ -2,6 +2,9 @@
 
 .historial-container {
   width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+  box-sizing: border-box;
   font-family: "Courier New", Courier, monospace;
 }
 
@@ -9,6 +12,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
   margin-bottom: 24px;
   padding-bottom: 12px;
   border-bottom: 1px dashed #333;
@@ -36,6 +40,7 @@
 
 .historial-volver:hover {
   border-style: solid;
+  
 }
 
 /* LISTA */
@@ -60,12 +65,17 @@
   background: #fff;
   transition: all 0.2s ease;
   position: relative;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.pedido-card:hover {
-  border-style: solid;
-  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.08);
-}
+.pedido-card:hover { border-style: solid; border-color: #333; }
+
+.pedido-card:has(.entregado):hover  { border-color: #00a844; }
+.pedido-card:has(.preparando):hover { border-color: #0066cc; }
+.pedido-card:has(.pendiente):hover  { border-color: #e67e00; }
+.pedido-card:has(.cancelado):hover  { border-color: #cc0000; }
+
 .perfil-card {
   height: auto;
   overflow: visible;
@@ -79,6 +89,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
   margin-bottom: 12px;
 }
 

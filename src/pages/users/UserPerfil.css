@@ -1,16 +1,22 @@
 /* Estilos del perfil de usuario */
 body {
   background-color: whitesmoke;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
+
 
 .user-perfil-container {
   min-height: 100vh;
   padding-bottom: 40px;
+  overflow-x: hidden;
 }
 
 .perfil-header {
-  width: 100%;
-  margin: -10px;
+  /*width: 100%;
+  margin: -10px;*/
+  flex-shrink: 0;
   background: linear-gradient(135deg, #00c853 30%, #7cff6b 60%, #b2ff59 100%);
   color: white;
   padding: 20px;
@@ -34,7 +40,8 @@ body {
   font-family: "Courier New", Courier, monospace;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+  overflow-y: auto;
+  padding: 0 20px 40px;
 }
 
 /* CONTENEDOR DEL TICKET - Ahora primero */
@@ -118,11 +125,12 @@ hr {
 
 .ascii-logo {
   font-family: "Fira Code", "Courier New", monospace;
-  font-size: 6px;
+  font-size: 4px;
   line-height: 1.1;
   color: #000;
   margin: 8px 0;
-  overflow-x: none;
+  overflow: hidden;
+  white-space: pre-wrap;
   
 }
 
@@ -312,10 +320,18 @@ hr {
   .perfil-layout {
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
   }
   
   .perfil-card {
     width: 100%;
     max-width: 500px;
+    min-width: unset;
   }
+  .ticket {
+    width: 100%;
+    max-width: 400px;
+  }
+  .ascii-logo {
+    display: none;}
 }

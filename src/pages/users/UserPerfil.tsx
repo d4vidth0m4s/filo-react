@@ -151,9 +151,6 @@ const handleLogout = () => {
             <div className="center">
               <div className="logo">MENU<br />INTEGRATE</div>
             </div>
-
-            
-
             <hr />
             <div className="info center">
               <p>Nombre: {usuario?.nombre}</p>
