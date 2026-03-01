@@ -154,18 +154,29 @@ button[type="submit"]:hover { background: var(--green-hover); }
   justify-content: center;
   align-items: center;
   background: white;
-  border: none;
+  border: 1px solid #e0e0e0;
   cursor: pointer;
-  border-radius: 30%;
+  border-radius: 50%;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  transition: box-shadow 0.3s ease, transform 0.2s ease, border-color 0.2s ease;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .Google:hover {
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  border-color: #1fd15f;
   transform: translateY(-1px);
+  background: #fafafa;
 }
 
+.Google:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
 .link-btn {
   background: none;
   border: none;

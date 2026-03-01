@@ -239,7 +239,8 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
               theme="outline"
               size="large"
               text="signin_with"
-              width="250"
+              type='icon'
+              shape='circle'
             />
             {googleLoading && <p>Procesando login con Google...</p>}
           </div>
