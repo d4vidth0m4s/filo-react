@@ -1,18 +1,17 @@
 import { api } from "./Api";
 
-type UsuarioRequest = {
- 
-  username: string;
+type CrearUsuarioRequest = {
   email: string;
+  username: string;
   password: string;
   nombre: string;
   familyName: string;
-}
+};
 
 
 export const UsuarioApi = {
-  create: async (data: UsuarioRequest) => {
-    const response = await api.post('/api/RegistrarUsuario', data);
+  create: async (data: CrearUsuarioRequest) => {
+    const response = await api.post('/Auths/CrearUsuario', data);
     return response.data;
   },
 };

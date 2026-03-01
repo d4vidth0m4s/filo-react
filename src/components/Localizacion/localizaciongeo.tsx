@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import "./localizaciongeo.css";
 
+const NOMINATIM_BASE_URL =
+  import.meta.env.VITE_NOMINATIM_BASE_URL?.trim() ?? "";
+
 interface LocationData {
   name: string;
   lat: number;
@@ -58,7 +61,7 @@ export default function LocationSelector({ onSelect, locationName }: Props) {
 
       try {
         const res = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&addressdetails=1`,
+          `${NOMINATIM_BASE_URL}/reverse?format=jsonv2&lat=${lat}&lon=${lng}&addressdetails=1`,
           {
             headers: {
               "Accept": "application/json",
@@ -101,7 +104,7 @@ export default function LocationSelector({ onSelect, locationName }: Props) {
 
     try {
       const res = await fetch(
-        `https://nominatim.openstreetmap.org/search?` +
+        `${NOMINATIM_BASE_URL}/search?` +
         `format=jsonv2` +
         `&q=${encodeURIComponent(q + ", Colombia")}` +
         `&countrycodes=co` +

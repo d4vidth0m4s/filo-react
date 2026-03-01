@@ -82,6 +82,11 @@ const DETALLE_FAKE: DetallePedido = {
   total:         "$26.49",
 };
 
+const AUTH_BRIDGE_URL =
+  import.meta.env.VITE_AUTH_BRIDGE_URL?.trim() ?? "";
+const AUTH_BRIDGE_ORIGIN =
+  import.meta.env.VITE_AUTH_BRIDGE_ORIGIN?.trim() ?? "";
+
 const UserPerfil: React.FC = () => {
   const navigate = useNavigate();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -103,12 +108,12 @@ const UserPerfil: React.FC = () => {
 async function codeAccessHandler () {
   const data = await codeAccess({ audience: "ControlGastosClients", expirationSeconds: 100 })
 
-const win = window.open("http://localhost:3001/auth/bridge", "_blank");
+const win = window.open(AUTH_BRIDGE_URL, "_blank");
 
 setTimeout(() => {
   win?.postMessage(
     { code: data.accessCode },
-    "http://localhost:3001"
+    AUTH_BRIDGE_ORIGIN
   );
 }, 500);
 
