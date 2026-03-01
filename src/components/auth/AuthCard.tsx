@@ -233,6 +233,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
 
           <div className="Google">
             <GoogleLogin
+              useOneTap
               onSuccess={handleGoogleCredentialResponse}
               onError={handleGoogleError}
               theme="outline"

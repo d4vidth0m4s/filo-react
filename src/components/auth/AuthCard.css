@@ -149,7 +149,10 @@ button[type="submit"] {
 
 button[type="submit"]:hover { background: var(--green-hover); }
 
-.google-btn {
+.Google {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: white;
   border: none;
   cursor: pointer;
@@ -158,7 +161,7 @@ button[type="submit"]:hover { background: var(--green-hover); }
   transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-.google-btn:hover {
+.Google:hover {
   box-shadow: 0 6px 16px rgba(0,0,0,0.18);
   transform: translateY(-1px);
 }

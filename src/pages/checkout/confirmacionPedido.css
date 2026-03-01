@@ -299,14 +299,24 @@
 }
 
 .checkoutv2__counter button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px solid #d3dbd7;
   background: #fff;
+  color: black; 
   width: 24px;
   height: 24px;
   border-radius: 999px;
   cursor: pointer;
 }
-
+.checkoutv2__counter button:hover{
+  background-color: var(--checkout-primary);
+  color: white;
+}
+.checkoutv2__counter span{
+  color: black;
+}
 .checkoutv2__promo {
   border-top: 1px solid var(--checkout-border);
   margin-top: 14px;
