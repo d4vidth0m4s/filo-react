@@ -85,14 +85,14 @@ const ConfirmacionPedido = () => {
 
   const payloadPreview = {
     comercioId: comercioIdFinal,
-    usuarioId:1,
+    usuarioId:usuarioId,
     direccion: direccion.trim(),
     tel: telefono.trim(),
     notaDirecion: instrucciones.trim(),
     cliente: cliente.trim() || "Cliente",
     monto: montoCarrito,
     metodoPago: metodoPagoApiMap[metodoPago],
-    items: carrito.map((item) => ({
+    items: carrito.map((item) => ({ 
       id: item.id,
       cantidad: item.cantidad,
       nombre: item.nombre,
@@ -189,7 +189,7 @@ const ConfirmacionPedido = () => {
                 className="checkoutv2__input"
                 value={direccion}
                 onChange={(event) => setDireccion(event.target.value)}
-                placeholder="Ej: Calle 10 # 20-30"
+                placeholder="Ej: Calle 10 # 20-30" required
               />
             </label>
 
@@ -199,7 +199,7 @@ const ConfirmacionPedido = () => {
                 className="checkoutv2__textarea"
                 value={instrucciones}
                 onChange={(event) => setInstrucciones(event.target.value)}
-                placeholder="Ej:Salchipapa sin salsas, Tocar timbre y dejar en porteria"
+                placeholder="Ej:Salchipapa sin salsas, Tocar timbre y dejar en porteria" required
                 rows={2}
               />
             </label>
@@ -212,13 +212,13 @@ const ConfirmacionPedido = () => {
             </div>
 
             <div className="checkoutv2__form-grid">
-              <label className="checkoutv2__label">
+              <label  className="checkoutv2__label">
                 Nombre completo
                 <input
                   className="checkoutv2__input"
                   value={cliente}
                   onChange={(event) => setCliente(event.target.value)}
-                  placeholder="Nombre de quien recibe"
+                  placeholder="Nombre de quien recibe" required
                 />
               </label>
 
@@ -228,7 +228,7 @@ const ConfirmacionPedido = () => {
                   className="checkoutv2__input"
                   value={telefono}
                   onChange={(event) => setTelefono(event.target.value)}
-                  placeholder="+57 300 000 0000"
+                  placeholder="+57 300 000 0000" required
                   type="tel"
                 />
               </label>
@@ -265,7 +265,7 @@ const ConfirmacionPedido = () => {
                   value="billetera"
                 />
                 <FaWallet />
-                <span>Billetera</span>
+                <span>Nequi</span>
               </label>
 
               <label className={`checkoutv2__payment-option ${metodoPago === "efectivo" ? "is-active" : ""}`}>
