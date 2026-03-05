@@ -21,14 +21,13 @@ type Usuario = {
 }
 
  type CodeRequest = {
-  audience: string,
-  expirationSeconds: number
+  expiracionMinutos: number
 }
 
 type CodeResponse = {
-  accessCode: string
-  audience: string
-  expiresIn: number
+  codigo: string
+  usuarioId: number
+  fechaExpiracionUtc: string
 }
 const PEDIDOS_FAKE: PedidoHistorial[] = [
   {
@@ -101,18 +100,18 @@ const UserPerfil: React.FC = () => {
  
 
   const codeAccess = async (data: CodeRequest): Promise<CodeResponse> => {
-    const response = await api.post<CodeResponse>('/api/auth/bridge/code', data);
+    const response = await api.post<CodeResponse>('/Auths/generar-codigo-acceso', data);
     return response.data;
   }
 
 async function codeAccessHandler () {
-  const data = await codeAccess({ audience: "ControlGastosClients", expirationSeconds: 100 })
+  const data = await codeAccess({ expiracionMinutos: 1 })
 
 const win = window.open(AUTH_BRIDGE_URL, "_blank");
 
 setTimeout(() => {
   win?.postMessage(
-    { code: data.accessCode },
+    { code: data.codigo },
     AUTH_BRIDGE_ORIGIN
   );
 }, 500);

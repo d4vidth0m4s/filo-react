@@ -1,0 +1,63 @@
+.comercios-page {
+  width: 100%;
+}
+
+.comercios-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.comercios-title {
+  font-size: 22px;
+  margin: 0 0 20px;
+}
+
+.comercios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.comercios-grid .redirect {
+  width: 100%;
+  min-width: 0;
+}
+
+.comercios-feedback {
+  margin: 0;
+  color: #666;
+}
+
+.comercios-feedback-more {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.comercios-loader-trigger {
+  width: 100%;
+  height: 1px;
+}
+
+@media (max-width: 768px) {
+  .comercios-container {
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  .comercios-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .comercios-grid .redirect {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+}

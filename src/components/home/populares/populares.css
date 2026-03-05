@@ -35,6 +35,13 @@ csshtml, body {
   color: var(--color-text-primary);
 }
 
+.populares-feedback {
+  margin: 0;
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+  color: #666;
+  font-size: 14px;
+}
+
 .icon-populares {
   display: flex;
   flex-direction: row;
