@@ -35,7 +35,7 @@ const promotions: Promotion[] = [
     tag: "Promo",
     gradient: "linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%)",
   },
-  {
+ {
     id: 4,
     icon: "🍕",
     title: "Descuento del 15%",
