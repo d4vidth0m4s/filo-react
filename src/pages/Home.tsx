@@ -9,9 +9,11 @@ const Home = () => {
   return (
     <>
       <div className="home-main">
-        {!expandido && <Categorias />}
-        {!expandido && <Promos />}
-        <Populares expandido={expandido} onToggle={() => setExpandido(!expandido)} />
+        <Categorias />
+        <Promos />
+        <Populares />
+        
+        <Footer />
       </div>
     </>
   );
