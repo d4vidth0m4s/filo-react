@@ -4,7 +4,7 @@ import { ComerciosApi, type ComercioCard } from "../api/Comercios.api";
 import "../components/home/populares/populares.css";
 import "./comercios.css";
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 10;
 
 const Comercios = () => {
   const [comercios, setComercios] = useState<ComercioCard[]>([]);
