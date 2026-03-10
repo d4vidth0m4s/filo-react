@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { ComerciosApi, type ComercioCard } from "../api/Comercios.api";
-import "../components/home/populares/populares.css";
+import { ComerciosApi, type ComercioCard } from "../../api/Comercios.api";
+import "../../components/home/populares/populares.css";
+import ComercioCardItem from "../../components/comercio/ComercioCard";
+import ComercioCardSkeleton from "../../components/comercio/ComercioCardSkeleton";
 import "./comercios.css";
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 12;
 
 const Comercios = () => {
   const [comercios, setComercios] = useState<ComercioCard[]>([]);
@@ -35,6 +36,7 @@ const Comercios = () => {
 
       try {
         const data = await ComerciosApi.getTodos(page, PAGE_SIZE);
+       
         setComercios((prev) => {
           const merged = page === 1 ? data : [...prev, ...data];
           const seen = new Set<string>();
@@ -48,6 +50,9 @@ const Comercios = () => {
         setHasMore(data.length === PAGE_SIZE);
         setNextPage(page + 1);
       } catch {
+        
+
+       
         setError("No se pudieron cargar los comercios.");
         setHasMore(false);
       } finally {
@@ -90,43 +95,29 @@ const Comercios = () => {
         <h2 className="comercios-title">Todos los comercios</h2>
 
         {initialLoading ? (
-          <p className="comercios-feedback">Cargando comercios...</p>
+          <div className="comercios-grid">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <ComercioCardSkeleton key={`comercio-skeleton-${index}`} />
+            ))}
+          </div>
         ) : comercios.length === 0 ? (
           <p className="comercios-feedback">{error || "No hay comercios disponibles."}</p>
         ) : (
           <div className="comercios-grid">
             {comercios.map((comercio) => (
-              <Link to={`/tiendas/${comercio.slug}`} key={`${comercio.id}-${comercio.slug}`} className="redirect">
-                <div className="card-image-section">
-                  <img src={comercio.banner} alt={comercio.nombre} className="card-main-image" />
-                </div>
-                <div className="card-info-section">
-                  <div className="card-header">
-                    <img src={comercio.logo} alt={`${comercio.nombre} logo`} className="card-logo-img" />
-                    <div className="card-text">
-                      <div className="card-title-line">
-                        <h3>{comercio.nombre}</h3>
-                        <span className="card-rating-badge">
-                          <i className="fa-solid fa-star"></i> {comercio.rating}
-                        </span>
-                      </div>
-                      <div className="card-details-line">
-                        <p>{comercio.descripcion}</p>
-                        <span className="card-time-badge">
-                          <i className="fa-solid fa-clock"></i> {comercio.tiempo}
-                        </span>
-                        <span className="card-envio-badge">{comercio.envio}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              <ComercioCardItem key={`${comercio.id}-${comercio.slug}`} comercio={comercio} />
             ))}
           </div>
         )}
 
         {!initialLoading && hasMore && <div ref={loaderRef} className="comercios-loader-trigger" />}
-        {loadingMore && <p className="comercios-feedback comercios-feedback-more">Cargando mas comercios...</p>}
+        {loadingMore && (
+          <div className="comercios-grid comercios-grid-loading-more">
+            {Array.from({ length: 2 }).map((_, index) => (
+              <ComercioCardSkeleton key={`comercio-skeleton-more-${index}`} />
+            ))}
+          </div>
+        )}
         {!initialLoading && comercios.length > 0 && error && (
           <p className="comercios-feedback comercios-feedback-more">{error}</p>
         )}

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./populares.css";
 import { Link } from "react-router-dom";
 import { ComerciosApi, type ComercioCard } from "../../../api/Comercios.api";
+import ComercioCardItem from "../../comercio/ComercioCard";
+import ComercioCardSkeleton from "../../comercio/ComercioCardSkeleton";
 
 const Populares = () => {
   const [comercios, setComercios] = useState<ComercioCard[]>([]);
@@ -40,8 +42,13 @@ const Populares = () => {
         </Link>
       </div>
 
+      
       {loading ? (
-        <p className="populares-feedback">Cargando comercios...</p>
+        <div className="icon-populares">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <ComercioCardSkeleton key={`popular-skeleton-${index}`} />
+          ))}
+        </div>
       ) : error ? (
         <p className="populares-feedback">{error}</p>
       ) : comercios.length === 0 ? (
@@ -49,31 +56,7 @@ const Populares = () => {
       ) : (
         <div className="icon-populares">
           {comercios.map((categoria) => (
-            <Link to={`/tiendas/${categoria.slug}`} key={`${categoria.id}-${categoria.slug}`} className="redirect">
-              <div className="card-image-section">
-                <img src={categoria.banner} alt={categoria.nombre} className="card-main-image" />
-              </div>
-              <div className="card-info-section">
-                <div className="card-header">
-                  <img src={categoria.logo} alt={`${categoria.nombre} logo`} className="card-logo-img" />
-                  <div className="card-text">
-                    <div className="card-title-line">
-                      <h3>{categoria.nombre}</h3>
-                      <span className="card-rating-badge">
-                        <i className="fa-solid fa-star"></i> {categoria.rating}
-                      </span>
-                    </div>
-                    <div className="card-details-line">
-                      <p>{categoria.descripcion}</p>
-                      <span className="card-time-badge">
-                        <i className="fa-solid fa-clock"></i> {categoria.tiempo}
-                      </span>
-                      <span className="card-envio-badge">{categoria.envio}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+            <ComercioCardItem key={`${categoria.id}-${categoria.slug}`} comercio={categoria} />
           ))}
         </div>
       )}

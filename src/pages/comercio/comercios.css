@@ -26,6 +26,10 @@
   min-width: 0;
 }
 
+.comercios-grid-loading-more {
+  margin-top: 20px;
+}
+
 .comercios-feedback {
   margin: 0;
   color: #666;
