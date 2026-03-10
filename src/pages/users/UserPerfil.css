@@ -1,4 +1,8 @@
 /* Estilos del perfil de usuario */
+.user-perfil-container, .user-perfil-container * {
+  box-sizing: border-box;
+}
+
 body {
   background-color: whitesmoke;
   margin: 0;
@@ -445,6 +449,8 @@ hr {
     border-style: solid;
     justify-content: center;
     padding: 10px 8px;
+    flex-direction: column;
+    gap: 4px;
   }
 
   .opcion-icon {
@@ -464,6 +470,16 @@ hr {
 
   .logout-btn {
     width: 100%;
+  }
+
+  .historial-header {
+    justify-content: center;
+    position: relative;
+  }
+  
+  .historial-volver {
+    position: absolute;
+    left: 0;
   }
 }
 

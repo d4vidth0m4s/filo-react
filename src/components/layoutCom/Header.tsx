@@ -26,6 +26,26 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const [recentSearches, setRecentSearches] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem("recentSearches");
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const addRecentSearch = (term: string) => {
+    if (!term.trim()) return;
+    setRecentSearches(prev => {
+      const newRecent = [term, ...prev.filter(t => t !== term)].slice(0, 5);
+      localStorage.setItem("recentSearches", JSON.stringify(newRecent));
+      return newRecent;
+    });
+  };
+
+  const masBuscados = [...tiendas].sort((a, b) => b.rating - a.rating).slice(0, 4);
+
   const resultados =
     query.trim().length > 1
       ? tiendas
@@ -42,10 +62,15 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
       : [];
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && resultados.length > 0) {
-      navigate(`/tiendas/${resultados[0].slug}`);
-      setQuery("");
-      setShowDropdown(false);
+    if (e.key === "Enter") {
+      if (query.trim().length > 1) {
+        addRecentSearch(query);
+      }
+      if (resultados.length > 0) {
+        navigate(`/tiendas/${resultados[0].slug}`);
+        setQuery("");
+        setShowDropdown(false);
+      }
     }
   };
   const navigate = useNavigate();
@@ -116,10 +141,69 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
               }}
               onKeyDown={handleSearch}
               onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-              onFocus={() => query.trim().length > 1 && setShowDropdown(true)}
+              onFocus={() => setShowDropdown(true)}
             />
 
-   {showDropdown && resultados.length > 0 && (
+    {showDropdown && query.trim().length <= 1 && (
+      <div className="search-dropdown suggestions-dropdown">
+        {recentSearches.length > 0 && (
+          <div className="suggestion-section">
+            <div className="suggestion-header">
+              <span>Recientes</span>
+              <button 
+                className="clear-recent-btn"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  setRecentSearches([]);
+                  localStorage.removeItem("recentSearches");
+                }}
+              >
+                Limpiar
+              </button>
+            </div>
+            {recentSearches.map((term) => (
+              <div 
+                key={term}
+                className="suggestion-item"
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  setQuery(term);
+                }}
+              >
+                <IoSearch className="suggestion-icon-small" />
+                <span>{term}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        
+        <div className="suggestion-section">
+          <div className="suggestion-header">
+            <span>Lo más buscado</span>
+          </div>
+          {masBuscados.map((t) => (
+            <Link
+              to={`/tiendas/${t.slug}`}
+              key={t.slug}
+              className="suggestion-item store-suggestion"
+              onClick={() => {
+                addRecentSearch(t.nombre);
+                setQuery("");
+                setShowDropdown(false);
+              }}
+            >
+              <img src={t.logo} alt={t.nombre} className="suggestion-store-logo" />
+              <div className="suggestion-store-info">
+                <span className="suggestion-store-name">{t.nombre}</span>
+                <span className="suggestion-store-category">{t.categoria.replace('-', ' ')}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    )}
+
+   {showDropdown && resultados.length > 0 && query.trim().length > 1 && (
     <div className="search-dropdown">
       {resultados.map((t) => (
         <Link
@@ -127,6 +211,7 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
           key={t.slug}
           className="search-dropdown-item"
           onClick={() => {
+            addRecentSearch(t.nombre);
             setQuery("");
             setShowDropdown(false);
           }}
@@ -167,10 +252,69 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
     }}
     onKeyDown={handleSearch}
     onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-    onFocus={() => query.trim().length > 1 && setShowDropdown(true)}
+    onFocus={() => setShowDropdown(true)}
   />
 
-  {showDropdown && resultados.length > 0 && (
+  {showDropdown && query.trim().length <= 1 && (
+    <div className="search-dropdown suggestions-dropdown">
+      {recentSearches.length > 0 && (
+        <div className="suggestion-section">
+          <div className="suggestion-header">
+            <span>Recientes</span>
+            <button 
+              className="clear-recent-btn"
+              onMouseDown={(e) => {
+                e.preventDefault();
+                setRecentSearches([]);
+                localStorage.removeItem("recentSearches");
+              }}
+            >
+              Limpiar
+            </button>
+          </div>
+          {recentSearches.map((term) => (
+            <div 
+              key={term}
+              className="suggestion-item"
+              onMouseDown={(e) => {
+                e.preventDefault();
+                setQuery(term);
+              }}
+            >
+              <IoSearch className="suggestion-icon-small" />
+              <span>{term}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      
+      <div className="suggestion-section">
+        <div className="suggestion-header">
+          <span>Lo más buscado</span>
+        </div>
+        {masBuscados.map((t) => (
+          <Link
+            to={`/tiendas/${t.slug}`}
+            key={t.slug}
+            className="suggestion-item store-suggestion"
+            onClick={() => {
+              addRecentSearch(t.nombre);
+              setQuery("");
+              setShowDropdown(false);
+            }}
+          >
+            <img src={t.logo} alt={t.nombre} className="suggestion-store-logo" />
+            <div className="suggestion-store-info">
+              <span className="suggestion-store-name">{t.nombre}</span>
+              <span className="suggestion-store-category">{t.categoria.replace('-', ' ')}</span>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )}
+
+  {showDropdown && resultados.length > 0 && query.trim().length > 1 && (
     <div className="search-dropdown">
       {resultados.map((t) => (
         <Link
@@ -178,6 +322,7 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
           key={t.slug}
           className="search-dropdown-item"
           onClick={() => {
+            addRecentSearch(t.nombre);
             setQuery("");
             setShowDropdown(false);
           }}
