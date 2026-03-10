@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
               )}
             </button>
           </div>
-
+          <div className="mobile-top-center">
           <Link to="/Filo-Home" className="logo-link">
             <h1 className="logo">Filo</h1>
           </Link>
@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
           <div className="ubicacion">
             <LocationSelector onSelect={handleLocationSelect} locationName={location.name} />
           </div>
-
+          </div>
           <button className="icon-btn user-btn" onClick={handleUserClick}>
             <i><FaUser /></i>
           </button>

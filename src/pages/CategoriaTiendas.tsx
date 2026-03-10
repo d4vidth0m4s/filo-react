@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { tiendas } from '../data/tiendas';
-import './categoriaTiendas.css';
+import './CategoriaTiendas.css';
 
 const nombres: Record<string, string> = {
   'restaurantes': 'Restaurantes',

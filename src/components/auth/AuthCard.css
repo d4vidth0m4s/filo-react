@@ -1,4 +1,4 @@
-/* ── Variables ─────────────────────────────────────────── */
+/* ── Variables  */
 :root {
   --green:       #1fd15f;
   --green-hover: #17b653;
@@ -9,13 +9,13 @@
   --shadow-md:   0 8px 30px rgba(0,0,0,0.08);
 }
 
-/* ── Reset base ────────────────────────────────────────── */
+/* ── Reset base */
 body, #root {
   margin: 0;
   min-height: 100vh;
 }
 
-/* ── Layout raíz ───────────────────────────────────────── */
+/* ── Layout raíz  */
 .auth-layout-container {
   display: flex;
   justify-content: center;
@@ -27,7 +27,7 @@ body, #root {
   box-sizing: border-box;
 }
 
-/* ── Card contenedor ───────────────────────────────────── */
+/* ── Card contenedor  */
 .auth-wrapper {
   display: flex;
   align-items: stretch;
@@ -38,7 +38,7 @@ body, #root {
   box-shadow: var(--shadow-md);
 }
 
-/* ── Banner lateral ────────────────────────────────────── */
+/* ── Banner lateral  */
 .auth-banner {
   flex: 1 1 50%;
   background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
@@ -46,6 +46,7 @@ body, #root {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  min-height: 90vh;
 }
 
 .banner-content {
@@ -62,13 +63,16 @@ body, #root {
   object-fit: cover;
 }
 
-/* ── Formulario ────────────────────────────────────────── */
+/* ── Formulario  */
 .login-container {
   flex: 1 1 50%;
   background: white;
   padding: 30px;
   text-align: center;
   border-radius: 0 20px 20px 0;
+   max-height: 100vh;         
+  overflow-y: auto;          
+  box-sizing: border-box;  
 }
 
 .login-container h1 {
@@ -76,7 +80,7 @@ body, #root {
   margin-bottom: 5px;
 }
 
-/* ── Botón volver ──────────────────────────────────────── */
+/* ── Botón volver  */
 #back {
   display: flex;
   justify-content: flex-start;
@@ -92,7 +96,7 @@ body, #root {
 
 #back:hover { color: var(--green-hover); }
 
-/* ── Inputs ────────────────────────────────────────────── */
+/* ── Inputs  */
 .input-group {
   position: relative;
   display: flex;
@@ -134,7 +138,7 @@ body, #root {
   transition: transform 0.2s ease;
 }
 
-/* ── Botones ───────────────────────────────────────────── */
+/* ── Botones  */
 button[type="submit"] {
   width: 100%;
   padding: 12px;
@@ -149,20 +153,34 @@ button[type="submit"] {
 
 button[type="submit"]:hover { background: var(--green-hover); }
 
-.google-btn {
+.Google {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: white;
-  border: none;
+  border: 1px solid #e0e0e0;
   cursor: pointer;
-  border-radius: 30%;
+  border-radius: 50%;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  transition: box-shadow 0.3s ease, transform 0.2s ease, border-color 0.2s ease;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
-.google-btn:hover {
-  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+.Google:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  border-color: #1fd15f;
   transform: translateY(-1px);
+  background: #fafafa;
 }
 
+.Google:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
 .link-btn {
   background: none;
   border: none;
@@ -175,11 +193,21 @@ button[type="submit"]:hover { background: var(--green-hover); }
 
 .link-btn:hover { color: var(--green-hover); }
 
-/* ── Responsive ────────────────────────────────────────── */
+/* ── Responsive  */
 @media (max-width: 800px) {
+  .auth-layout-container {
+    align-items: center;
+    justify-content: flex-start ;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
   .auth-wrapper {
     flex-direction: column;
     border-radius: 20px;
+    max-height: none;        
+    max-width: 420px;
+    margin:  auto;
   }
 
   .auth-banner {
@@ -194,5 +222,8 @@ button[type="submit"]:hover { background: var(--green-hover); }
     border-radius: 20px;
     max-width: 100%;
     flex: none;
+    max-height: none;        
+    overflow-y: visible;     
+    padding: 30px 20px;     
   }
-} 
+}

@@ -205,6 +205,12 @@ button:disabled {
     color: white;
     opacity: 0.9;
 }
+
+.pedido-error {
+    margin-top: 10px;
+    color: #b91c1c;
+    font-size: 14px;
+}
 .loader {
   width: 18px;
   height: 18px;
