@@ -9,7 +9,7 @@ import UserPerfil from "./pages/users/UserPerfil";
 import PrivateLayout from "./layouts/Private Layout/PrivateLayout";
 import TiendasPerfil from "./pages/Tiendas/TiendasPerfil";
 import ConfirmacionPedido from "./pages/checkout/ConfirmacionPedido";
-import Comercios from "./pages/Comercios";
+import Comercios from "./pages/comercio/Comercios";
 
 import CategoriaTiendas from './pages/CategoriaTiendas';
 //import TiendaDetalle from "./pages/Tiendas/tiendaDetalle";

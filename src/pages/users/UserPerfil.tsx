@@ -9,6 +9,7 @@ import HistorialUser from '../../components/historialUser/historialUser'
 import  type {DetallePedido} from '../../components/historialUser/pedidoDetalles/PedidoDetalle'
 import type { PedidoHistorial } from '../../components/historialUser/historialUser'
 import DetallePedidoData  from '../../components/historialUser/pedidoDetalles/PedidoDetalle'
+import { FaBoxOpen, FaHeart, FaStore, FaSignOutAlt } from 'react-icons/fa'
 
 type Usuario = {
   id: number
@@ -164,16 +165,20 @@ const handleLogout = () => {
 
             <div className="grid perfil-opciones">
               <button className="opcion" onClick={() => setVistaActiva("pedidos")}>
-                <span>Mis pedidos</span>
+                <FaBoxOpen className="opcion-icon" aria-hidden="true" />
+                <span className="opcion-label">Mis pedidos</span>
               </button>
               <button className="opcion">
-                <span>Favoritos</span>
+                <FaHeart className="opcion-icon" aria-hidden="true" />
+                <span className="opcion-label">Favoritos</span>
               </button>
               <button className="opcion" onClick={codeAccessHandler}>
-                <span>Tu comercio</span>
+                <FaStore className="opcion-icon" aria-hidden="true" />
+                <span className="opcion-label">Tu comercio</span>
               </button>
               <button className="opcion logout" onClick={handleLogout}>
-                <span>Cerrar sesión</span>
+                <FaSignOutAlt className="opcion-icon" aria-hidden="true" />
+                <span className="opcion-label">Cerrar sesión</span>
               </button>
             </div>
 
