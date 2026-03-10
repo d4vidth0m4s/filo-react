@@ -27,6 +27,22 @@ body {
   margin-bottom: 30px;
 }
 
+.perfil-header .back-btn {
+  color: #ffffff;
+}
+
+.perfil-header .back-btn svg {
+  color: #ffffff;
+}
+
+.perfil-header .back-btn:hover {
+  color: yellowgreen;
+}
+
+.perfil-header .back-btn:hover svg {
+  color: yellowgreen;
+}
+
 .perfil-header h2 {
   margin: 0;
   font-size: 24px;
@@ -413,7 +429,7 @@ hr {
   .perfil-opciones {
     display: flex;
     flex-wrap: nowrap;
-    gap: 8px;
+    gap: 6px;
     justify-content: space-between;
     overflow: visible;
     padding-bottom: 0;
@@ -496,15 +512,16 @@ hr {
   }
 
   .perfil-opciones {
-    gap: 6px;
+    gap: 4px;
   }
 
   .opcion {
-    min-height: 54px;
+    min-height: 50px;
     width: auto;
     max-width: none;
     flex: 1 1 0;
     font-size: 11px;
+    padding: 8px 6px;
   }
 }
 

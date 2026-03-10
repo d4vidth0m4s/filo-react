@@ -16,16 +16,30 @@ interface LocationData {
 }
 
 
+const normalizeText = (text: string) =>
+  text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
 const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
   const [query, setQuery] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const resultados = query.trim().length > 1
-    ? tiendas.filter((t) =>
-        t.nombre.toLowerCase().includes(query.toLowerCase()) ||
-        t.descripcion.toLowerCase().includes(query.toLowerCase())
-      ).slice(0, 6)
-    : [];
+  const resultados =
+    query.trim().length > 1
+      ? tiendas
+          .filter((t) => {
+            const q = normalizeText(query);
+            const nombre = normalizeText(t.nombre);
+            const descripcion = normalizeText(t.descripcion);
+            return (
+              nombre.includes(q) ||
+              descripcion.includes(q)
+            );
+          })
+          .slice(0, 6)
+      : [];
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && resultados.length > 0) {

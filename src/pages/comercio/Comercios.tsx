@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ComerciosApi, type ComercioCard } from "../../api/Comercios.api";
 import "../../components/home/populares/populares.css";
 import ComercioCardItem from "../../components/comercio/ComercioCard";
@@ -8,6 +9,7 @@ import "./comercios.css";
 const PAGE_SIZE = 12;
 
 const Comercios = () => {
+  const navigate = useNavigate();
   const [comercios, setComercios] = useState<ComercioCard[]>([]);
   const [initialLoading, setInitialLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -92,7 +94,18 @@ const Comercios = () => {
   return (
     <div className="comercios-page">
       <div className="comercios-container">
-        <h2 className="comercios-title">Todos los comercios</h2>
+        <div className="populares">
+          <h2 className="comercios-title">Todos los comercios</h2>
+          {comercios.length > 0 && (
+            <button
+              type="button"
+              className="ver-todo"
+              onClick={() => navigate(-1)}
+            >
+              Ver menos
+            </button>
+          )}
+        </div>
 
         {initialLoading ? (
           <div className="comercios-grid">
@@ -110,7 +123,9 @@ const Comercios = () => {
           </div>
         )}
 
-        {!initialLoading && hasMore && <div ref={loaderRef} className="comercios-loader-trigger" />}
+        {!initialLoading && hasMore && (
+          <div ref={loaderRef} className="comercios-loader-trigger" />
+        )}
         {loadingMore && (
           <div className="comercios-grid comercios-grid-loading-more">
             {Array.from({ length: 2 }).map((_, index) => (
