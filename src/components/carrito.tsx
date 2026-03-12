@@ -1,5 +1,5 @@
-import { useCart } from "../context/cartContext";
-import { CarTaxiFront } from "lucide-react";
+import { useCart } from '../context/useCart';
+import { CarTaxiFront } from 'lucide-react';
 
 const Carrito = () => {
   const { carrito } = useCart();
@@ -10,7 +10,9 @@ const Carrito = () => {
 
   return (
     <div>
-      <h3><CarTaxiFront /> Carrito</h3>
+      <h3>
+        <CarTaxiFront /> Carrito
+      </h3>
 
       {carrito.map((item) => (
         <div key={item.id}>

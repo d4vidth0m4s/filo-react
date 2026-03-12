@@ -5,7 +5,7 @@
   margin: 0 auto;
   padding: 0 16px;
   box-sizing: border-box;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .historial-header {
@@ -30,7 +30,7 @@
   border: 1px dashed #333;
   cursor: pointer;
   padding: 6px 12px;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 11px;
   font-weight: bold;
   text-transform: uppercase;
@@ -40,7 +40,6 @@
 
 .historial-volver:hover {
   border-style: solid;
-  
 }
 
 /* LISTA */
@@ -69,12 +68,23 @@
   width: 100%;
 }
 
-.pedido-card:hover { border-style: solid; border-color: #333; }
+.pedido-card:hover {
+  border-style: solid;
+  border-color: #333;
+}
 
-.pedido-card:has(.entregado):hover  { border-color: #00a844; }
-.pedido-card:has(.preparando):hover { border-color: #0066cc; }
-.pedido-card:has(.pendiente):hover  { border-color: #e67e00; }
-.pedido-card:has(.cancelado):hover  { border-color: #cc0000; }
+.pedido-card:has(.entregado):hover {
+  border-color: #00a844;
+}
+.pedido-card:has(.preparando):hover {
+  border-color: #0066cc;
+}
+.pedido-card:has(.pendiente):hover {
+  border-color: #e67e00;
+}
+.pedido-card:has(.cancelado):hover {
+  border-color: #cc0000;
+}
 
 .perfil-card {
   height: auto;
@@ -164,7 +174,7 @@
 }
 
 .pedido-producto-item::before {
-  content: "·";
+  content: '·';
   color: #999;
 }
 

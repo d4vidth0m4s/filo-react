@@ -304,17 +304,17 @@
   align-items: center;
   border: 1px solid #d3dbd7;
   background: #fff;
-  color: black; 
+  color: black;
   width: 24px;
   height: 24px;
   border-radius: 999px;
   cursor: pointer;
 }
-.checkoutv2__counter button:hover{
+.checkoutv2__counter button:hover {
   background-color: var(--checkout-primary);
   color: white;
 }
-.checkoutv2__counter span{
+.checkoutv2__counter span {
   color: black;
 }
 .checkoutv2__promo {
@@ -395,7 +395,9 @@
   padding: 13px 14px;
   cursor: pointer;
   box-shadow: 0 16px 30px rgba(21, 163, 74, 0.25);
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
 }
 
 .checkoutv2__cta:hover {

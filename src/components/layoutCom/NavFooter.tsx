@@ -1,13 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-import './NavFooter.css'
+import './NavFooter.css';
 
 //import '../scripts/login'
 
-
 const NavFooter: React.FC = () => {
-
-
   return (
     <footer className="navFooter">
       <div className="nav-Footer-content">
@@ -29,7 +26,7 @@ const NavFooter: React.FC = () => {
         </a>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default NavFooter
+export default NavFooter;

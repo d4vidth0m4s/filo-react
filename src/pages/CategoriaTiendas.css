@@ -1,8 +1,8 @@
- .cat-container {
+.cat-container {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   width: 100%;
 }
 

@@ -27,12 +27,18 @@
   height: 80px;
   border-radius: var(--border-radius-lg);
   margin-bottom: var(--spacing-xs);
-  background: linear-gradient(to bottom, var(--color-primary), var(--color-primary-light));
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary),
+    var(--color-primary-light)
+  );
   display: grid;
   place-items: center;
   font-size: 35px;
   box-shadow: 0 4px 10px var(--color-shadow);
-  transition: transform var(--transition-medium) ease, box-shadow var(--transition-medium) ease;
+  transition:
+    transform var(--transition-medium) ease,
+    box-shadow var(--transition-medium) ease;
   cursor: pointer;
 }
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 //import { useNavigate } from 'react-router-dom'
 //import '../scripts/back'
 
@@ -7,13 +7,13 @@ const UserCall: React.FC = () => {
   //const navigate = useNavigate()
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Formulario de login enviado')
-  }
+    e.preventDefault();
+    console.log('Formulario de login enviado');
+  };
 
   const loginGoogle = () => {
-    console.log('Login con Google')
-  }
+    console.log('Login con Google');
+  };
 
   return (
     <div className="login-container">
@@ -45,7 +45,7 @@ const UserCall: React.FC = () => {
         ¿No tienes cuenta? <a href="/users/register">Regístrate</a>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default UserCall
+export default UserCall;

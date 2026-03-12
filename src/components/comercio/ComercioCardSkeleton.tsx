@@ -1,12 +1,12 @@
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 type ComercioCardSkeletonProps = {
   className?: string;
 };
 
 const ComercioCardSkeleton = ({ className }: ComercioCardSkeletonProps) => {
-  const wrapperClassName = ["redirect", className].filter(Boolean).join(" ");
+  const wrapperClassName = ['redirect', className].filter(Boolean).join(' ');
 
   return (
     <div className={wrapperClassName} aria-hidden="true">

@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
-import { tiendas } from "../../data/tiendas";
+import { useParams } from 'react-router-dom';
+import { tiendas } from '../../data/tiendas';
 
 export default function TiendaDetalle() {
   const { slug } = useParams<{ slug: string }>();
 
-  const tienda = tiendas.find(t => t.slug === slug);
+  const tienda = tiendas.find((t) => t.slug === slug);
 
   if (!tienda) {
     return <p className="p-4">Tienda no encontrada</p>;
@@ -18,11 +18,8 @@ export default function TiendaDetalle() {
 
       {/* productos */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {tienda.productos.map(producto => (
-          <div
-            key={producto.id}
-            className="border rounded-xl p-4 shadow"
-          >
+        {tienda.productos.map((producto) => (
+          <div key={producto.id} className="border rounded-xl p-4 shadow">
             <img
               src={producto.imagen}
               alt={producto.nombre}
@@ -30,9 +27,7 @@ export default function TiendaDetalle() {
             />
 
             <h3 className="font-semibold">{producto.nombre}</h3>
-            <p className="text-sm text-gray-500">
-              {producto.descripcion}
-            </p>
+            <p className="text-sm text-gray-500">{producto.descripcion}</p>
 
             <div className="flex justify-between items-center mt-4">
               <span className="font-bold">

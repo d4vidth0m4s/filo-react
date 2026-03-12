@@ -13,7 +13,7 @@
 }
 
 .tienda-overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, .7), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
   color: white;
   height: 100%;
   padding: 20px;
@@ -39,9 +39,7 @@
   font-size: 14px;
 }
 
-
 .tienda-categorias {
-
   z-index: 2;
   display: flex;
   gap: 10px;
@@ -89,7 +87,7 @@
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, .08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .producto-card img {
@@ -100,7 +98,7 @@
 
 .producto-info {
   display: flex;
-  flex-direction: column ;
+  flex-direction: column;
   padding: 10px;
   flex: 1;
 }

@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import type { ComercioCard as ComercioCardType } from "../../api/Comercios.api";
+import { Link } from 'react-router-dom';
+import type { ComercioCard as ComercioCardType } from '../../api/Comercios.api';
 
 type ComercioCardProps = {
   comercio: ComercioCardType;
@@ -7,16 +7,24 @@ type ComercioCardProps = {
 };
 
 const ComercioCard = ({ comercio, className }: ComercioCardProps) => {
-  const linkClassName = ["redirect", className].filter(Boolean).join(" ");
+  const linkClassName = ['redirect', className].filter(Boolean).join(' ');
 
   return (
     <Link to={`/tiendas/${comercio.slug}`} className={linkClassName}>
       <div className="card-image-section">
-        <img src={comercio.banner} alt={comercio.nombre} className="card-main-image" />
+        <img
+          src={comercio.banner}
+          alt={comercio.nombre}
+          className="card-main-image"
+        />
       </div>
       <div className="card-info-section">
         <div className="card-header">
-          <img src={comercio.logo} alt={`${comercio.nombre} logo`} className="card-logo-img" />
+          <img
+            src={comercio.logo}
+            alt={`${comercio.nombre} logo`}
+            className="card-logo-img"
+          />
           <div className="card-text">
             <div className="card-title-line">
               <h3>{comercio.nombre}</h3>

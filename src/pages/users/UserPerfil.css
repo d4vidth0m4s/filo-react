@@ -1,5 +1,6 @@
 /* Estilos del perfil de usuario */
-.user-perfil-container, .user-perfil-container * {
+.user-perfil-container,
+.user-perfil-container * {
   box-sizing: border-box;
 }
 
@@ -9,7 +10,6 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
-
 
 .user-perfil-container {
   min-height: 100vh;
@@ -57,7 +57,7 @@ body {
   display: flex;
   gap: 24px;
   align-items: flex-start;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
   max-width: 1400px;
   margin: 0 auto;
   overflow-y: auto;
@@ -70,12 +70,12 @@ body {
   flex-shrink: 0;
   position: relative;
   background: white;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* ZIGZAG SUPERIOR */
 .ticket::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -8px;
   left: 0;
@@ -83,19 +83,39 @@ body {
   height: 10px;
   background: white;
   clip-path: polygon(
-    0% 100%, 4% 0%, 8% 100%, 12% 0%, 16% 100%,
-    20% 0%, 24% 100%, 28% 0%, 32% 100%,
-    36% 0%, 40% 100%, 44% 0%, 48% 100%,
-    52% 0%, 56% 100%, 60% 0%, 64% 100%,
-    68% 0%, 72% 100%, 76% 0%, 80% 100%,
-    84% 0%, 88% 100%, 92% 0%, 96% 100%,
-    100% 0%, 100% 100%
+    0% 100%,
+    4% 0%,
+    8% 100%,
+    12% 0%,
+    16% 100%,
+    20% 0%,
+    24% 100%,
+    28% 0%,
+    32% 100%,
+    36% 0%,
+    40% 100%,
+    44% 0%,
+    48% 100%,
+    52% 0%,
+    56% 100%,
+    60% 0%,
+    64% 100%,
+    68% 0%,
+    72% 100%,
+    76% 0%,
+    80% 100%,
+    84% 0%,
+    88% 100%,
+    92% 0%,
+    96% 100%,
+    100% 0%,
+    100% 100%
   );
 }
 
 /* ZIGZAG INFERIOR */
 .ticket-inner::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -9px;
   left: 0;
@@ -103,13 +123,33 @@ body {
   height: 10px;
   background: white;
   clip-path: polygon(
-    0% 0%, 4% 100%, 8% 0%, 12% 100%, 16% 0%,
-    20% 100%, 24% 0%, 28% 100%, 32% 0%,
-    36% 100%, 40% 0%, 44% 100%, 48% 0%,
-    52% 100%, 56% 0%, 60% 100%, 64% 0%,
-    68% 100%, 72% 0%, 76% 100%, 80% 0%,
-    84% 100%, 88% 0%, 92% 100%, 96% 0%,
-    100% 100%, 100% 0%
+    0% 0%,
+    4% 100%,
+    8% 0%,
+    12% 100%,
+    16% 0%,
+    20% 100%,
+    24% 0%,
+    28% 100%,
+    32% 0%,
+    36% 100%,
+    40% 0%,
+    44% 100%,
+    48% 0%,
+    52% 100%,
+    56% 0%,
+    60% 100%,
+    64% 0%,
+    68% 100%,
+    72% 0%,
+    76% 100%,
+    80% 0%,
+    84% 100%,
+    88% 0%,
+    92% 100%,
+    96% 0%,
+    100% 100%,
+    100% 0%
   );
 }
 
@@ -144,14 +184,13 @@ hr {
 }
 
 .ascii-logo {
-  font-family: "Fira Code", "Courier New", monospace;
+  font-family: 'Fira Code', 'Courier New', monospace;
   font-size: 4px;
   line-height: 1.1;
   color: #000;
   margin: 8px 0;
   overflow: hidden;
   white-space: pre-wrap;
-  
 }
 
 /* GRID TIPO IMPRESION */
@@ -197,13 +236,13 @@ hr {
 
 /* HOVER */
 .opcion:hover {
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
   border-style: solid;
 }
 
 /* ACTIVE/PRESSED */
 .opcion:active {
-  background: rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* BOTÓN LOGOUT ESPECIAL */
@@ -213,7 +252,7 @@ hr {
 }
 
 .opcion.logout:hover {
-  background: rgba(204,0,0,0.05);
+  background: rgba(204, 0, 0, 0.05);
   border-style: solid;
 }
 
@@ -225,7 +264,7 @@ hr {
   flex: 1;
   min-width: 400px;
   text-align: center;
-  box-shadow: 0 15px 25px rgba(0,0,0,.05);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
   height: fit-content;
 }
 
@@ -236,7 +275,7 @@ hr {
   object-fit: cover;
   margin-bottom: 20px;
   border: 4px solid #d6d842;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .nombre-usuario {
@@ -255,7 +294,7 @@ hr {
 
 /* EFECTO IMPRESION */
 .ticket * {
-  text-shadow: 0.2px 0.2px 0 rgba(0,0,0,0.15);
+  text-shadow: 0.2px 0.2px 0 rgba(0, 0, 0, 0.15);
 }
 .logout-overlay {
   position: fixed;
@@ -274,7 +313,7 @@ hr {
   max-width: 90%;
   padding: 30px 25px;
   border-radius: 18px;
-  text-align: center; 
+  text-align: center;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   animation: logoutScale 0.3s ease;
 }
@@ -324,7 +363,7 @@ hr {
   border: none;
   border-radius: 25px;
   padding: 10px 22px;
-  font-size: 14px;  
+  font-size: 14px;
   cursor: pointer;
   transition: all 0.25s ease;
 }
@@ -337,10 +376,14 @@ hr {
 /* Animación */
 
 @keyframes logoutScale {
-  from { opacity: 0; transform: scale(0.85) translateY(20px);
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
   }
 
-  to { opacity: 1; transform: scale(1) translateY(0);
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 /* Responsive */
@@ -476,7 +519,7 @@ hr {
     justify-content: center;
     position: relative;
   }
-  
+
   .historial-volver {
     position: absolute;
     left: 0;

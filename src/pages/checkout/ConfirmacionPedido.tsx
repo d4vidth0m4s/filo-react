@@ -1,49 +1,63 @@
-import { useMemo, useState } from "react";
-import { FaCreditCard, FaLock, FaMapMarkerAlt, FaMoneyBillWave, FaPhoneAlt, FaWallet } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { PedidosApi } from "../../api/Pedidos.api";
-import { useCart } from "../../context/cartContext";
-import "./confirmacionPedido.css";
+import { useMemo, useState } from 'react';
+import {
+  FaCreditCard,
+  FaLock,
+  FaMapMarkerAlt,
+  FaMoneyBillWave,
+  FaPhoneAlt,
+  FaWallet,
+} from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { PedidosApi } from '../../api/Pedidos.api';
+import { useCart } from '../../context/useCart';
+import './confirmacionPedido.css';
 
 const obtenerClienteInicial = (): string => {
-  const raw = localStorage.getItem("userDatos");
+  const raw = localStorage.getItem('userDatos');
   if (!raw) {
-    return "";
+    return '';
   }
 
   try {
     const parsed: unknown = JSON.parse(raw);
-    if (!parsed || typeof parsed !== "object") {
-      return "";
+    if (!parsed || typeof parsed !== 'object') {
+      return '';
     }
 
     const user = parsed as Record<string, unknown>;
-    const nombre = typeof user.nombre === "string" ? user.nombre.trim() : "";
-    const familyName = typeof user.familyName === "string" ? user.familyName.trim() : "";
-    const username = typeof user.username === "string" ? user.username.trim() : "";
+    const nombre = typeof user.nombre === 'string' ? user.nombre.trim() : '';
+    const familyName =
+      typeof user.familyName === 'string' ? user.familyName.trim() : '';
+    const username =
+      typeof user.username === 'string' ? user.username.trim() : '';
     const nombreCompleto = `${nombre} ${familyName}`.trim();
-    return nombreCompleto || username || "";
+    return nombreCompleto || username || '';
   } catch {
-    return "";
+    return '';
   }
 };
 
 const obtenerUsuarioIdInicial = (): number => {
-  const raw = localStorage.getItem("userDatos");
+  const raw = localStorage.getItem('userDatos');
   if (!raw) {
     return 0;
   }
 
   try {
     const parsed: unknown = JSON.parse(raw);
-    if (!parsed || typeof parsed !== "object") {
+    if (!parsed || typeof parsed !== 'object') {
       return 0;
     }
 
     const user = parsed as Record<string, unknown>;
     const id = user.id;
     const usuarioId = user.usuarioId;
-    const valor = typeof id === "number" ? id : typeof usuarioId === "number" ? usuarioId : Number(id ?? usuarioId);
+    const valor =
+      typeof id === 'number'
+        ? id
+        : typeof usuarioId === 'number'
+          ? usuarioId
+          : Number(id ?? usuarioId);
     return Number.isFinite(valor) ? valor : 0;
   } catch {
     return 0;
@@ -51,33 +65,44 @@ const obtenerUsuarioIdInicial = (): number => {
 };
 
 const metodoPagoApiMap = {
-  tarjeta: "tarjeta",
-  billetera: "billetera",
-  efectivo: "efectivo",
+  tarjeta: 'tarjeta',
+  billetera: 'billetera',
+  efectivo: 'efectivo',
 } as const;
 
 type MetodoPago = keyof typeof metodoPagoApiMap;
 
 const ConfirmacionPedido = () => {
   const navigate = useNavigate();
-  const { carrito, montoCarrito, agregarProducto, restarProducto, vaciarCarrito } = useCart();
+  const {
+    carrito,
+    montoCarrito,
+    agregarProducto,
+    restarProducto,
+    vaciarCarrito,
+  } = useCart();
   const [cliente, setCliente] = useState<string>(obtenerClienteInicial);
-  const [telefono, setTelefono] = useState<string>("+57");
-  const [direccion, setDireccion] = useState<string>(() => localStorage.getItem("direccionEntrega") ?? "");
-  const [instrucciones, setInstrucciones] = useState<string>("");
-  const [metodoPago, setMetodoPago] = useState<MetodoPago>("efectivo");
-  const [numeroTarjeta, setNumeroTarjeta] = useState<string>("");
-  const [fechaTarjeta, setFechaTarjeta] = useState<string>("");
-  const [cvv, setCvv] = useState<string>("");
-  const [promoCode, setPromoCode] = useState<string>("");
+  const [telefono, setTelefono] = useState<string>('+57');
+  const [direccion, setDireccion] = useState<string>(
+    () => localStorage.getItem('direccionEntrega') ?? ''
+  );
+  const [instrucciones, setInstrucciones] = useState<string>('');
+  const [metodoPago, setMetodoPago] = useState<MetodoPago>('efectivo');
+  const [numeroTarjeta, setNumeroTarjeta] = useState<string>('');
+  const [fechaTarjeta, setFechaTarjeta] = useState<string>('');
+  const [cvv, setCvv] = useState<string>('');
+  const [promoCode, setPromoCode] = useState<string>('');
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pedidoExitoso, setPedidoExitoso] = useState(false);
   const usuarioId = useMemo(() => obtenerUsuarioIdInicial(), []);
 
-  const tiendasEnCarrito = useMemo(() => Array.from(new Set(carrito.map((item) => item.storeId))), [carrito]);
+  const tiendasEnCarrito = useMemo(
+    () => Array.from(new Set(carrito.map((item) => item.storeId))),
+    [carrito]
+  );
   const tieneMultiplesComercios = tiendasEnCarrito.length > 1;
-  const comercioIdFinal = carrito[0]?.storeId ?? "";
+  const comercioIdFinal = carrito[0]?.storeId ?? '';
   const envio = montoCarrito >= 50000 ? 0 : 5000;
   const servicio = 0;
   const descuento = 0;
@@ -85,14 +110,14 @@ const ConfirmacionPedido = () => {
 
   const payloadPreview = {
     comercioId: comercioIdFinal,
-    usuarioId:usuarioId,
+    usuarioId: usuarioId,
     direccion: direccion.trim(),
     tel: telefono.trim(),
     notaDirecion: instrucciones.trim(),
-    cliente: cliente.trim() || "Cliente",
+    cliente: cliente.trim() || 'Cliente',
     monto: montoCarrito,
     metodoPago: metodoPagoApiMap[metodoPago],
-    items: carrito.map((item) => ({ 
+    items: carrito.map((item) => ({
       id: item.id,
       cantidad: item.cantidad,
       nombre: item.nombre,
@@ -101,25 +126,25 @@ const ConfirmacionPedido = () => {
 
   const aplicarPromo = () => {
     if (!promoCode.trim()) {
-      setError("Ingresa un codigo promocional.");
+      setError('Ingresa un codigo promocional.');
       return;
     }
-    setError("Por ahora no hay codigos activos.");
+    setError('Por ahora no hay codigos activos.');
   };
 
   const confirmarPedido = async () => {
     if (carrito.length === 0) {
-      setError("Tu carrito esta vacio.");
+      setError('Tu carrito esta vacio.');
       return;
     }
 
     if (!direccion.trim()) {
-      setError("La direccion de entrega es obligatoria.");
+      setError('La direccion de entrega es obligatoria.');
       return;
     }
 
     if (tieneMultiplesComercios) {
-      setError("Solo puedes confirmar productos de un comercio por pedido.");
+      setError('Solo puedes confirmar productos de un comercio por pedido.');
       return;
     }
 
@@ -129,11 +154,12 @@ const ConfirmacionPedido = () => {
     try {
       await PedidosApi.create(payloadPreview);
 
-      localStorage.setItem("direccionEntrega", direccion.trim());
+      localStorage.setItem('direccionEntrega', direccion.trim());
       vaciarCarrito();
       setPedidoExitoso(true);
     } catch (err) {
-      const message = err instanceof Error ? err.message : "No se pudo confirmar el pedido.";
+      const message =
+        err instanceof Error ? err.message : 'No se pudo confirmar el pedido.';
       setError(message);
     } finally {
       setCargando(false);
@@ -146,7 +172,7 @@ const ConfirmacionPedido = () => {
         <section className="checkoutv2__empty">
           <h1>Pedido confirmado</h1>
           <p>Tu orden fue enviada correctamente al comercio.</p>
-          <button className="checkoutv2__cta" onClick={() => navigate("/")}>
+          <button className="checkoutv2__cta" onClick={() => navigate('/')}>
             Volver al inicio
           </button>
         </section>
@@ -178,10 +204,7 @@ const ConfirmacionPedido = () => {
                 <FaMapMarkerAlt />
                 <h2>Informacion</h2>
               </div>
-
             </div>
-
-
 
             <label className="checkoutv2__label">
               Direccion
@@ -189,7 +212,8 @@ const ConfirmacionPedido = () => {
                 className="checkoutv2__input"
                 value={direccion}
                 onChange={(event) => setDireccion(event.target.value)}
-                placeholder="Ej: Calle 10 # 20-30" required
+                placeholder="Ej: Calle 10 # 20-30"
+                required
               />
             </label>
 
@@ -199,7 +223,8 @@ const ConfirmacionPedido = () => {
                 className="checkoutv2__textarea"
                 value={instrucciones}
                 onChange={(event) => setInstrucciones(event.target.value)}
-                placeholder="Ej:Salchipapa sin salsas, Tocar timbre y dejar en porteria" required
+                placeholder="Ej:Salchipapa sin salsas, Tocar timbre y dejar en porteria"
+                required
                 rows={2}
               />
             </label>
@@ -212,13 +237,14 @@ const ConfirmacionPedido = () => {
             </div>
 
             <div className="checkoutv2__form-grid">
-              <label  className="checkoutv2__label">
+              <label className="checkoutv2__label">
                 Nombre completo
                 <input
                   className="checkoutv2__input"
                   value={cliente}
                   onChange={(event) => setCliente(event.target.value)}
-                  placeholder="Nombre de quien recibe" required
+                  placeholder="Nombre de quien recibe"
+                  required
                 />
               </label>
 
@@ -228,7 +254,8 @@ const ConfirmacionPedido = () => {
                   className="checkoutv2__input"
                   value={telefono}
                   onChange={(event) => setTelefono(event.target.value)}
-                  placeholder="+57 300 000 0000" required
+                  placeholder="+57 300 000 0000"
+                  required
                   type="tel"
                 />
               </label>
@@ -242,12 +269,14 @@ const ConfirmacionPedido = () => {
             </div>
 
             <div className="checkoutv2__payment-grid">
-              <label className={`checkoutv2__payment-option ${metodoPago === "tarjeta" ? "is-active" : ""}`}>
+              <label
+                className={`checkoutv2__payment-option ${metodoPago === 'tarjeta' ? 'is-active' : ''}`}
+              >
                 <input
-                  checked={metodoPago === "tarjeta"}
+                  checked={metodoPago === 'tarjeta'}
                   className="checkoutv2__radio"
                   name="payment"
-                  onChange={() => setMetodoPago("tarjeta")}
+                  onChange={() => setMetodoPago('tarjeta')}
                   type="radio"
                   value="tarjeta"
                 />
@@ -255,12 +284,14 @@ const ConfirmacionPedido = () => {
                 <span>Tarjeta</span>
               </label>
 
-              <label className={`checkoutv2__payment-option ${metodoPago === "billetera" ? "is-active" : ""}`}>
+              <label
+                className={`checkoutv2__payment-option ${metodoPago === 'billetera' ? 'is-active' : ''}`}
+              >
                 <input
-                  checked={metodoPago === "billetera"}
+                  checked={metodoPago === 'billetera'}
                   className="checkoutv2__radio"
                   name="payment"
-                  onChange={() => setMetodoPago("billetera")}
+                  onChange={() => setMetodoPago('billetera')}
                   type="radio"
                   value="billetera"
                 />
@@ -268,12 +299,14 @@ const ConfirmacionPedido = () => {
                 <span>Nequi</span>
               </label>
 
-              <label className={`checkoutv2__payment-option ${metodoPago === "efectivo" ? "is-active" : ""}`}>
+              <label
+                className={`checkoutv2__payment-option ${metodoPago === 'efectivo' ? 'is-active' : ''}`}
+              >
                 <input
-                  checked={metodoPago === "efectivo"}
+                  checked={metodoPago === 'efectivo'}
                   className="checkoutv2__radio"
                   name="payment"
-                  onChange={() => setMetodoPago("efectivo")}
+                  onChange={() => setMetodoPago('efectivo')}
                   type="radio"
                   value="efectivo"
                 />
@@ -282,7 +315,7 @@ const ConfirmacionPedido = () => {
               </label>
             </div>
 
-            {metodoPago === "tarjeta" && (
+            {metodoPago === 'tarjeta' && (
               <div className="checkoutv2__card-details">
                 <label className="checkoutv2__label">
                   Numero de tarjeta
@@ -330,7 +363,10 @@ const ConfirmacionPedido = () => {
 
               <ul className="checkoutv2__items">
                 {carrito.map((item) => (
-                  <li className="checkoutv2__item" key={`${item.id}-${item.storeId}`}>
+                  <li
+                    className="checkoutv2__item"
+                    key={`${item.id}-${item.storeId}`}
+                  >
                     <div className="checkoutv2__thumb">
                       <img alt={item.nombre} src={item.imagen} />
                     </div>
@@ -338,12 +374,19 @@ const ConfirmacionPedido = () => {
                     <div className="checkoutv2__item-body">
                       <div className="checkoutv2__item-top">
                         <p>{item.nombre}</p>
-                        <strong>${(item.precio * item.cantidad).toLocaleString()}</strong>
+                        <strong>
+                          ${(item.precio * item.cantidad).toLocaleString()}
+                        </strong>
                       </div>
                       <div className="checkoutv2__item-bottom">
                         <span>Qty: {item.cantidad}</span>
                         <div className="checkoutv2__counter">
-                          <button onClick={() => restarProducto(item.id, item.storeId)} type="button">
+                          <button
+                            onClick={() =>
+                              restarProducto(item.id, item.storeId)
+                            }
+                            type="button"
+                          >
                             -
                           </button>
                           <button
@@ -393,7 +436,9 @@ const ConfirmacionPedido = () => {
                 </p>
                 <p>
                   <span>Domicilio</span>
-                  <strong>{envio === 0 ? "Gratis" : `$${envio.toLocaleString()}`}</strong>
+                  <strong>
+                    {envio === 0 ? 'Gratis' : `$${envio.toLocaleString()}`}
+                  </strong>
                 </p>
                 <p>
                   <span>Servicio</span>
@@ -411,16 +456,24 @@ const ConfirmacionPedido = () => {
 
               {tieneMultiplesComercios && (
                 <p className="checkoutv2__error">
-                  Tienes productos de varios comercios. Finaliza un pedido por comercio.
+                  Tienes productos de varios comercios. Finaliza un pedido por
+                  comercio.
                 </p>
               )}
               {error && <p className="checkoutv2__error">{error}</p>}
 
-              <button className="checkoutv2__cta" disabled={cargando} onClick={confirmarPedido}>
-                {cargando ? "Enviando..." : `Confirmar y pagar $${totalFinal.toLocaleString()}`}
+              <button
+                className="checkoutv2__cta"
+                disabled={cargando}
+                onClick={confirmarPedido}
+              >
+                {cargando
+                  ? 'Enviando...'
+                  : `Confirmar y pagar $${totalFinal.toLocaleString()}`}
               </button>
               <p className="checkoutv2__legal">
-                Al confirmar este pedido aceptas nuestros terminos y politica de privacidad.
+                Al confirmar este pedido aceptas nuestros terminos y politica de
+                privacidad.
               </p>
             </section>
 

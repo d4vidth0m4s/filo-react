@@ -1,42 +1,37 @@
-import { useParams } from "react-router-dom";
-import { tiendas } from "../../data/tiendas";
-import "./tiendaPerfil.css";
-import BackBotton from "../../components/backBotton/BackBotton";
-import { useSearchParams } from "react-router-dom";
-import { useCart } from "../../context/cartContext";
+import { useParams } from 'react-router-dom';
+import { tiendas } from '../../data/tiendas';
+import './tiendaPerfil.css';
+import BackBotton from '../../components/backBotton/BackBotton';
+import { useSearchParams } from 'react-router-dom';
+import { useCart } from '../../context/useCart';
 const TiendaPerfil = () => {
   const { slug } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const { agregarProducto, restarProducto, carrito } = useCart();
-const categoria = searchParams.get("cat") || "all";
-const cambiarCategoria = (cat:string ) => {
-  setSearchParams({ cat });
-};
+  const categoria = searchParams.get('cat') || 'all';
+  const cambiarCategoria = (cat: string) => {
+    setSearchParams({ cat });
+  };
 
-  
-  
   const productosFiltrados_t = tiendas;
 
-  const tienda= productosFiltrados_t.find((t) => t.slug === slug);
-  
+  const tienda = productosFiltrados_t.find((t) => t.slug === slug);
+
   if (!tienda) {
-   // Regirigi a Nofound ()
+    // Regirigi a Nofound ()
     return <h2 className="tienda-error">Tienda no encontrada</h2>;
   }
   const productos = tienda?.productos || [];
   const productosFiltrados_p =
-  categoria === "all"
-    ? productos
-    : productos.filter(
-        (p) => p.categoria === categoria
-      );
-      
+    categoria === 'all'
+      ? productos
+      : productos.filter((p) => p.categoria === categoria);
 
   return (
     <div className="tienda-page">
-      <div className="tienda-header">
-      </div>
-      <div className="tienda-banner"
+      <div className="tienda-header"></div>
+      <div
+        className="tienda-banner"
         style={{ backgroundImage: `url(${tienda.banner})` }}
       >
         <BackBotton modo="back" />
@@ -54,19 +49,17 @@ const cambiarCategoria = (cat:string ) => {
       </div>
 
       <div className="tienda-categorias">
-        <button onClick={() => cambiarCategoria("all")}>
-    Todos
-  </button>
+        <button onClick={() => cambiarCategoria('all')}>Todos</button>
 
-  {tienda.categorias.map((cat, i) => (
-    <button
-      key={i}
-      onClick={() => cambiarCategoria(cat)}
-      className={categoria === cat ? "active" : ""}
-    >
-      {cat}
-    </button>
-  ))}
+        {tienda.categorias.map((cat, i) => (
+          <button
+            key={i}
+            onClick={() => cambiarCategoria(cat)}
+            className={categoria === cat ? 'active' : ''}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
 
       <div className="tienda-productos">
@@ -79,7 +72,9 @@ const cambiarCategoria = (cat:string ) => {
               <span>${prod.precio}</span>
 
               {(() => {
-                const item = carrito.find(p => p.id === prod.id && p.storeId === tienda.slug);
+                const item = carrito.find(
+                  (p) => p.id === prod.id && p.storeId === tienda.slug
+                );
 
                 if (!item) {
                   return (
@@ -95,14 +90,18 @@ const cambiarCategoria = (cat:string ) => {
                         })
                       }
                     >
-                        Agregar
+                      Agregar
                     </button>
                   );
                 }
 
                 return (
                   <div className="cantidad-control">
-                    <button onClick={() => restarProducto(prod.id, tienda.slug)}>-</button>
+                    <button
+                      onClick={() => restarProducto(prod.id, tienda.slug)}
+                    >
+                      -
+                    </button>
                     <span>{item.cantidad}</span>
                     <button
                       onClick={() =>
@@ -124,7 +123,6 @@ const cambiarCategoria = (cat:string ) => {
             </div>
           </div>
         ))}
-        
       </div>
     </div>
   );

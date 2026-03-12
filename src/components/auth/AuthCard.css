@@ -1,16 +1,17 @@
 /* ── Variables  */
 :root {
-  --green:       #1fd15f;
+  --green: #1fd15f;
   --green-hover: #17b653;
-  --green-dark:  #00c853;
-  --bg:          #f8f8f8;
-  --input-bg:    #f2f2f2;
-  --shadow-sm:   0 4px 10px rgba(0,0,0,0.12);
-  --shadow-md:   0 8px 30px rgba(0,0,0,0.08);
+  --green-dark: #00c853;
+  --bg: #f8f8f8;
+  --input-bg: #f2f2f2;
+  --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* ── Reset base */
-body, #root {
+body,
+#root {
   margin: 0;
   min-height: 100vh;
 }
@@ -70,9 +71,9 @@ body, #root {
   padding: 30px;
   text-align: center;
   border-radius: 0 20px 20px 0;
-   max-height: 100vh;         
-  overflow-y: auto;          
-  box-sizing: border-box;  
+  max-height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .login-container h1 {
@@ -94,7 +95,9 @@ body, #root {
   text-decoration: none;
 }
 
-#back:hover { color: var(--green-hover); }
+#back:hover {
+  color: var(--green-hover);
+}
 
 /* ── Inputs  */
 .input-group {
@@ -139,7 +142,7 @@ body, #root {
 }
 
 /* ── Botones  */
-button[type="submit"] {
+button[type='submit'] {
   width: 100%;
   padding: 12px;
   border: none;
@@ -151,7 +154,9 @@ button[type="submit"] {
   transition: background 0.2s ease;
 }
 
-button[type="submit"]:hover { background: var(--green-hover); }
+button[type='submit']:hover {
+  background: var(--green-hover);
+}
 
 .Google {
   display: flex;
@@ -162,7 +167,10 @@ button[type="submit"]:hover { background: var(--green-hover); }
   cursor: pointer;
   border-radius: 50%;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.3s ease, transform 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
   width: 48px;
   height: 48px;
   padding: 0;
@@ -171,7 +179,7 @@ button[type="submit"]:hover { background: var(--green-hover); }
 }
 
 .Google:hover {
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   border-color: #1fd15f;
   transform: translateY(-1px);
   background: #fafafa;
@@ -191,13 +199,15 @@ button[type="submit"]:hover { background: var(--green-hover); }
   text-decoration: none;
 }
 
-.link-btn:hover { color: var(--green-hover); }
+.link-btn:hover {
+  color: var(--green-hover);
+}
 
 /* ── Responsive  */
 @media (max-width: 800px) {
   .auth-layout-container {
     align-items: center;
-    justify-content: flex-start ;
+    justify-content: flex-start;
     padding: 20px;
     overflow-y: auto;
   }
@@ -205,9 +215,9 @@ button[type="submit"]:hover { background: var(--green-hover); }
   .auth-wrapper {
     flex-direction: column;
     border-radius: 20px;
-    max-height: none;        
+    max-height: none;
     max-width: 420px;
-    margin:  auto;
+    margin: auto;
   }
 
   .auth-banner {
@@ -222,8 +232,8 @@ button[type="submit"]:hover { background: var(--green-hover); }
     border-radius: 20px;
     max-width: 100%;
     flex: none;
-    max-height: none;        
-    overflow-y: visible;     
-    padding: 30px 20px;     
+    max-height: none;
+    overflow-y: visible;
+    padding: 30px 20px;
   }
 }

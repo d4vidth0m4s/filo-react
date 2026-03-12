@@ -1,4 +1,5 @@
-csshtml, body {
+csshtml,
+body {
   overflow-x: hidden;
   width: 100%;
 }
@@ -128,7 +129,9 @@ csshtml, body {
   flex-direction: column;
   cursor: pointer;
   overflow: hidden;
-  transition: opacity var(--transition-medium) ease, box-shadow var(--transition-medium) ease;
+  transition:
+    opacity var(--transition-medium) ease,
+    box-shadow var(--transition-medium) ease;
   padding: 0;
   /* 👇 elimina flex-shrink: 0 */
   scroll-snap-align: start;
@@ -272,7 +275,6 @@ csshtml, body {
     gap: 20px;
   }
 }
-
 
 .icon-populares.expandido {
   display: grid;

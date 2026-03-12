@@ -1,16 +1,33 @@
 @keyframes slideInRight {
-  from { transform: translateX(60px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slideInLeft {
-  from { transform: translateX(-60px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(-60px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(-5deg); }
-  50% { transform: translateY(-8px) rotate(-5deg); }
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-5deg);
+  }
 }
 
 .promo-wrapper {
@@ -139,7 +156,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, transform 0.15s;
+  transition:
+    background 0.2s,
+    transform 0.15s;
   color: white;
   font-size: 16px;
   flex-shrink: 0;
@@ -167,7 +186,7 @@
   border-radius: 4px;
 }
 @media (max-width: 768px) {
-  .promo-wrapper{
+  .promo-wrapper {
     width: 90%;
     height: 100px;
     padding: 0 16px 16px 16px;
@@ -176,7 +195,6 @@
     padding: 16px 20px;
     gap: 12px;
     min-height: 90px;
-
   }
   .promo-banner__icon {
     font-size: 30px;
@@ -184,7 +202,7 @@
   .promo-banner__title {
     font-size: clamp(15px, 2vw, 18px);
   }
-  .promo-banner__description {  
+  .promo-banner__description {
     font-size: clamp(12px, 1.2vw, 12px);
   }
   .promo-banner__controls {
@@ -201,10 +219,8 @@
     justify-content: column;
     width: 6px;
     height: 6px;
-    
   }
   .dot.active {
     width: 20px;
   }
 }
-  

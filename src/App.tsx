@@ -1,19 +1,18 @@
 // src/App.tsx
-import { Routes, Route, Navigate } from "react-router-dom";
-import Layout from "./layouts/Public Layout/Layout";
-import AuthLayout from "./layouts/Public Layout/AuthLayout";
-import Home from "./pages/Home";
-import Register from "./pages/users/Register";
-import UserLog from "./pages/users/UserLog";
-import UserPerfil from "./pages/users/UserPerfil";
-import PrivateLayout from "./layouts/Private Layout/PrivateLayout";
-import TiendasPerfil from "./pages/Tiendas/TiendasPerfil";
-import ConfirmacionPedido from "./pages/checkout/ConfirmacionPedido";
-import Comercios from "./pages/comercio/Comercios";
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Layout from './layouts/Public Layout/Layout';
+import AuthLayout from './layouts/Public Layout/AuthLayout';
+import Home from './pages/Home';
+import Register from './pages/users/Register';
+import UserLog from './pages/users/UserLog';
+import UserPerfil from './pages/users/UserPerfil';
+import PrivateLayout from './layouts/Private Layout/PrivateLayout';
+import TiendasPerfil from './pages/Tiendas/TiendasPerfil';
+import ConfirmacionPedido from './pages/checkout/ConfirmacionPedido';
+import Comercios from './pages/comercio/Comercios';
 
 import CategoriaTiendas from './pages/CategoriaTiendas';
 //import TiendaDetalle from "./pages/Tiendas/tiendaDetalle";
-
 
 const App = () => {
   navigator.geolocation.getCurrentPosition(
@@ -21,17 +20,15 @@ const App = () => {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
 
-      console.log("Lat:", lat);
-      console.log("Lng:", lng);
+      console.log('Lat:', lat);
+      console.log('Lng:', lng);
     },
     (error) => {
-      console.log("Error:", error);
+      console.log('Error:', error);
     }
   );
 
   return (
-
-
     <Routes>
       {/* Layout principal con Header y Footer */}
       <Route element={<Layout />}>
@@ -41,14 +38,11 @@ const App = () => {
         <Route path="/tiendas/:slug" element={<TiendasPerfil />} />
 
         <Route path="/confirmar-pedido" element={<ConfirmacionPedido />} />
-      {/*  <Route path="/tiendas/:slug" element={<TiendaDetalle />} /> */}  
+        {/*  <Route path="/tiendas/:slug" element={<TiendaDetalle />} /> */}
 
         <Route path="/categoria/:slug" element={<CategoriaTiendas />} />
         {/*  <Route path="/tiendas/:slug" element={<TiendaDetalle />} /> */}
       </Route>
-
-
-
 
       {/* Layout de autenticación lgin y registro */}
       <Route element={<AuthLayout />}>
@@ -61,13 +55,8 @@ const App = () => {
         <Route path="/users/" element={<UserPerfil />} />
       </Route>
 
-
       <Route path="*" element={<div>404 Not Found</div>} />
-
     </Routes>
-
-
-
   );
 };
 

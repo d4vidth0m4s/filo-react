@@ -1,5 +1,5 @@
-import React from 'react'
-import './promos.css'
+import React from 'react';
+import './promos.css';
 
 const Promos: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const Promos: React.FC = () => {
         <p className="pro-text">Por la compra mayor a $ recibe envios gratis</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Promos
+export default Promos;

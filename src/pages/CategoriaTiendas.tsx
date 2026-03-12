@@ -3,9 +3,9 @@ import { tiendas } from '../data/tiendas';
 import './CategoriaTiendas.css';
 
 const nombres: Record<string, string> = {
-  'restaurantes': 'Restaurantes',
-  'tiendas': 'Tiendas',
-  'supermercados': 'Supermercados',
+  restaurantes: 'Restaurantes',
+  tiendas: 'Tiendas',
+  supermercados: 'Supermercados',
   'comidas-rapidas': 'Comidas Rápidas',
 };
 
@@ -24,7 +24,11 @@ const CategoriaTiendas = () => {
           {filtradas.map((t) => (
             <Link to={`/tiendas/${t.slug}`} key={t.slug} className="redirect">
               <div className="card-image-section">
-                <img src={t.banner} alt={t.nombre} className="card-main-image" />
+                <img
+                  src={t.banner}
+                  alt={t.nombre}
+                  className="card-main-image"
+                />
               </div>
               <div className="card-info-section">
                 <div className="card-header">

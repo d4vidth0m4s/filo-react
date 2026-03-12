@@ -1,80 +1,90 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-import { useNavigate, Link } from 'react-router-dom'
-import { GoogleLogin } from '@react-oauth/google'
-import type { CredentialResponse } from '@react-oauth/google'
-import './AuthCard.css'
-import { AuthApi } from '../../api/Auths.Api'
-import BackBotton from '../backBotton/BackBotton'
-import { UsuarioApi } from '../../api/Usuario.api'
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import type { CredentialResponse } from '@react-oauth/google';
+import './AuthCard.css';
+import { AuthApi } from '../../api/Auths.Api';
+import BackBotton from '../backBotton/BackBotton';
+import { UsuarioApi } from '../../api/Usuario.api';
 
 type AuthCardProps = {
-  modo?: 'login' | 'registro'
-}
+  modo?: 'login' | 'registro';
+};
 
 const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
-  const bannerURL = import.meta.env.VITE_AUTH_BANNER_URL?.trim() ?? ''
-  const navigate = useNavigate()
+  const bannerURL = import.meta.env.VITE_AUTH_BANNER_URL?.trim() ?? '';
+  const navigate = useNavigate();
 
-  const [isLogin, setIsLogin] = useState(modo === 'login')
-  const [username, setUsername] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [nombre, setNombre] = useState('')
-  const [familyName, setFamilyName] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [googleLoading, setGoogleLoading] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
-  const [submitError, setSubmitError] = useState('')
-  const [submitSuccess, setSubmitSuccess] = useState('')
+  const [isLogin, setIsLogin] = useState(modo === 'login');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [familyName, setFamilyName] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [submitSuccess, setSubmitSuccess] = useState('');
 
   const clearFeedback = () => {
-    setSubmitError('')
-    setSubmitSuccess('')
-  }
+    setSubmitError('');
+    setSubmitSuccess('');
+  };
 
   const getApiMessage = (error: unknown, fallback: string) => {
     if (axios.isAxiosError(error)) {
-      const data = error.response?.data as { message?: unknown } | string | undefined
+      const data = error.response?.data as
+        | { message?: unknown }
+        | string
+        | undefined;
 
       if (typeof data === 'string' && data.trim()) {
-        return data
+        return data;
       }
 
-      if (data && typeof data === 'object' && typeof data.message === 'string' && data.message.trim()) {
-        return data.message
+      if (
+        data &&
+        typeof data === 'object' &&
+        typeof data.message === 'string' &&
+        data.message.trim()
+      ) {
+        return data.message;
       }
     }
 
-    return fallback
-  }
+    return fallback;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    clearFeedback()
+    e.preventDefault();
+    clearFeedback();
 
     if (isLogin) {
-      setLoading(true)
+      setLoading(true);
       try {
-        const response = await AuthApi.pots({ username, password })
-        localStorage.setItem('userDatos', JSON.stringify(response))
-        localStorage.setItem('token', response.token)
-        navigate('/')
+        const response = await AuthApi.pots({ username, password });
+        localStorage.setItem('userDatos', JSON.stringify(response));
+        localStorage.setItem('token', response.token);
+        navigate('/');
       } catch (error) {
-        setSubmitError(getApiMessage(error, 'No se pudo iniciar sesion. Verifica tus datos.'))
+        setSubmitError(
+          getApiMessage(error, 'No se pudo iniciar sesion. Verifica tus datos.')
+        );
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-      return
+      return;
     }
 
     if (password !== confirmPassword) {
-      setSubmitError('Las contrasenas no coinciden.')
-      return
+      setSubmitError('Las contrasenas no coinciden.');
+      return;
     }
 
-    setLoading(true)
+    setLoading(true);
     try {
       await UsuarioApi.create({
         email: email.trim(),
@@ -82,43 +92,47 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
         password,
         nombre: nombre.trim(),
         familyName: familyName.trim(),
-      })
+      });
 
-      setSubmitSuccess('Usuario registrado con exito. Ahora inicia sesion.')
-      setIsLogin(true)
-      setPassword('')
-      setConfirmPassword('')
+      setSubmitSuccess('Usuario registrado con exito. Ahora inicia sesion.');
+      setIsLogin(true);
+      setPassword('');
+      setConfirmPassword('');
     } catch (error) {
-      setSubmitError(getApiMessage(error, 'No se pudo registrar el usuario.'))
+      setSubmitError(getApiMessage(error, 'No se pudo registrar el usuario.'));
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
-  const handleGoogleCredentialResponse = async (response: CredentialResponse) => {
-    clearFeedback()
+  const handleGoogleCredentialResponse = async (
+    response: CredentialResponse
+  ) => {
+    clearFeedback();
 
     if (!response.credential) {
-      setSubmitError('Google no devolvio credencial.')
-      return
+      setSubmitError('Google no devolvio credencial.');
+      return;
     }
 
-    setGoogleLoading(true)
+    setGoogleLoading(true);
     try {
-      const apiResponse = await AuthApi.google({ token: response.credential })
-      localStorage.setItem('userDatos', JSON.stringify(apiResponse))
-      localStorage.setItem('token', apiResponse.token)
-      navigate('/')
+      const apiResponse = await AuthApi.google({ token: response.credential });
+      localStorage.setItem('userDatos', JSON.stringify(apiResponse));
+      localStorage.setItem('token', apiResponse.token);
+      navigate('/');
     } catch (error) {
-      setSubmitError(getApiMessage(error, 'Error al iniciar sesion con Google.'))
+      setSubmitError(
+        getApiMessage(error, 'Error al iniciar sesion con Google.')
+      );
     } finally {
-      setGoogleLoading(false)
+      setGoogleLoading(false);
     }
-  }
+  };
 
   const handleGoogleError = () => {
-    setSubmitError('Google login fallo o fue cancelado.')
-  }
+    setSubmitError('Google login fallo o fue cancelado.');
+  };
 
   return (
     <div className="auth-layout-container">
@@ -135,7 +149,11 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
           <Link to="/Filo-Home" className="logo-link">
             <h1>Filo</h1>
           </Link>
-          <p>{isLogin ? 'Inicia sesion para continuar' : 'Registrate para continuar'}</p>
+          <p>
+            {isLogin
+              ? 'Inicia sesion para continuar'
+              : 'Registrate para continuar'}
+          </p>
 
           <form onSubmit={handleSubmit}>
             {!isLogin && (
@@ -181,13 +199,15 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
               <i className="fa-solid fa-envelope"></i>
               <input
                 type={isLogin ? 'text' : 'email'}
-                placeholder={isLogin ? 'Usuario o correo' : 'Correo electronico'}
+                placeholder={
+                  isLogin ? 'Usuario o correo' : 'Correo electronico'
+                }
                 value={isLogin ? username : email}
                 onChange={(e) => {
                   if (isLogin) {
-                    setUsername(e.target.value)
+                    setUsername(e.target.value);
                   } else {
-                    setEmail(e.target.value)
+                    setEmail(e.target.value);
                   }
                 }}
                 required
@@ -203,8 +223,16 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <button type="button" className="toggle-password-btn" onClick={() => setShowPassword(!showPassword)}>
-                {showPassword ? <i className="fa-solid fa-eye-slash"></i> : <i className="fa-solid fa-eye"></i>}
+              <button
+                type="button"
+                className="toggle-password-btn"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <i className="fa-solid fa-eye-slash"></i>
+                ) : (
+                  <i className="fa-solid fa-eye"></i>
+                )}
               </button>
             </div>
 
@@ -222,12 +250,22 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
             )}
 
             <button type="submit" disabled={loading}>
-              {loading ? 'Cargando...' : isLogin ? 'Iniciar sesion' : 'Registrarse'}
+              {loading
+                ? 'Cargando...'
+                : isLogin
+                  ? 'Iniciar sesion'
+                  : 'Registrarse'}
             </button>
           </form>
 
-          {submitError && <p style={{ color: '#d32f2f', marginTop: '10px' }}>{submitError}</p>}
-          {submitSuccess && <p style={{ color: '#2e7d32', marginTop: '10px' }}>{submitSuccess}</p>}
+          {submitError && (
+            <p style={{ color: '#d32f2f', marginTop: '10px' }}>{submitError}</p>
+          )}
+          {submitSuccess && (
+            <p style={{ color: '#2e7d32', marginTop: '10px' }}>
+              {submitSuccess}
+            </p>
+          )}
 
           <p className="or">O</p>
 
@@ -239,8 +277,8 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
               theme="outline"
               size="large"
               text="signin_with"
-              type='icon'
-              shape='circle'
+              type="icon"
+              shape="circle"
             />
             {googleLoading && <p>Procesando login con Google...</p>}
           </div>
@@ -253,8 +291,8 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
                   type="button"
                   className="link-btn"
                   onClick={() => {
-                    setIsLogin(false)
-                    clearFeedback()
+                    setIsLogin(false);
+                    clearFeedback();
                   }}
                 >
                   Registrate
@@ -267,8 +305,8 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
                   type="button"
                   className="link-btn"
                   onClick={() => {
-                    setIsLogin(true)
-                    clearFeedback()
+                    setIsLogin(true);
+                    clearFeedback();
                   }}
                 >
                   Inicia sesion
@@ -279,7 +317,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ modo = 'login' }) => {
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AuthCard
+export default AuthCard;

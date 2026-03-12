@@ -1,14 +1,30 @@
-import { useState, useEffect, useRef } from "react";
-import { FaLocationDot } from "react-icons/fa6";
-import "./localizaciongeo.css";
+import { useState, useEffect, useRef } from 'react';
+import { FaLocationDot } from 'react-icons/fa6';
+import './localizaciongeo.css';
 
 const NOMINATIM_BASE_URL =
-  import.meta.env.VITE_NOMINATIM_BASE_URL?.trim() ?? "";
+  import.meta.env.VITE_NOMINATIM_BASE_URL?.trim() ?? '';
 
 interface LocationData {
   name: string;
   lat: number;
   lng: number;
+}
+
+interface NominatimResponse {
+  place_id: number;
+  lat: string;
+  lon: string;
+  display_name: string;
+  address?: AddressData;
+}
+
+interface AddressData {
+  city?: string;
+  town?: string;
+  municipality?: string;
+  village?: string;
+  state?: string;
 }
 
 interface Props {
@@ -19,38 +35,35 @@ interface Props {
 export default function LocationSelector({ onSelect, locationName }: Props) {
   const [open, setOpen] = useState<boolean>(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
-  const [search, setSearch] = useState<string>("");
-  const [results, setResults] = useState<any[]>([]);
+  const [search, setSearch] = useState<string>('');
+  const [results, setResults] = useState<NominatimResponse[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const getCityName = (address: any, display: string) => {
+
+  const getCityName = (address: AddressData | undefined, display: string) => {
     return (
       address?.city ||
       address?.town ||
       address?.municipality ||
       address?.village ||
       address?.state ||
-      display.split(",")[0]
+      display.split(',')[0]
     );
   };
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (
-        panelRef.current &&
-        !panelRef.current.contains(e.target as Node)
-      ) {
+      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     }
 
     if (open) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [open]);
-
 
   const getMyLocation = () => {
     if (!navigator.geolocation) return;
@@ -64,16 +77,15 @@ export default function LocationSelector({ onSelect, locationName }: Props) {
           `${NOMINATIM_BASE_URL}/reverse?format=jsonv2&lat=${lat}&lon=${lng}&addressdetails=1`,
           {
             headers: {
-              "Accept": "application/json",
-              "User-Agent": "FiloApp/1.0"
-            }
+              Accept: 'application/json',
+              'User-Agent': 'FiloApp/1.0',
+            },
           }
         );
 
         const data = await res.json();
 
-        const city =
-          getCityName(data.address, data.display_name);
+        const city = getCityName(data.address, data.display_name);
 
         onSelect({
           lat,
@@ -82,14 +94,13 @@ export default function LocationSelector({ onSelect, locationName }: Props) {
         });
 
         setOpen(false);
-
       } catch (err) {
         console.error(err);
 
         onSelect({
           lat,
           lng,
-          name: "Mi ubicación",
+          name: 'Mi ubicación',
         });
 
         setOpen(false);
@@ -105,22 +116,22 @@ export default function LocationSelector({ onSelect, locationName }: Props) {
     try {
       const res = await fetch(
         `${NOMINATIM_BASE_URL}/search?` +
-        `format=jsonv2` +
-        `&q=${encodeURIComponent(q + ", Colombia")}` +
-        `&countrycodes=co` +
-        `&addressdetails=1` +
-        `&limit=5`,
+          `format=jsonv2` +
+          `&q=${encodeURIComponent(q + ', Colombia')}` +
+          `&countrycodes=co` +
+          `&addressdetails=1` +
+          `&limit=5`,
         {
           headers: {
-            "Accept": "application/json",
-            "User-Agent": "FiloApp/1.0 (contacto@filo.com)"
-          }
+            Accept: 'application/json',
+            'User-Agent': 'FiloApp/1.0 (contacto@filo.com)',
+          },
         }
       );
       const data = await res.json();
       setResults(data.slice(0, 5));
     } catch (err) {
-      console.error("Error buscando ubicación", err);
+      console.error('Error buscando ubicación', err);
     }
     setLoading(false);
   };
@@ -128,7 +139,8 @@ export default function LocationSelector({ onSelect, locationName }: Props) {
   return (
     <div className="location-wrapper">
       <div className="location-trigger" onClick={() => setOpen(!open)}>
-        <FaLocationDot /> <span> {locationName ? locationName : "Cambiar ubicación"}</span>
+        <FaLocationDot />{' '}
+        <span> {locationName ? locationName : 'Cambiar ubicación'}</span>
       </div>
 
       {open && (
@@ -137,12 +149,27 @@ export default function LocationSelector({ onSelect, locationName }: Props) {
             Usar mi ubicación
           </button>
 
-          <input type="text" placeholder="Buscar ciudad..." value={search}
+          <input
+            type="text"
+            placeholder="Buscar ciudad..."
+            value={search}
             onChange={(e) => {
               const value = e.target.value;
               setSearch(value);
-              clearTimeout((window as any).searchTimer);
-              (window as any).searchTimer = setTimeout(() => {
+              clearTimeout(
+                (
+                  window as Window &
+                    typeof globalThis & {
+                      searchTimer?: ReturnType<typeof setTimeout>;
+                    }
+                ).searchTimer
+              );
+              (
+                window as Window &
+                  typeof globalThis & {
+                    searchTimer?: ReturnType<typeof setTimeout>;
+                  }
+              ).searchTimer = setTimeout(() => {
                 searchPlace(value);
               }, 500);
             }}
@@ -156,7 +183,9 @@ export default function LocationSelector({ onSelect, locationName }: Props) {
           )}
 
           {results.map((r) => (
-            <div key={r.place_id} className="location-result"
+            <div
+              key={r.place_id}
+              className="location-result"
               onClick={() => {
                 const city = getCityName(r.address, r.display_name);
                 onSelect({
@@ -172,7 +201,6 @@ export default function LocationSelector({ onSelect, locationName }: Props) {
                 r.address?.village ||
                 r.address?.state ||
                 r.display_name}
-
             </div>
           ))}
         </div>

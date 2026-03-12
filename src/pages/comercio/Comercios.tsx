@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ComerciosApi, type ComercioCard } from "../../api/Comercios.api";
-import "../../components/home/populares/populares.css";
-import ComercioCardItem from "../../components/comercio/ComercioCard";
-import ComercioCardSkeleton from "../../components/comercio/ComercioCardSkeleton";
-import "./comercios.css";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ComerciosApi, type ComercioCard } from '../../api/Comercios.api';
+import '../../components/home/populares/populares.css';
+import ComercioCardItem from '../../components/comercio/ComercioCard';
+import ComercioCardSkeleton from '../../components/comercio/ComercioCardSkeleton';
+import './comercios.css';
 
 const PAGE_SIZE = 12;
 
@@ -13,67 +13,61 @@ const Comercios = () => {
   const [comercios, setComercios] = useState<ComercioCard[]>([]);
   const [initialLoading, setInitialLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [nextPage, setNextPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [selectedCategoria, setSelectedCategoria] = useState<string>("todos");
+  const [selectedCategoria, setSelectedCategoria] = useState<string>('todos');
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const isFetchingRef = useRef(false);
   const hasMoreRef = useRef(true);
 
   const categoriasNav = [
-    { slug: "todos", label: "Todos" },
-    { slug: "restaurantes", label: "Restaurantes" },
-    { slug: "tiendas", label: "Tiendas" },
-    { slug: "supermercados", label: "Supermercados" },
-    { slug: "comidas-rapidas", label: "Comidas rápidas" },
+    { slug: 'todos', label: 'Todos' },
+    { slug: 'restaurantes', label: 'Restaurantes' },
+    { slug: 'tiendas', label: 'Tiendas' },
+    { slug: 'supermercados', label: 'Supermercados' },
+    { slug: 'comidas-rapidas', label: 'Comidas rápidas' },
   ];
 
   useEffect(() => {
     hasMoreRef.current = hasMore;
   }, [hasMore]);
 
-  const fetchPage = useCallback(
-    async (page: number) => {
-      if (isFetchingRef.current || !hasMoreRef.current) return;
+  const fetchPage = useCallback(async (page: number) => {
+    if (isFetchingRef.current || !hasMoreRef.current) return;
 
-      isFetchingRef.current = true;
-      if (page === 1) {
-        setInitialLoading(true);
-      } else {
-        setLoadingMore(true);
-      }
-      setError("");
+    isFetchingRef.current = true;
+    if (page === 1) {
+      setInitialLoading(true);
+    } else {
+      setLoadingMore(true);
+    }
+    setError('');
 
-      try {
-        const data = await ComerciosApi.getTodos(page, PAGE_SIZE);
-       
-        setComercios((prev) => {
-          const merged = page === 1 ? data : [...prev, ...data];
-          const seen = new Set<string>();
-          return merged.filter((item) => {
-            const key = `${item.id}-${item.slug}`;
-            if (seen.has(key)) return false;
-            seen.add(key);
-            return true;
-          });
+    try {
+      const data = await ComerciosApi.getTodos(page, PAGE_SIZE);
+
+      setComercios((prev) => {
+        const merged = page === 1 ? data : [...prev, ...data];
+        const seen = new Set<string>();
+        return merged.filter((item) => {
+          const key = `${item.id}-${item.slug}`;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
         });
-        setHasMore(data.length === PAGE_SIZE);
-        setNextPage(page + 1);
-      } catch {
-        
-
-       
-        setError("No se pudieron cargar los comercios.");
-        setHasMore(false);
-      } finally {
-        setInitialLoading(false);
-        setLoadingMore(false);
-        isFetchingRef.current = false;
-      }
-    },
-    []
-  );
+      });
+      setHasMore(data.length === PAGE_SIZE);
+      setNextPage(page + 1);
+    } catch {
+      setError('No se pudieron cargar los comercios.');
+      setHasMore(false);
+    } finally {
+      setInitialLoading(false);
+      setLoadingMore(false);
+      isFetchingRef.current = false;
+    }
+  }, []);
 
   useEffect(() => {
     void fetchPage(1);
@@ -91,7 +85,7 @@ const Comercios = () => {
       },
       {
         root: null,
-        rootMargin: "300px 0px",
+        rootMargin: '300px 0px',
         threshold: 0,
       }
     );
@@ -101,7 +95,7 @@ const Comercios = () => {
   }, [fetchPage, hasMore, nextPage]);
 
   const comerciosFiltrados =
-    selectedCategoria === "todos"
+    selectedCategoria === 'todos'
       ? comercios
       : comercios.filter((c) => c.categoria === selectedCategoria);
 
@@ -127,8 +121,8 @@ const Comercios = () => {
               key={cat.slug}
               type="button"
               className={
-                "comercios-categoria-pill" +
-                (selectedCategoria === cat.slug ? " active" : "")
+                'comercios-categoria-pill' +
+                (selectedCategoria === cat.slug ? ' active' : '')
               }
               onClick={() => setSelectedCategoria(cat.slug)}
             >
@@ -144,11 +138,16 @@ const Comercios = () => {
             ))}
           </div>
         ) : comerciosFiltrados.length === 0 ? (
-          <p className="comercios-feedback">{error || "No hay comercios disponibles."}</p>
+          <p className="comercios-feedback">
+            {error || 'No hay comercios disponibles.'}
+          </p>
         ) : (
           <div className="comercios-grid">
             {comerciosFiltrados.map((comercio) => (
-              <ComercioCardItem key={`${comercio.id}-${comercio.slug}`} comercio={comercio} />
+              <ComercioCardItem
+                key={`${comercio.id}-${comercio.slug}`}
+                comercio={comercio}
+              />
             ))}
           </div>
         )}

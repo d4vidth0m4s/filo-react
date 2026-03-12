@@ -1,4 +1,4 @@
-import { api } from "./Api";
+import { api } from './Api';
 
 type CrearUsuarioRequest = {
   email: string;
@@ -7,7 +7,6 @@ type CrearUsuarioRequest = {
   nombre: string;
   familyName: string;
 };
-
 
 export const UsuarioApi = {
   create: async (data: CrearUsuarioRequest) => {

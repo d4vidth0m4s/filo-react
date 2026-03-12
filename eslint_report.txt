@@ -1,0 +1,15 @@
+
+C:\Users\RYZEN\Desktop\Proyectos\Filo-react\filo-react\src\components\Localizacion\localizaciongeo.tsx
+   23:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   25:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  144:39  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  145:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\RYZEN\Desktop\Proyectos\Filo-react\filo-react\src\components\promobanner\promobanner.tsx
+  77:6  warning  React Hook useEffect has a missing dependency: 'next'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\RYZEN\Desktop\Proyectos\Filo-react\filo-react\src\context\cartContext.tsx
+  192:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+Ô£û 6 problems (5 errors, 1 warning)
+

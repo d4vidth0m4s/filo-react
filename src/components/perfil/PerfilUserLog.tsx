@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 //import { useNavigate } from 'react-router-dom'
 //import Swal from 'sweetalert2'
 //import withReactContent from 'sweetalert2-react-content'
@@ -25,7 +25,7 @@ const PerfilUserLog: React.FC = () => {
       }
     })
     */
-  }
+  };
   return (
     <>
       <header className="perfil-header">
@@ -64,7 +64,7 @@ const PerfilUserLog: React.FC = () => {
         </button>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default PerfilUserLog
+export default PerfilUserLog;

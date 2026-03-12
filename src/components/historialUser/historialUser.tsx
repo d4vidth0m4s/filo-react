@@ -1,11 +1,11 @@
-import "./historialUser.css";
+import './historialUser.css';
 
 type ItemPedido = {
   id: number;
   nombre: string;
 };
 
-type EstadoPedido = "pendiente" | "preparando" | "entregado" | "cancelado";
+type EstadoPedido = 'pendiente' | 'preparando' | 'entregado' | 'cancelado';
 
 export type PedidoHistorial = {
   id: number;
@@ -22,7 +22,11 @@ type HistorialUserProps = {
   onVerDetalle: (id: number) => void;
 };
 
-const HistorialUser = ({ pedidos, onVolver, onVerDetalle }: HistorialUserProps) => {
+const HistorialUser = ({
+  pedidos,
+  onVolver,
+  onVerDetalle,
+}: HistorialUserProps) => {
   return (
     <div className="historial-container">
       <div className="historial-header">
@@ -37,7 +41,11 @@ const HistorialUser = ({ pedidos, onVolver, onVerDetalle }: HistorialUserProps) 
       ) : (
         <div className="historial-lista">
           {pedidos.map((pedido) => (
-            <div className="pedido-card" key={pedido.id} onClick={() => onVerDetalle(pedido.id)} > 
+            <div
+              className="pedido-card"
+              key={pedido.id}
+              onClick={() => onVerDetalle(pedido.id)}
+            >
               <div className="pedido-card-header">
                 <div>
                   <div className="pedido-numero">{pedido.codigo}</div>

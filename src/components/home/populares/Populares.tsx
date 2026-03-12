@@ -1,37 +1,41 @@
-import { useEffect, useRef, useState } from "react";
-import "./populares.css";
-import { Link } from "react-router-dom";
-import { ComerciosApi, type ComercioCard } from "../../../api/Comercios.api";
-import ComercioCardItem from "../../comercio/ComercioCard";
-import ComercioCardSkeleton from "../../comercio/ComercioCardSkeleton";
+import { useEffect, useRef, useState } from 'react';
+import './populares.css';
+import { Link } from 'react-router-dom';
+import { ComerciosApi, type ComercioCard } from '../../../api/Comercios.api';
+import ComercioCardItem from '../../comercio/ComercioCard';
+import ComercioCardSkeleton from '../../comercio/ComercioCardSkeleton';
 
 const Populares = () => {
   const [comercios, setComercios] = useState<ComercioCard[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const handleScrollLeft = () => {
     const container = scrollRef.current;
     if (!container) return;
 
-    const firstCard = container.querySelector(".redirect") as HTMLElement | null;
+    const firstCard = container.querySelector(
+      '.redirect'
+    ) as HTMLElement | null;
     const step = firstCard ? firstCard.offsetWidth + 16 : container.clientWidth;
     const target = Math.max(container.scrollLeft - step, 0);
 
-    container.scrollTo({ left: target, behavior: "smooth" });
+    container.scrollTo({ left: target, behavior: 'smooth' });
   };
 
   const handleScrollRight = () => {
     const container = scrollRef.current;
     if (!container) return;
 
-    const firstCard = container.querySelector(".redirect") as HTMLElement | null;
+    const firstCard = container.querySelector(
+      '.redirect'
+    ) as HTMLElement | null;
     const step = firstCard ? firstCard.offsetWidth + 16 : container.clientWidth;
     const maxScrollLeft = container.scrollWidth - container.clientWidth;
     const target = Math.min(container.scrollLeft + step, maxScrollLeft);
 
-    container.scrollTo({ left: target, behavior: "smooth" });
+    container.scrollTo({ left: target, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -45,7 +49,7 @@ const Populares = () => {
         setComercios(data);
       } catch {
         if (!active) return;
-        setError("No se pudieron cargar los comercios populares.");
+        setError('No se pudieron cargar los comercios populares.');
       } finally {
         if (active) setLoading(false);
       }
@@ -66,7 +70,6 @@ const Populares = () => {
         </Link>
       </div>
 
-      
       {loading ? (
         <div className="icon-populares">
           {Array.from({ length: 5 }).map((_, index) => (
@@ -76,7 +79,9 @@ const Populares = () => {
       ) : error ? (
         <p className="populares-feedback">{error}</p>
       ) : comercios.length === 0 ? (
-        <p className="populares-feedback">No hay comercios populares disponibles.</p>
+        <p className="populares-feedback">
+          No hay comercios populares disponibles.
+        </p>
       ) : (
         <div className="icon-populares-wrapper">
           <button
@@ -89,7 +94,10 @@ const Populares = () => {
           </button>
           <div className="icon-populares" ref={scrollRef}>
             {comercios.map((categoria) => (
-              <ComercioCardItem key={`${categoria.id}-${categoria.slug}`} comercio={categoria} />
+              <ComercioCardItem
+                key={`${categoria.id}-${categoria.slug}`}
+                comercio={categoria}
+              />
             ))}
           </div>
           <button

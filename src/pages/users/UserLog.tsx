@@ -1,12 +1,8 @@
-import React from 'react'
-import AuthCard from '../../components/auth/AuthCard'
-
+import React from 'react';
+import AuthCard from '../../components/auth/AuthCard';
 
 const UserLog: React.FC = () => {
-  return (
-    
-    <AuthCard modo="login" />
-  )
-}
+  return <AuthCard modo="login" />;
+};
 
-export default UserLog
+export default UserLog;
