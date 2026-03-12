@@ -48,8 +48,56 @@ csshtml, body {
   gap: var(--spacing-md);
   width: 100%;
   overflow-x: auto;
-  padding: 0 var(--spacing-lg) var(--spacing-lg);
+  padding: 0 calc(var(--spacing-lg) + 24px) var(--spacing-lg) var(--spacing-lg);
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.icon-populares-wrapper {
+  position: relative;
+}
+
+.populares-scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff;
+  font-size: 18px;
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.icon-populares-wrapper:hover .populares-scroll-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.populares-scroll-btn-left {
+  left: 8px;
+}
+
+.populares-scroll-btn-right {
+  right: 8px;
+}
+
+@media (max-width: 768px) {
+  .populares-scroll-btn {
+    font-size: 16px;
+  }
 }
 
 .icon-populares::-webkit-scrollbar {
@@ -83,6 +131,7 @@ csshtml, body {
   transition: opacity var(--transition-medium) ease, box-shadow var(--transition-medium) ease;
   padding: 0;
   /* 👇 elimina flex-shrink: 0 */
+  scroll-snap-align: start;
 }
 
 .redirect:hover {
@@ -255,6 +304,53 @@ csshtml, body {
 @media (max-width: 768px) {
   .contenido {
     overflow: hidden;
+  }
+
+  .icon-populares {
+    /* padding fijo; centramos primero y último con márgenes en las cards */
+    padding: 0 16px 16px 16px;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* Hacer las cards de populares un poco más compactas en mobile */
+  .icon-populares .redirect {
+    min-width: 240px;
+    width: 240px;
+    scroll-snap-align: center;
+  }
+
+  /* margen para centrar la PRIMERA card en mobile */
+  .icon-populares .redirect:first-child {
+    margin-left: calc((100vw - 240px) / 2 - 16px);
+  }
+
+  /* margen para centrar la ÚLTIMA card en mobile sin que se corte */
+  .icon-populares .redirect:last-child {
+    margin-right: calc((100vw - 240px) / 2 - 16px);
+  }
+
+  .icon-populares .card-image-section {
+    height: 140px;
+  }
+
+  .icon-populares .card-info-section {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .icon-populares .card-logo-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon-populares .card-text h3 {
+    font-size: 13px;
+  }
+
+  .icon-populares .card-text p,
+  .icon-populares .card-time-badge,
+  .icon-populares .card-envio-badge {
+    font-size: 10px;
   }
 
   .icon-populares.expandido {
