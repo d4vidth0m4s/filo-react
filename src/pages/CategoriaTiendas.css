@@ -1,4 +1,4 @@
-.cat-container {
+ .cat-container {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -28,13 +28,12 @@
     padding: 16px;
     box-sizing: border-box;
     width: 100%;
-    overflow: hidden;
   }
 
   .cat-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
     width: 100%;
   }
 
@@ -44,5 +43,30 @@
     max-width: 100% !important;
     flex-shrink: 1 !important;
     box-sizing: border-box;
+  }
+
+  /* Hacer las tarjetas más compactas en mobile */
+  .cat-grid .card-image-section {
+    height: 120px;
+  }
+
+  .cat-grid .card-info-section {
+    padding: 8px;
+    gap: 6px;
+  }
+
+  .cat-grid .card-logo-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cat-grid .card-text h3 {
+    font-size: 13px;
+  }
+
+  .cat-grid .card-text p,
+  .cat-grid .card-time-badge,
+  .cat-grid .card-envio-badge {
+    font-size: 10px;
   }
 }

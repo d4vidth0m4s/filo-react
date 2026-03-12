@@ -16,9 +16,18 @@ const Comercios = () => {
   const [error, setError] = useState("");
   const [nextPage, setNextPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [selectedCategoria, setSelectedCategoria] = useState<string>("todos");
   const loaderRef = useRef<HTMLDivElement | null>(null);
   const isFetchingRef = useRef(false);
   const hasMoreRef = useRef(true);
+
+  const categoriasNav = [
+    { slug: "todos", label: "Todos" },
+    { slug: "restaurantes", label: "Restaurantes" },
+    { slug: "tiendas", label: "Tiendas" },
+    { slug: "supermercados", label: "Supermercados" },
+    { slug: "comidas-rapidas", label: "Comidas rápidas" },
+  ];
 
   useEffect(() => {
     hasMoreRef.current = hasMore;
@@ -91,6 +100,11 @@ const Comercios = () => {
     return () => observer.disconnect();
   }, [fetchPage, hasMore, nextPage]);
 
+  const comerciosFiltrados =
+    selectedCategoria === "todos"
+      ? comercios
+      : comercios.filter((c) => c.categoria === selectedCategoria);
+
   return (
     <div className="comercios-page">
       <div className="comercios-container">
@@ -107,17 +121,33 @@ const Comercios = () => {
           )}
         </div>
 
+        <nav className="comercios-categorias-nav">
+          {categoriasNav.map((cat) => (
+            <button
+              key={cat.slug}
+              type="button"
+              className={
+                "comercios-categoria-pill" +
+                (selectedCategoria === cat.slug ? " active" : "")
+              }
+              onClick={() => setSelectedCategoria(cat.slug)}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </nav>
+
         {initialLoading ? (
           <div className="comercios-grid">
             {Array.from({ length: 6 }).map((_, index) => (
               <ComercioCardSkeleton key={`comercio-skeleton-${index}`} />
             ))}
           </div>
-        ) : comercios.length === 0 ? (
+        ) : comerciosFiltrados.length === 0 ? (
           <p className="comercios-feedback">{error || "No hay comercios disponibles."}</p>
         ) : (
           <div className="comercios-grid">
-            {comercios.map((comercio) => (
+            {comerciosFiltrados.map((comercio) => (
               <ComercioCardItem key={`${comercio.id}-${comercio.slug}`} comercio={comercio} />
             ))}
           </div>

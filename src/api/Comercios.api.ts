@@ -6,6 +6,7 @@ export type ComercioCard = {
   id: string;
   slug: string;
   nombre: string;
+  categoria: string;
   descripcion: string;
   banner: string;
   logo: string;
@@ -81,11 +82,13 @@ const mapComercio = (item: ComercioResponseItem, index: number): ComercioCard =>
   const nombre = toText(getFirst(item, ["nombre", "name", "Nombre"]), `Comercio ${index + 1}`);
   const slugFromApi = toText(getFirst(item, ["slug", "Slug"]));
   const slug = slugFromApi || toSlug(nombre) || `comercio-${index + 1}`;
+  const categoria = toText(getFirst(item, ["categoria", "Categoria"]), "otros");
 
   return {
     id: toText(idRaw, `comercio-${index + 1}`),
     slug,
     nombre,
+    categoria,
     descripcion: toText(getFirst(item, ["descripcion", "description", "Descripcion"]), "Sin descripcion"),
     banner: toText(
       getFirst(item, ["banner", "bannerUrl", "imagenBanner", "imageUrl", "ImagenBanner"]),
